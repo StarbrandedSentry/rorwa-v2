@@ -1,32 +1,105 @@
-
-// Custom Theming for Angular Material
-// For more information: https://material.angular.io/guide/theming
 @import '~@angular/material/theming';
-// Plus imports for other components in your app.
-
-// Include the common styles for Angular Material. We include this here so that you only
-// have to load a single css file for Angular Material in your app.
-// Be sure that you only ever include this mixin once!
+$primary: (
+  50: #f0e0e0,
+  100: #d9b3b3,
+  200: #c08080,
+  300: #a64d4d,
+  400: #932626,
+  500: #800000,
+  600: #780000,
+  700: #6d0000,
+  800: #630000,
+  900: #500000,
+  A100: #ff8383,
+  A200: #ff5050,
+  A400: #ff1d1d,
+  A700: #ff0303,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #ffffff,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #ffffff,
+    A700: #ffffff
+  )
+);
+$accent: (
+  50: #e0f0f0,
+  100: #b3d9d9,
+  200: #80c0c0,
+  300: #4da6a6,
+  400: #269393,
+  500: #008080,
+  600: #007878,
+  700: #006d6d,
+  800: #006363,
+  900: #005050,
+  A100: #83ffff,
+  A200: #50ffff,
+  A400: #1dffff,
+  A700: #03ffff,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000
+  )
+);
 @include mat-core();
+$primary: mat-palette($primary);
+$accent: mat-palette($accent);
+$warn: mat-palette($mat-red);
+$theme: mat-light-theme($primary, $accent, $warn);
+$custom-typography: mat-typography-config(
+  $font-family: '"Raleway", sans-serif',
+  $headline: mat-typography-level(32px, 48px, 700),
+  $body-1: mat-typography-level(16px, 24px, 500)
+);
+@include mat-base-typography($custom-typography);
+@include angular-material-typography($custom-typography);
+@include angular-material-theme($theme);
 
-// Define the palettes for your theme using the Material Design palettes available in palette.scss
-// (imported above). For each palette, you can optionally specify a default, lighter, and darker
-// hue. Available color palettes: https://material.io/design/color/
-$rorwa-v2-primary: mat-palette($mat-indigo);
-$rorwa-v2-accent: mat-palette($mat-pink, A200, A100, A400);
+* {
+  box-sizing: inherit;
+}
+html,
+body {
+  height: 100%;
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  font-family: 'Athiti', sans-serif;
+}
 
-// The warn palette is optional (defaults to red).
-$rorwa-v2-warn: mat-palette($mat-red);
+h1,
+h2,
+h3,
+h4 {
+  font-family: 'Raleway', sans-serif;
+}
 
-// Create the theme object (a Sass map containing all of the palettes).
-$rorwa-v2-theme: mat-light-theme($rorwa-v2-primary, $rorwa-v2-accent, $rorwa-v2-warn);
-
-// Include theme styles for core and each component used in your app.
-// Alternatively, you can import and @include the theme mixins for each component
-// that you are using.
-@include angular-material-theme($rorwa-v2-theme);
-
-/* You can add global styles to this file, and also import other style files */
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.body {
+  display: flex;
+  flex-direction: column;
+  padding: 2% 15%;
+  background-color: blue;
+}
