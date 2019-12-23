@@ -7,26 +7,35 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { HomeComponent } from './home/home.component';
 import { DashComponent } from './home/dash/dash.component';
-import { LoginComponent } from './login/login.component';
 import { SearchComponent } from './home/search/search.component';
 import { HttpClientModule } from '@angular/common/http';
+import { SignInComponent } from './sign-in/sign-in.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import {
+  ErrorStateMatcher,
+  ShowOnDirtyErrorStateMatcher
+} from '@angular/material';
 
 @NgModule({
   declarations: [
     AppComponent,
+    AppComponent,
     HomeComponent,
     DashComponent,
-    LoginComponent,
-    SearchComponent
+    SearchComponent,
+    SignInComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    [{ provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher }]
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

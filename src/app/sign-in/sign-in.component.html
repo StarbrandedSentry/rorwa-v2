@@ -1,0 +1,24 @@
+<div class="body">
+  <mat-icon color="primary" svgIcon="research"></mat-icon>
+  <h2>Sign in</h2>
+  <div class="container">
+    <form [formGroup]="signInForm">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Email</mat-label>
+        <input
+          matInput
+          formControlName="emailCtrl"
+          placeholder="Email"
+          type="email"
+          required
+        />
+        <mat-error *ngIf="signInForm.hasError('email')">WTF</mat-error>
+        <mat-error *ngIf="signInForm.hasError('required')">WTF</mat-error>
+      </mat-form-field>
+
+      <div class="actions">
+        <button mat-flat-button color="primary">Sign in</button>
+      </div>
+    </form>
+  </div>
+</div>
