@@ -25,7 +25,12 @@ export class SignInComponent implements OnInit {
 
   ngOnInit() {
     this.signInForm = this.formBuilder.group({
-      emailCtrl: ['', [Validators.required, Validators.email]]
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]]
     });
+  }
+
+  onSignInClick(): void {
+    console.log('clicked');
   }
 }

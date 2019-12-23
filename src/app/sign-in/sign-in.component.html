@@ -7,17 +7,37 @@
         <mat-label>Email</mat-label>
         <input
           matInput
-          formControlName="emailCtrl"
+          formControlName="email"
           placeholder="Email"
           type="email"
-          required
         />
-        <mat-error *ngIf="signInForm.hasError('email')">WTF</mat-error>
-        <mat-error *ngIf="signInForm.hasError('required')">WTF</mat-error>
+        <mat-error *ngIf="signInForm.get('email').hasError('email')"
+          >That's not an email, bro.</mat-error
+        >
+        <mat-error *ngIf="signInForm.get('email').hasError('required')"
+          >Woah! You didn't enter anything!</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          formControlName="password"
+          placeholder="Password"
+          type="password"
+        />
       </mat-form-field>
 
       <div class="actions">
-        <button mat-flat-button color="primary">Sign in</button>
+        <button
+          mat-flat-button
+          color="primary"
+          class="full-width"
+          (click)="onSignInClick()"
+          [disabled]="!signInForm.valid"
+        >
+          Sign in
+        </button>
       </div>
     </form>
   </div>
