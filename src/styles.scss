@@ -103,3 +103,20 @@ h4 {
   padding: 2% 15%;
   background-color: blue;
 }
+
+.logo {
+  font-family: 'Raleway', sans-serif;
+  text-transform: uppercase;
+  -webkit-touch-callout: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  font-weight: 700;
+}
+
+.no-select {
+  text-transform: uppercase;
+  -webkit-touch-callout: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}

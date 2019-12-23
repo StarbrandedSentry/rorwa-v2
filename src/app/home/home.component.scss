@@ -1,3 +1,40 @@
-.body{
-  color: #ffffff;
+.mobile {
+  display: none;
+}
+
+.desktop {
+  display: flex;
+  flex-direction: column;
+}
+
+mat-toolbar {
+  font-size: 1rem;
+  height: 7vh;
+  min-height: 7vh;
+  padding: 0 10%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  font-weight: 700;
+
+  .logo {
+    font-size: 1.25rem;
+    margin-right: auto;
+    transform: scale(1.25) translateY(0.25rem);
+  }
+}
+
+.sign-in {
+  cursor: pointer;
+}
+
+@media screen and (max-width: 720px) {
+  .desktop {
+    display: none;
+  }
+
+  .mobile {
+    display: flex;
+    flex-direction: column;
+  }
 }
