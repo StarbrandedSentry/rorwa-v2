@@ -16,6 +16,9 @@ import {
   ShowOnDirtyErrorStateMatcher
 } from '@angular/material';
 import { ErrorComponent } from './message/error/error.component';
+import { FirebaseCollectionModule } from './firebase-collection/firebase-collection.module';
+import { AngularFireModule } from '@angular/fire';
+import { environment } from '../environments/environment.prod';
 
 @NgModule({
   declarations: [
@@ -33,7 +36,9 @@ import { ErrorComponent } from './message/error/error.component';
     BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FirebaseCollectionModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig)
   ],
   providers: [
     [{ provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher }]

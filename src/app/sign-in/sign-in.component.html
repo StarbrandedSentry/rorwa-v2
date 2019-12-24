@@ -38,8 +38,9 @@
           color="primary"
           class="full-width"
           (click)="onSignInClick()"
+          [disabled]="signInButtonDisabled"
         >
-          Sign in
+          {{ signInButtonText }}
         </button>
       </div>
     </form>

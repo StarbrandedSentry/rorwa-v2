@@ -13,6 +13,8 @@ import { Subject } from 'rxjs';
 export class SignInComponent implements OnInit {
   signInForm: FormGroup;
   matcher = new MyErrorStateMatcher();
+  signInButtonText = 'Sign in';
+  signInButtonDisabled: boolean;
   errorMessage: Subject<string> = new Subject<string>();
   constructor(
     iconRegistry: MatIconRegistry,
@@ -35,6 +37,13 @@ export class SignInComponent implements OnInit {
   onSignInClick(): void {
     if (!this.signInForm.get('email').value) {
       this.errorMessage.next('Field values are empty!');
+      return;
     }
+    this.signInOnProgress();
+  }
+
+  private signInOnProgress(): void {
+    this.signInButtonText = 'Signing in...';
+    this.signInButtonDisabled = true;
   }
 }
