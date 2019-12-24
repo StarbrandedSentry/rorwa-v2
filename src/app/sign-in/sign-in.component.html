@@ -11,12 +11,12 @@
           placeholder="Email"
           type="email"
         />
-        <mat-error *ngIf="signInForm.get('email').hasError('email')"
+        <!--<mat-error *ngIf="signInForm.get('email').hasError('email')"
           >That's not an email, bro.</mat-error
         >
         <mat-error *ngIf="signInForm.get('email').hasError('required')"
           >Woah! You didn't enter anything!</mat-error
-        >
+        >-->
       </mat-form-field>
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Password</mat-label>
@@ -28,13 +28,16 @@
         />
       </mat-form-field>
 
+      <div>
+        <message-error [message$]="errorMessage.asObservable()"></message-error>
+      </div>
+
       <div class="actions">
         <button
           mat-flat-button
           color="primary"
           class="full-width"
           (click)="onSignInClick()"
-          [disabled]="!signInForm.valid"
         >
           Sign in
         </button>

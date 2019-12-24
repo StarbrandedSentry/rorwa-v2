@@ -3,6 +3,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material/icon';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MyErrorStateMatcher } from '../errorstatematcher';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-sign-in',
@@ -12,6 +13,7 @@ import { MyErrorStateMatcher } from '../errorstatematcher';
 export class SignInComponent implements OnInit {
   signInForm: FormGroup;
   matcher = new MyErrorStateMatcher();
+  errorMessage: Subject<string> = new Subject<string>();
   constructor(
     iconRegistry: MatIconRegistry,
     sanitizer: DomSanitizer,
@@ -25,12 +27,14 @@ export class SignInComponent implements OnInit {
 
   ngOnInit() {
     this.signInForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]]
+      email: ['' /*, [Validators.required, Validators.email]*/],
+      password: ['' /*, [Validators.required]*/]
     });
   }
 
   onSignInClick(): void {
-    console.log('clicked');
+    if (!this.signInForm.get('email').value) {
+      this.errorMessage.next('Field values are empty!');
+    }
   }
 }

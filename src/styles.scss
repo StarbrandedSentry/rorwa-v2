@@ -160,3 +160,23 @@ h4 {
   margin-top: 1rem;
   display: flex;
 }
+
+.message {
+  font-family: 'Raleway', sans-serif;
+  padding: 1rem 1.5rem;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+
+  &.error {
+    background-color: mat-color($warn, 500);
+  }
+  &.success {
+    background-color: #22bb33;
+  }
+
+  .material-icons {
+    margin-left: auto;
+    cursor: pointer;
+  }
+}

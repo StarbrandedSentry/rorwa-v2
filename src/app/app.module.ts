@@ -15,6 +15,7 @@ import {
   ErrorStateMatcher,
   ShowOnDirtyErrorStateMatcher
 } from '@angular/material';
+import { ErrorComponent } from './message/error/error.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import {
     HomeComponent,
     DashComponent,
     SearchComponent,
-    SignInComponent
+    SignInComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,
