@@ -185,6 +185,11 @@ h4 {
   flex-direction: column;
 }
 
+.row {
+  display: flex;
+  align-items: center;
+}
+
 .full-width {
   width: 100%;
 }

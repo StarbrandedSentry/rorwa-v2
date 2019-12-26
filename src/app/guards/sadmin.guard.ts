@@ -24,15 +24,25 @@ export class SadminGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
+    return this.auth.user$.pipe(
+      map(user => {
+        if (user.role === 1) {
+          return true;
+        } else {
+          this.router.navigateByUrl('/home');
+          return false;
+        }
+      })
+    );
     /*return this.auth.user$.pipe(
       take(1),
       map(user => user && user.role === 1)
     );*/
-    if (this.auth.isSignedIn) {
+    /*if (this.auth.isSignedIn) {
       return true;
     } else {
       this.router.navigateByUrl('/home');
       return false;
-    }
+    }*/
   }
 }
