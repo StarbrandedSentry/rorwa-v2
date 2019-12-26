@@ -84,6 +84,8 @@ $custom-typography: mat-typography-config(
   --grey-300: #e0e0e0;
   --grey-400: #bdbdbd;
   --grey-500: #9e9e9e;
+  --grey-700: #616161;
+  --primary-500: #a00000;
 }
 
 * {
@@ -112,10 +114,41 @@ h4 {
 .body {
   display: flex;
   flex-direction: column;
-  padding: 2% 15%;
+  padding: 1% 15%;
   font-family: 'Athiti', sans-serif;
   min-height: 93vh;
   height: 100%;
+}
+
+.with-nav {
+  min-height: 87vh;
+}
+
+.nav {
+  padding: 0 15%;
+  display: flex;
+  height: 6vh;
+  align-items: center;
+}
+
+.nav-link {
+  margin-right: 0.5rem;
+  font-family: 'Raleway', sans-serif;
+  cursor: pointer;
+  padding: 0.5rem 0.25rem;
+  font-size: 1.15rem;
+
+  &:hover {
+    border-bottom: var(--grey-500) solid 2px;
+  }
+}
+
+.link-active {
+  border-bottom: mat-color($primary, 500) solid 2px;
+  font-weight: 700;
+  &:hover {
+    border-bottom: mat-color($primary, 500) solid 2px;
+  }
 }
 
 .logo {
@@ -179,5 +212,17 @@ h4 {
   .material-icons {
     margin-left: auto;
     cursor: pointer;
+  }
+}
+
+.menu-button {
+  outline: none;
+  border: none;
+  font-family: 'Raleway', sans-serif;
+  background-color: #ffffff;
+  color: #000000;
+  &:hover {
+    background-color: mat-color($accent, 500);
+    color: white;
   }
 }

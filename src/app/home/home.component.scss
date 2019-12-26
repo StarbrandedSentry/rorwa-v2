@@ -24,8 +24,38 @@ mat-toolbar {
   }
 }
 
+.account {
+  font-weight: 700;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+}
+
 .sign-in {
   cursor: pointer;
+}
+
+.acc-menu {
+  border-radius: 4px;
+  background-color: #ffffff;
+  width: 200px;
+  position: absolute;
+  top: 5%;
+  right: 10%;
+  box-shadow: 0 0 6px -1px var(--grey-700);
+  height: auto;
+  padding: 0.1rem 0;
+
+  button {
+    position: relative;
+    padding: 0.5rem 1rem;
+    width: 100%;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
 }
 
 @media screen and (max-width: 767px) {

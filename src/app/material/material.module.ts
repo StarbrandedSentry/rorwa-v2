@@ -3,12 +3,14 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatDividerModule } from '@angular/material/divider';
 
 const Material = [
   MatButtonModule,
   MatToolbarModule,
   MatIconModule,
-  MatInputModule
+  MatInputModule,
+  MatDividerModule
 ];
 
 @NgModule({

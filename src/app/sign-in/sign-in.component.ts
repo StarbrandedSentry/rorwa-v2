@@ -4,6 +4,10 @@ import { MatIconRegistry } from '@angular/material/icon';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MyErrorStateMatcher } from '../errorstatematcher';
 import { Subject } from 'rxjs';
+import { AuthService } from '../shared/auth.service';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { consoleTestResultHandler } from 'tslint/lib/test';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-in',
@@ -16,10 +20,14 @@ export class SignInComponent implements OnInit {
   signInButtonText = 'Sign in';
   signInButtonDisabled: boolean;
   errorMessage: Subject<string> = new Subject<string>();
+
   constructor(
     iconRegistry: MatIconRegistry,
     sanitizer: DomSanitizer,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    public authService: AuthService,
+    private afAuth: AngularFireAuth,
+    private router: Router
   ) {
     iconRegistry.addSvgIcon(
       'research',
@@ -35,15 +43,37 @@ export class SignInComponent implements OnInit {
   }
 
   onSignInClick(): void {
-    if (!this.signInForm.get('email').value) {
+    if (
+      !this.signInForm.get('email').value ||
+      !this.signInForm.get('password').value
+    ) {
       this.errorMessage.next('Field values are empty!');
       return;
     }
     this.signInOnProgress();
+    this.authService
+      .signInUsingEmail(
+        this.signInForm.get('email').value,
+        this.signInForm.get('password').value
+      )
+      .then(result => {
+        this.router.navigateByUrl('/home');
+      })
+      .catch(error => {
+        this.errorMessage.next(error);
+      })
+      .finally(() => {
+        this.signInEnd();
+      });
   }
 
   private signInOnProgress(): void {
     this.signInButtonText = 'Signing in...';
     this.signInButtonDisabled = true;
+  }
+
+  private signInEnd(): void {
+    this.signInButtonText = 'Sign in';
+    this.signInButtonDisabled = false;
   }
 }

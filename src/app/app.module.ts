@@ -19,6 +19,12 @@ import { ErrorComponent } from './message/error/error.component';
 import { FirebaseCollectionModule } from './firebase-collection/firebase-collection.module';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment.prod';
+import { AuthService } from './shared/auth.service';
+import { SadminComponent } from './home/sadmin/sadmin.component';
+import { SadminDashComponent } from './home/sadmin/sadmin-dash/sadmin-dash.component';
+import { SadminNavComponent } from './home/sadmin/sadmin-nav/sadmin-nav.component';
+import { SadminSettingsComponent } from './home/sadmin/sadmin-settings/sadmin-settings.component';
+import { SadminGuard } from './guards/sadmin.guard';
 
 @NgModule({
   declarations: [
@@ -28,7 +34,11 @@ import { environment } from '../environments/environment.prod';
     DashComponent,
     SearchComponent,
     SignInComponent,
-    ErrorComponent
+    ErrorComponent,
+    SadminComponent,
+    SadminDashComponent,
+    SadminNavComponent,
+    SadminSettingsComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +51,9 @@ import { environment } from '../environments/environment.prod';
     AngularFireModule.initializeApp(environment.firebaseConfig)
   ],
   providers: [
-    [{ provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher }]
+    [{ provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher }],
+    AuthService,
+    SadminGuard
   ],
   bootstrap: [AppComponent]
 })
