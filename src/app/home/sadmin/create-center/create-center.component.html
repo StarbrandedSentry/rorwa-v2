@@ -1,20 +1,66 @@
 <div class="body with-nav">
   <h2 class="mat-title">Create a new center</h2>
-  <mat-horizontal-stepper [linear]="true">
-    <mat-step>
+  <mat-horizontal-stepper [linear]="true" #stepper>
+    <!--CENTER STEP-->
+    <mat-step [stepControl]="centerFormGroup">
       <form [formGroup]="centerFormGroup">
         <ng-template matStepLabel>Fill out center details</ng-template>
+        <div class="row">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Name</mat-label>
+            <input
+              matInput
+              placeholder="Enter name"
+              formControlName="centerName"
+              required
+            />
+            <mat-error>Entry must be longer!</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="row">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Description</mat-label>
+            <textarea
+              matInput
+              placeholder="Enter description"
+              formControlName="centerDescription"
+              required
+            ></textarea>
+            <mat-error>Entry must be longer!</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="row">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Date established</mat-label>
+            <input
+              matInput
+              [matDatepicker]="established"
+              placeholder="Enter date established"
+              formControlName="centerEstablished"
+              required
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="established"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #established></mat-datepicker>
+            <mat-error>This is required!</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="actions">
+          <button mat-raised-button (click)="text()">Next</button>
+        </div>
       </form>
     </mat-step>
-    <mat-step>
+    <!--ADMIN STEP-->
+    <!--<mat-step [stepControl]="adminFormGroup">
       <form [formGroup]="adminFormGroup">
         <ng-template matStepLabel>Add initial admin</ng-template>
       </form>
     </mat-step>
     <mat-step>
-      <form [formGroup]="confirmFormGroup">
-        <ng-template matStepLabel>Confirm</ng-template>
-      </form>
-    </mat-step>
+      <ng-template matStepLabel>Confirm</ng-template>
+    </mat-step>-->
   </mat-horizontal-stepper>
+  <button mat-raised-button (click)="text()">Next</button>
 </div>
