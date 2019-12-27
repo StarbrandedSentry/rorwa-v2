@@ -9,6 +9,7 @@ import { SadminComponent } from './home/sadmin/sadmin.component';
 import { SadminDashComponent } from './home/sadmin/sadmin-dash/sadmin-dash.component';
 import { SadminSettingsComponent } from './home/sadmin/sadmin-settings/sadmin-settings.component';
 import { SadminGuard } from './guards/sadmin.guard';
+import { CreateCenterComponent } from './home/sadmin/create-center/create-center.component';
 
 const redirectSignedInToDash = redirectLoggedInTo(['home']);
 
@@ -28,7 +29,8 @@ const routes: Routes = [
         children: [
           { path: '', redirectTo: 'dash', pathMatch: 'full' },
           { path: 'dash', component: SadminDashComponent },
-          { path: 'settings', component: SadminSettingsComponent }
+          { path: 'settings', component: SadminSettingsComponent },
+          { path: 'create', component: CreateCenterComponent }
         ]
       }
     ]

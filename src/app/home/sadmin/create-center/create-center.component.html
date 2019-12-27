@@ -1,0 +1,20 @@
+<div class="body with-nav">
+  <h2 class="mat-title">Create a new center</h2>
+  <mat-horizontal-stepper [linear]="true">
+    <mat-step>
+      <form [formGroup]="centerFormGroup">
+        <ng-template matStepLabel>Fill out center details</ng-template>
+      </form>
+    </mat-step>
+    <mat-step>
+      <form [formGroup]="adminFormGroup">
+        <ng-template matStepLabel>Add initial admin</ng-template>
+      </form>
+    </mat-step>
+    <mat-step>
+      <form [formGroup]="confirmFormGroup">
+        <ng-template matStepLabel>Confirm</ng-template>
+      </form>
+    </mat-step>
+  </mat-horizontal-stepper>
+</div>

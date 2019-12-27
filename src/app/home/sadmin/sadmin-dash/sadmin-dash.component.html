@@ -5,6 +5,12 @@
       <input matInput placeholder="Search for a center..." />
       <mat-icon matPrefix>search</mat-icon>
     </mat-form-field>
-    <button mat-flat-button color="primary">New center</button>
+    <button
+      mat-flat-button
+      color="primary"
+      [routerLink]="['/home/sadmin/create']"
+    >
+      New center
+    </button>
   </div>
 </div>

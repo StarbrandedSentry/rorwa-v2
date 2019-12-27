@@ -125,10 +125,12 @@ h4 {
 }
 
 .nav {
-  padding: 0 15%;
   display: flex;
   height: 6vh;
-  align-items: center;
+  align-items: flex-end;
+  justify-content: flex-start;
+  border-bottom: var(--grey-500) solid 1px;
+  width: 70%;
 }
 
 .nav-link {

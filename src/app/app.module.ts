@@ -25,6 +25,7 @@ import { SadminDashComponent } from './home/sadmin/sadmin-dash/sadmin-dash.compo
 import { SadminNavComponent } from './home/sadmin/sadmin-nav/sadmin-nav.component';
 import { SadminSettingsComponent } from './home/sadmin/sadmin-settings/sadmin-settings.component';
 import { SadminGuard } from './guards/sadmin.guard';
+import { CreateCenterComponent } from './home/sadmin/create-center/create-center.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { SadminGuard } from './guards/sadmin.guard';
     SadminComponent,
     SadminDashComponent,
     SadminNavComponent,
-    SadminSettingsComponent
+    SadminSettingsComponent,
+    CreateCenterComponent
   ],
   imports: [
     BrowserModule,
