@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { forbiddenEmail } from '../../../validators';
+import { forbiddenDate } from '../../../validators';
 
 @Component({
   selector: 'app-create-center',
@@ -18,7 +18,7 @@ export class CreateCenterComponent implements OnInit {
     this.centerFormGroup = this.formBuilder.group({
       centerName: ['', [Validators.minLength(8), Validators.required]],
       centerDescription: ['', [Validators.minLength(8), Validators.required]],
-      centerEstablished: ['', [Validators.required, forbiddenEmail]],
+      centerEstablished: ['', [Validators.required, forbiddenDate]],
       centerAddress: ['', [Validators.required, Validators.minLength(8)]],
       centerContactNum: [
         '',
@@ -27,10 +27,7 @@ export class CreateCenterComponent implements OnInit {
     });
   }
 
-  text() {
-    const cDate = Date.now();
-    console.log(this.centerFormGroup.get('centerEstablished').value);
-    console.log(cDate);
-    console.log(this.centerFormGroup.get('centerEstablished').value <= cDate);
+  get centerEstablished() {
+    return this.centerFormGroup.get('centerEstablished');
   }
 }

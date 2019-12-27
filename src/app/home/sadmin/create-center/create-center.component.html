@@ -44,11 +44,13 @@
               [for]="established"
             ></mat-datepicker-toggle>
             <mat-datepicker #established></mat-datepicker>
-            <mat-error>This is required!</mat-error>
+            <mat-error *ngIf="centerEstablished.hasError('forbiddenDate')"
+              >Date is not before the current date.</mat-error
+            >
           </mat-form-field>
         </div>
         <div class="actions">
-          <button mat-raised-button (click)="text()">Next</button>
+          <button mat-raised-button>Next</button>
         </div>
       </form>
     </mat-step>
@@ -62,5 +64,4 @@
       <ng-template matStepLabel>Confirm</ng-template>
     </mat-step>-->
   </mat-horizontal-stepper>
-  <button mat-raised-button (click)="text()">Next</button>
 </div>
