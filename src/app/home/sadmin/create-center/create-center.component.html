@@ -1,6 +1,6 @@
 <div class="body with-nav">
   <h2 class="mat-title">Create a new center</h2>
-  <mat-horizontal-stepper [linear]="true" #stepper>
+  <mat-horizontal-stepper linear #stepper>
     <!--CENTER STEP-->
     <mat-step [stepControl]="centerFormGroup">
       <form [formGroup]="centerFormGroup">
@@ -49,19 +49,44 @@
             >
           </mat-form-field>
         </div>
+        <div class="row">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Address</mat-label>
+            <input
+              matInput
+              placeholder="Enter address"
+              formControlName="centerAddress"
+              required
+            />
+            <mat-error>Entry must be longer!</mat-error>
+        </div>
+        <div class="row">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Contact number</mat-label>
+            <input
+              matInput
+              placeholder="Enter contact number"
+              formControlName="centerContactNum"
+              required
+            />
+            <mat-error>Not a phone number.</mat-error>
+          </mat-form-field>
+        </div>
         <div class="actions">
-          <button mat-raised-button>Next</button>
+          <button mat-stroked-button matStepperNext>Next</button>
         </div>
       </form>
     </mat-step>
     <!--ADMIN STEP-->
-    <!--<mat-step [stepControl]="adminFormGroup">
+    <mat-step [stepControl]="adminFormGroup">
       <form [formGroup]="adminFormGroup">
         <ng-template matStepLabel>Add initial admin</ng-template>
       </form>
     </mat-step>
+    <!--CONFIRMATION-->
     <mat-step>
       <ng-template matStepLabel>Confirm</ng-template>
-    </mat-step>-->
+      gesagesgse
+    </mat-step>
   </mat-horizontal-stepper>
 </div>
