@@ -40,6 +40,10 @@ const routes: Routes = [
     component: SignInComponent,
     ...canActivate(redirectSignedInToDash)
   },
+  {
+    path: 'invitation',
+    loadChildren: './invitation/invitation.module#InvitationModule'
+  },
   { path: '**', redirectTo: 'home' }
 ];
 

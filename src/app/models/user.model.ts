@@ -6,3 +6,11 @@ export interface User {
   photoURL?: string;
   displayName?: string;
 }
+
+export interface Invitation {
+  email?: string;
+  name?: string;
+  centerID?: string;
+  centerName?: string;
+  invitationType?: number;
+}

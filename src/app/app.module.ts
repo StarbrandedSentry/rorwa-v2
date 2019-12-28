@@ -26,6 +26,10 @@ import { SadminNavComponent } from './home/sadmin/sadmin-nav/sadmin-nav.componen
 import { SadminSettingsComponent } from './home/sadmin/sadmin-settings/sadmin-settings.component';
 import { SadminGuard } from './guards/sadmin.guard';
 import { CreateCenterComponent } from './home/sadmin/create-center/create-center.component';
+import { InvitationModule } from './invitation/invitation.module';
+import { CenterService } from './shared/center.service';
+import { UserService } from './shared/user.service';
+import { SuccessComponent } from './message/success/success.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +44,8 @@ import { CreateCenterComponent } from './home/sadmin/create-center/create-center
     SadminDashComponent,
     SadminNavComponent,
     SadminSettingsComponent,
-    CreateCenterComponent
+    CreateCenterComponent,
+    SuccessComponent
   ],
   imports: [
     BrowserModule,
@@ -50,12 +55,15 @@ import { CreateCenterComponent } from './home/sadmin/create-center/create-center
     HttpClientModule,
     ReactiveFormsModule,
     FirebaseCollectionModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig)
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    InvitationModule
   ],
   providers: [
     [{ provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher }],
     AuthService,
-    SadminGuard
+    SadminGuard,
+    CenterService,
+    UserService
   ],
   bootstrap: [AppComponent]
 })

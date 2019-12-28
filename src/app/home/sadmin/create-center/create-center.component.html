@@ -1,5 +1,6 @@
 <div class="body with-nav">
   <h2 class="mat-title">Create a new center</h2>
+  <!--TODO : CHANGE LINEAR TO TRUE-->
   <mat-horizontal-stepper linear #stepper>
     <!--CENTER STEP-->
     <mat-step [stepControl]="centerFormGroup">
@@ -59,6 +60,7 @@
               required
             />
             <mat-error>Entry must be longer!</mat-error>
+          </mat-form-field>
         </div>
         <div class="row">
           <mat-form-field appearance="outline" class="full-width">
@@ -81,12 +83,75 @@
     <mat-step [stepControl]="adminFormGroup">
       <form [formGroup]="adminFormGroup">
         <ng-template matStepLabel>Add initial admin</ng-template>
+        <div class="row">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Admin email</mat-label>
+            <input
+              matInput
+              placeholder="Enter admin email"
+              formControlName="adminEmail"
+              required
+            />
+            <mat-error *ngIf="adminEmail.hasError('email')"
+              >This is not an email.</mat-error
+            >
+          </mat-form-field>
+        </div>
       </form>
+      <div class="actions">
+        <button mat-stroked-button matStepperPrevious>Back</button>
+        <button mat-stroked-button matStepperNext>Next</button>
+      </div>
     </mat-step>
     <!--CONFIRMATION-->
     <mat-step>
       <ng-template matStepLabel>Confirm</ng-template>
-      gesagesgse
+      <div class="entry">
+        <div class="mat-caption">Center name</div>
+        <span>{{ centerName.value }}</span>
+      </div>
+      <div class="entry">
+        <div class="mat-caption">Center description</div>
+        <span>{{ centerDescription.value }}</span>
+      </div>
+      <div class="entry">
+        <div class="mat-caption">Center established date</div>
+        <span>{{ centerEstablished.value | date: 'MMM dd, yyyy' }}</span>
+      </div>
+      <div class="entry">
+        <div class="mat-caption">Center address</div>
+        <span>{{ centerAddress.value }}</span>
+      </div>
+      <div class="entry">
+        <div class="mat-caption">Center contact number</div>
+        <span>{{ centerContactNum.value }}</span>
+      </div>
+      <div class="entry">
+        <div class="mat-caption">Admin email</div>
+        <span>{{ adminEmail.value }}</span>
+      </div>
+      <div>
+        <message-error [message$]="errorMessage.asObservable()"></message-error>
+      </div>
+      <div>
+        <message-success
+          [message$]="successMessage.asObservable()"
+        ></message-success>
+      </div>
+      <div class="actions">
+        <button
+          mat-flat-button
+          color="primary"
+          (click)="onConfirmClick()"
+          [disabled]="isCreating"
+        >
+          {{ confirmButtonText }}
+        </button>
+      </div>
+      <div class="actions">
+        <button mat-stroked-button matStepperPrevious>Back</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+      </div>
     </mat-step>
   </mat-horizontal-stepper>
 </div>
