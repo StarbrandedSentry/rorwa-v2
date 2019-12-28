@@ -6,7 +6,33 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material/icon';
-import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import {
+  FormGroup,
+  Validators,
+  FormBuilder,
+  FormControl,
+  FormGroupDirective,
+  NgForm
+} from '@angular/forms';
+import { checkEmail, checkPasswords } from '../../validators';
+import { ErrorStateMatcher } from '@angular/material';
+
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(
+    control: FormControl | null,
+    form: FormGroupDirective | NgForm | null
+  ): boolean {
+    const invalidCtrl = !!(control && control.invalid && control.parent.dirty);
+    const invalidParent = !!(
+      control &&
+      control.parent &&
+      control.parent.invalid &&
+      control.parent.dirty
+    );
+
+    return invalidCtrl || invalidParent;
+  }
+}
 
 @Component({
   selector: 'app-invitation-content',
@@ -14,9 +40,14 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
   styleUrls: ['./invitation-content.component.scss']
 })
 export class InvitationContentComponent implements OnInit {
-  passwordRegex = '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]$';
+  matcher = new MyErrorStateMatcher();
+  passwordRegex = '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$';
   invitation$: Observable<Invitation>;
   accountForm: FormGroup;
+
+  //message boiler plate
+  createButtonText = 'Create account';
+
   constructor(
     private afFirestore: AngularFirestore,
     private activatedRoute: ActivatedRoute,
@@ -43,21 +74,27 @@ export class InvitationContentComponent implements OnInit {
       if (inv.status !== 'pending') {
         this.router.navigateByUrl('/invitation/whoops/error');
       }
-    });
 
-    this.accountForm = this.formBuilder.group({
-      accountEmail: ['', [Validators.required, Validators.email]],
-      password: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(8),
-          Validators.pattern(this.passwordRegex)
-        ]
-      ],
-      confirmPassword: ['', [Validators.required, Validators.minLength(8)]],
-      name: ['', [Validators.required]]
+      this.accountForm = this.formBuilder.group(
+        {
+          accountEmail: [
+            '',
+            [Validators.required, Validators.email, checkEmail(inv.email)]
+          ],
+          password: [
+            '',
+            [Validators.required, Validators.pattern(this.passwordRegex)]
+          ],
+          confirmPassword: ['', [Validators.required]],
+          name: ['', [Validators.required]]
+        },
+        { validators: checkPasswords }
+      );
     });
+  }
+
+  onCreateClick() {
+    console.log('SNIPER');
   }
 
   get accountEmail() {
