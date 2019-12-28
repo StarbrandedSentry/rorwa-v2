@@ -80,14 +80,19 @@ export class CreateCenterComponent implements OnInit {
         const newInvitation: Invitation = {
           email: this.adminEmail.value,
           centerName: this.centerName.value,
-          centerID: centerResult.id
+          centerID: centerResult.id,
+          invitationType: 1,
+          status: 'pending'
         };
         this.userService
           .createInvitation(newInvitation)
           .then(invitationResult => {
             this.createCenterDone();
             /*TODO: CHANGE LINK FOR PRODUCTION*/
-            this.successMessage.next('Center created.\nInvitation link is: ');
+            this.successMessage.next(
+              'Center created.\nInvitation link is: http://localhost:4200/invitation/' +
+                invitationResult.id
+            );
           })
           .catch(error => {
             this.errorMessage.next(error);

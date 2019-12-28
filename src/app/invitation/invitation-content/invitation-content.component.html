@@ -1,0 +1,57 @@
+<div class="body" *ngIf="invitation$ | async as invitation">
+  <mat-icon color="primary" svgIcon="research"></mat-icon>
+  <div class="mat-h1">You have been invited!</div>
+  <div class="mat-subheading-2">To continue, create your account.</div>
+  <div class="container" [formGroup]="accountForm">
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input
+        matInput
+        placeholder="Enter email"
+        formControlName="accountEmail"
+        required
+      />
+      <mat-error *ngIf="accountEmail.hasError('email')"
+        >This is not an email.</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Password</mat-label>
+      <input
+        matInput
+        placeholder="Enter password"
+        formControlName="password"
+        type="password"
+        required
+      />
+      <mat-error
+        *ngIf="password.hasError('minlength') && !password.hasError('pattern')"
+        >Password must at least be 8 characters long.</mat-error
+      >
+      <mat-error *ngIf="password.hasError('pattern')"
+        >Password must contain at least one capital letter and at least one
+        number.</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Confirm password</mat-label>
+      <input
+        matInput
+        placeholder="Enter password again"
+        type="password"
+        formControlName="confirmPassword"
+        required
+      />
+    </mat-form-field>
+    <mat-divider></mat-divider>
+    <mat-form-field appearance="outline">
+      <mat-label>Your name</mat-label>
+      <input
+        matInput
+        placeholder="Enter name"
+        formControlName="name"
+        required
+      />
+    </mat-form-field>
+  </div>
+</div>

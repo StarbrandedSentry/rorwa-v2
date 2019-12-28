@@ -6,7 +6,6 @@ import { MyErrorStateMatcher } from '../errorstatematcher';
 import { Subject } from 'rxjs';
 import { AuthService } from '../shared/auth.service';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { consoleTestResultHandler } from 'tslint/lib/test';
 import { Router } from '@angular/router';
 
 @Component({

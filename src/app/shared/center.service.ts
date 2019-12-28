@@ -9,7 +9,9 @@ import { Center } from '../models/center.model';
   providedIn: 'root'
 })
 export class CenterService {
-  centerCollection: AngularFirestoreCollection<Center>;
+  centerCollection: AngularFirestoreCollection<
+    Center
+  > = this.afFirestore.collection('centers');
   constructor(private afFirestore: AngularFirestore) {}
 
   createCenter(center: Center) {

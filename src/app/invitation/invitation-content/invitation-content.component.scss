@@ -1,0 +1,30 @@
+.body {
+  align-items: center;
+  padding: 3% 15%;
+}
+
+mat-icon {
+  transform: scale(2.5);
+  margin-bottom: 1.5rem;
+}
+
+.container {
+  width: 75%;
+
+  mat-form-field {
+    width: 100%;
+  }
+}
+
+mat-divider {
+  margin-bottom: 1rem;
+}
+
+@media screen and (max-width: 767px) {
+  .body {
+    padding: 3% 2%;
+  }
+  .container {
+    width: 90%;
+  }
+}

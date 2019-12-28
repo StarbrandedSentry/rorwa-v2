@@ -52,7 +52,7 @@ export class AuthService {
     return this.updateUserData(credential.user);
   }
 
-  updateUserData(user) {
+  updateUserData(user: User) {
     const userRef: AngularFirestoreDocument<User> = this.afFirestore.doc(
       'users/' + user.uid
     );

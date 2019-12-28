@@ -5,6 +5,8 @@ export interface User {
   email: string;
   photoURL?: string;
   displayName?: string;
+  centerID?: string;
+  centerName?: string;
 }
 
 export interface Invitation {
@@ -13,4 +15,5 @@ export interface Invitation {
   centerID?: string;
   centerName?: string;
   invitationType?: number;
+  status?: string;
 }
