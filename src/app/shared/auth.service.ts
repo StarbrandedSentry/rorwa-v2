@@ -53,7 +53,7 @@ export class AuthService {
   }
 
   updateUserData(user: User) {
-    const userRef: AngularFirestoreDocument<User> = this.afFirestore.doc(
+    const userRef: AngularFirestoreDocument<User> = this.afFirestore.doc<User>(
       'users/' + user.uid
     );
 
@@ -63,5 +63,32 @@ export class AuthService {
     };
 
     return userRef.set(data, { merge: true });
+  }
+
+  saveUserData(user: User) {
+    const userRef: AngularFirestoreDocument<User> = this.afFirestore.doc<User>(
+      'users/' + user.uid
+    );
+
+    return userRef.set(user, { merge: true });
+  }
+
+  signOut() {
+    this.afAuth.auth.signOut().then(res => {
+      this.router.navigateByUrl('/home');
+    });
+  }
+
+  async createAccount(user: User, pass: string, centerID: string) {
+    const credential = await this.afAuth.auth.createUserWithEmailAndPassword(
+      user.email,
+      pass
+    );
+    user.uid = credential.user.uid;
+    return this.saveUserData(user).then(res => {
+      return this.afFirestore
+        .doc('centers/' + centerID + '/admins/' + user.uid)
+        .set(user);
+    });
   }
 }

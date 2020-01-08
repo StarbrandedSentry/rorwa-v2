@@ -1,5 +1,5 @@
 export interface User {
-  uid: string;
+  uid?: string;
   role?: number;
   name?: string;
   email: string;
@@ -16,4 +16,5 @@ export interface Invitation {
   centerName?: string;
   invitationType?: number;
   status?: string;
+  id?: string;
 }

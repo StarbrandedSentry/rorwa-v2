@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { InvitationErrorComponent } from './invitation-error/invitation-error.component';
 import { InvitationContentComponent } from './invitation-content/invitation-content.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MessageModule } from '../message/message.module';
 
 const routes: Routes = [
   { path: ':id', component: InvitationContentComponent },
@@ -26,7 +27,8 @@ const routes: Routes = [
     FirebaseCollectionModule,
     HttpClientModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MessageModule
   ]
 })
 export class InvitationModule {}

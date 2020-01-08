@@ -29,10 +29,13 @@ export class HomeComponent implements OnInit {
 
   toggleAccMenu() {
     this.isAccMenuVisible = !this.isAccMenuVisible;
-    console.log('toggled!');
   }
 
   closeAccMenu(event) {
     this.isAccMenuVisible = false;
+  }
+
+  onSignOutClick() {
+    this.auth.signOut();
   }
 }

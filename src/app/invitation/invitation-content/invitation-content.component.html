@@ -59,11 +59,17 @@
         required
       />
     </mat-form-field>
+
+    <!--ERROR MESSAGE-->
+    <div>
+      <message-error [message$]="errorMessage.asObservable()"></message-error>
+    </div>
+
     <button
       type="submit"
       mat-flat-button
       color="primary"
-      [disabled]="accountForm.invalid"
+      [disabled]="accountForm.invalid || createButtonDisabled"
       (click)="onCreateClick()"
     >
       {{ createButtonText }}

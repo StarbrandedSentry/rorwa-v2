@@ -30,6 +30,7 @@ import { InvitationModule } from './invitation/invitation.module';
 import { CenterService } from './shared/center.service';
 import { UserService } from './shared/user.service';
 import { SuccessComponent } from './message/success/success.component';
+import { MessageModule } from './message/message.module';
 
 @NgModule({
   declarations: [
@@ -39,13 +40,11 @@ import { SuccessComponent } from './message/success/success.component';
     DashComponent,
     SearchComponent,
     SignInComponent,
-    ErrorComponent,
     SadminComponent,
     SadminDashComponent,
     SadminNavComponent,
     SadminSettingsComponent,
-    CreateCenterComponent,
-    SuccessComponent
+    CreateCenterComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +55,8 @@ import { SuccessComponent } from './message/success/success.component';
     ReactiveFormsModule,
     FirebaseCollectionModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    InvitationModule
+    InvitationModule,
+    MessageModule
   ],
   providers: [
     [{ provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher }],

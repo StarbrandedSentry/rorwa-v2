@@ -8,13 +8,22 @@ import { Invitation, User } from '../models/user.model';
 export class UserService {
   constructor(private afFirestore: AngularFirestore) {}
 
-  addAdmin(centerID: string, userID: string, user: User) {
+  /*addAdmin(centerID: string, userID: string, user: User) {
     return this.afFirestore
       .doc('centers/' + centerID + '/admins/' + userID)
       .set(user);
-  }
+  }*/
 
   createInvitation(invitation: Invitation) {
     return this.afFirestore.collection('invitations').add(invitation);
+  }
+
+  changeInvitationStatus(id: string, status: string) {
+    const invitation: Invitation = {
+      status: status
+    };
+    return this.afFirestore
+      .doc('invitations/' + id)
+      .set(invitation, { merge: true });
   }
 }

@@ -72,7 +72,9 @@ export class CreateCenterComponent implements OnInit {
       description: this.centerDescription.value,
       dateEstablished: this.centerEstablished.value,
       address: this.centerAddress.value,
-      contactNumber: this.centerContactNum.value
+      contactNumber: this.centerContactNum.value,
+      memberCount: 0,
+      adminCount: 0
     };
     this.centerService
       .createCenter(newCenter)

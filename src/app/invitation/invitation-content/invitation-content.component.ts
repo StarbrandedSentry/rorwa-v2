@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { switchMap, take } from 'rxjs/operators';
-import { Observable } from 'rxjs';
-import { Invitation } from '../../models/user.model';
+import { map, switchMap, take } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { Invitation, User } from '../../models/user.model';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -16,6 +16,10 @@ import {
 } from '@angular/forms';
 import { checkEmail, checkPasswords } from '../../validators';
 import { ErrorStateMatcher } from '@angular/material';
+import { UserService } from '../../shared/user.service';
+import { AuthService } from '../../shared/auth.service';
+import { Center } from '../../models/center.model';
+import { CenterService } from '../../shared/center.service';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(
@@ -30,7 +34,8 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
       control.parent.dirty
     );
 
-    return invalidCtrl || invalidParent;
+    /*return invalidCtrl /!* || invalidParent*!/;*/
+    return control.dirty && form.invalid;
   }
 }
 
@@ -44,9 +49,13 @@ export class InvitationContentComponent implements OnInit {
   passwordRegex = '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$';
   invitation$: Observable<Invitation>;
   accountForm: FormGroup;
+  invitation: Invitation;
+  invitationID: string;
 
   //message boiler plate
   createButtonText = 'Create account';
+  createButtonDisabled: boolean;
+  errorMessage: Subject<string> = new Subject<string>();
 
   constructor(
     private afFirestore: AngularFirestore,
@@ -54,7 +63,10 @@ export class InvitationContentComponent implements OnInit {
     sanitizer: DomSanitizer,
     iconRegistry: MatIconRegistry,
     private router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private userService: UserService,
+    private authService: AuthService,
+    private centerService: CenterService
   ) {
     iconRegistry.addSvgIcon(
       'research',
@@ -62,18 +74,20 @@ export class InvitationContentComponent implements OnInit {
     );
   }
 
-  ngOnInit() {
-    this.invitation$ = this.activatedRoute.paramMap.pipe(
+  async ngOnInit() {
+    this.invitation$ = await this.activatedRoute.paramMap.pipe(
       take(1),
       switchMap(params => {
         const id = params.get('id');
+        this.invitationID = params.get('id');
         return this.afFirestore.doc('invitations/' + id).valueChanges();
       })
     );
-    this.invitation$.subscribe(inv => {
+    this.invitation$.pipe(take(1)).subscribe(inv => {
       if (inv.status !== 'pending') {
         this.router.navigateByUrl('/invitation/whoops/error');
       }
+      this.invitation = inv;
 
       this.accountForm = this.formBuilder.group(
         {
@@ -94,7 +108,30 @@ export class InvitationContentComponent implements OnInit {
   }
 
   onCreateClick() {
-    console.log('SNIPER');
+    this.userService
+      .changeInvitationStatus(this.invitationID, 'approved')
+      .then(invRes => {
+        const newUser: User = {
+          email: this.accountEmail.value,
+          name: this.name.value,
+          role: 2
+        };
+        this.authService
+          .createAccount(newUser, this.password.value, this.invitation.centerID)
+          .then(accRes => {
+            this.router.navigateByUrl('/home');
+          })
+          .catch(error => {
+            this.errorMessage.next('Something went wrong...');
+          });
+      })
+      .catch(error => {
+        console.log(error);
+        this.errorMessage.next('Something went wrong...');
+      })
+      .finally(() => {
+        this.creationStop();
+      });
   }
 
   get accountEmail() {
@@ -108,5 +145,15 @@ export class InvitationContentComponent implements OnInit {
   }
   get name() {
     return this.accountForm.get('name');
+  }
+
+  private creationStart() {
+    this.createButtonText = 'Creating...';
+    this.createButtonDisabled = true;
+  }
+
+  private creationStop() {
+    this.createButtonText = 'Create account';
+    this.createButtonDisabled = false;
   }
 }
