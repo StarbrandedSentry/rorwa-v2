@@ -28,6 +28,17 @@ export const incrementUsers = functions.firestore
           .catch(err => {
             console.log(err);
           });
+      } else if (afterData.invitationType === 2) {
+        admin
+          .firestore()
+          .doc('centers/' + afterData.centerID)
+          .update({ memberCount: FieldValue.increment(1) })
+          .then(res => {
+            console.log(res);
+          })
+          .catch(err => {
+            console.log(err);
+          });
       }
     }
   });
