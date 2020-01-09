@@ -7,6 +7,8 @@ import { FirebaseCollectionModule } from '../firebase-collection/firebase-collec
 import { HttpClientModule } from '@angular/common/http';
 import { MaterialModule } from '../material/material.module';
 import { NavModule } from '../nav/nav.module';
+import { CenterNavComponent } from './center-nav/center-nav.component';
+import { CenterResearchesComponent } from './center-researches/center-researches.component';
 
 const routes: Routes = [
   {
@@ -14,13 +16,25 @@ const routes: Routes = [
     component: CenterComponent,
     children: [
       { path: '', redirectTo: 'dash/:id', pathMatch: 'full' },
-      { path: 'dash/:id', component: CenterDashComponent }
+      {
+        path: 'dash/:id',
+        component: CenterDashComponent,
+        children: [
+          { path: '', redirectTo: 'researches', pathMatch: 'full' },
+          { path: 'researches', component: CenterResearchesComponent }
+        ]
+      }
     ]
   }
 ];
 
 @NgModule({
-  declarations: [CenterComponent, CenterDashComponent],
+  declarations: [
+    CenterComponent,
+    CenterDashComponent,
+    CenterNavComponent,
+    CenterResearchesComponent
+  ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

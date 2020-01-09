@@ -1,0 +1,18 @@
+.center-body {
+  padding: 1% 15%;
+  display: flex;
+}
+
+.center-info {
+  width: 30%;
+  margin-right: 1rem;
+
+  .mat-title {
+    margin-bottom: 0;
+    font-weight: 700;
+  }
+}
+
+.center-main {
+  width: 100%;
+}

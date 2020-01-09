@@ -7,5 +7,6 @@ export interface Center {
   contactNumber?: string;
   isActive?: boolean;
   adminCount?: number;
+  researchCount?: number;
   memberCount?: number;
 }

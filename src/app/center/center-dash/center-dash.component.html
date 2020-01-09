@@ -1,1 +1,12 @@
-<div *ngIf="center$ | async as center">fwafwa</div>
+<div *ngIf="center$ | async" class="center-body">
+  <div class="center-info container">
+    <div class="mat-title">
+      {{ center.name }}
+    </div>
+    <div class="mat-subheading-1">Researches: {{ center.researchCount }}</div>
+    <p class="mat-body">{{ center.description }}</p>
+  </div>
+  <div class="center-main">
+    <app-center-nav></app-center-nav>
+  </div>
+</div>
