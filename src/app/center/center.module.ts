@@ -12,6 +12,7 @@ import { CenterResearchesComponent } from './center-researches/center-researches
 import { CenterResearchAddComponent } from './center-research-add/center-research-add.component';
 import { AdminGuard } from '../guards/admin.guard';
 import { CenterAdminsComponent } from './center-admins/center-admins.component';
+import { SadminGuard } from '../guards/sadmin.guard';
 
 const routes: Routes = [
   {
@@ -30,7 +31,11 @@ const routes: Routes = [
             component: CenterResearchAddComponent,
             canActivate: [AdminGuard]
           },
-          { path: 'admins', component: CenterAdminsComponent }
+          {
+            path: 'admins',
+            component: CenterAdminsComponent,
+            canActivate: [SadminGuard]
+          }
         ]
       }
     ]
