@@ -11,7 +11,8 @@ import { map, switchMap } from 'rxjs/operators';
   styleUrls: ['./center-dash.component.scss']
 })
 export class CenterDashComponent implements OnInit {
-  center$: Observable<Center>;
+  center$;
+  center: Center;
 
   constructor(
     private afFirestore: AngularFirestore,
@@ -19,13 +20,24 @@ export class CenterDashComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    console.log('center');
-    /*this.center$ = this.route.paramMap.pipe(
+    this.center$ = this.route.paramMap.pipe(
       switchMap(params => {
         const id = params.get('id');
-        console.log(id);
-        return this.afFirestore.doc('centers/' + id).valueChanges();
+        return this.afFirestore
+          .doc('centers/' + id)
+          .snapshotChanges()
+          .pipe(
+            map(a => {
+              const data = a.payload.data() as Center;
+              data.id = a.payload.id;
+              return data;
+            })
+          );
       })
-    );*/
+    );
+    this.center$.subscribe(center => {
+      this.center = center;
+      console.logt;
+    });
   }
 }

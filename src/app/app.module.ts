@@ -29,9 +29,9 @@ import { CreateCenterComponent } from './home/sadmin/create-center/create-center
 import { InvitationModule } from './invitation/invitation.module';
 import { CenterService } from './shared/center.service';
 import { UserService } from './shared/user.service';
-import { SuccessComponent } from './message/success/success.component';
 import { MessageModule } from './message/message.module';
 import { CenterModule } from './center/center.module';
+import { NavModule } from './nav/nav.module';
 
 @NgModule({
   declarations: [
@@ -58,7 +58,8 @@ import { CenterModule } from './center/center.module';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     InvitationModule,
     MessageModule,
-    CenterModule
+    CenterModule,
+    NavModule
   ],
   providers: [
     [{ provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher }],

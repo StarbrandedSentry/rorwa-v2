@@ -1,13 +1,4 @@
-.mobile {
-  display: none;
-}
-
-.desktop {
-  display: flex;
-  flex-direction: column;
-}
-
-/*mat-toolbar {
+mat-toolbar {
   font-size: 1rem;
   height: 7vh;
   min-height: 7vh;
@@ -55,16 +46,5 @@
     width: 100%;
     font-weight: 700;
     text-transform: uppercase;
-  }
-}*/
-
-@media screen and (max-width: 767px) {
-  .desktop {
-    display: none;
-  }
-
-  .mobile {
-    display: flex;
-    flex-direction: column;
   }
 }

@@ -15,7 +15,7 @@
   </div>
   <div class="center-main" *ngFor="let center of centerService.centers">
     <div class="center-container">
-      <div class="mat-title">
+      <div class="mat-title" [routerLink]="['/center/dash', center.id]">
         {{ center.name }}
       </div>
       <div class="row mat-subheading-1">

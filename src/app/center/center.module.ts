@@ -6,14 +6,15 @@ import { CenterDashComponent } from './center-dash/center-dash.component';
 import { FirebaseCollectionModule } from '../firebase-collection/firebase-collection.module';
 import { HttpClientModule } from '@angular/common/http';
 import { MaterialModule } from '../material/material.module';
+import { NavModule } from '../nav/nav.module';
 
 const routes: Routes = [
   {
     path: '',
     component: CenterComponent,
     children: [
-      { path: '', redirectTo: 'dash', pathMatch: 'full' },
-      { path: ':id', component: CenterDashComponent }
+      { path: '', redirectTo: 'dash/:id', pathMatch: 'full' },
+      { path: 'dash/:id', component: CenterDashComponent }
     ]
   }
 ];
@@ -25,7 +26,8 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     FirebaseCollectionModule,
     HttpClientModule,
-    MaterialModule
+    MaterialModule,
+    NavModule
   ]
 })
 export class CenterModule {}
