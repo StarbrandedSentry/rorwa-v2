@@ -13,7 +13,24 @@
       New center
     </button>
   </div>
-  <div>
-    fsegesg
+  <div class="center-main" *ngFor="let center of centers">
+    <div class="center-container">
+      <div class="mat-title">
+        {{ center.name }}
+      </div>
+      <div class="row mat-subheading-1">
+        <div class="column">
+          <div class="head">Admins</div>
+          : {{ center.adminCount }}
+        </div>
+        <div class="column">
+          <div class="head">Members</div>
+          : {{ center.memberCount }}
+        </div>
+      </div>
+      <p class="mat-body-1">
+        {{ center.description }}
+      </p>
+    </div>
   </div>
 </div>

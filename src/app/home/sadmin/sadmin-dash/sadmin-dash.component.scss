@@ -3,3 +3,32 @@
     margin-left: 0.75rem;
   }
 }
+
+.center-main {
+  margin-top: 1rem;
+}
+
+.center-container {
+  margin-bottom: 0.5rem;
+  border-bottom: var(--grey-200) solid 1px;
+  padding-bottom: 1rem;
+
+  .mat-title {
+    cursor: pointer;
+    font-weight: 700;
+    margin-bottom: 0;
+    &:hover {
+      text-decoration: underline;
+      color: var(--primary-500);
+    }
+  }
+
+  /*.head {
+    font-weight: 700;
+  }*/
+
+  .column {
+    display: flex;
+    margin-right: 0.5rem;
+  }
+}
