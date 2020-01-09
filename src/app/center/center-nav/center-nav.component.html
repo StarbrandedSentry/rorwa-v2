@@ -7,5 +7,15 @@
     >
       Researches
     </div>
+    <div *ngIf="authService.user$ | async as user">
+      <div
+        class="nav-link"
+        [routerLink]="['admins']"
+        routerLinkActive="link-active"
+        *ngIf="user.role == 1"
+      >
+        Admins
+      </div>
+    </div>
   </div>
 </div>

@@ -10,6 +10,8 @@ import { NavModule } from '../nav/nav.module';
 import { CenterNavComponent } from './center-nav/center-nav.component';
 import { CenterResearchesComponent } from './center-researches/center-researches.component';
 import { CenterResearchAddComponent } from './center-research-add/center-research-add.component';
+import { AdminGuard } from '../guards/admin.guard';
+import { CenterAdminsComponent } from './center-admins/center-admins.component';
 
 const routes: Routes = [
   {
@@ -23,7 +25,12 @@ const routes: Routes = [
         children: [
           { path: '', redirectTo: 'researches', pathMatch: 'full' },
           { path: 'researches', component: CenterResearchesComponent },
-          { path: 'add', component: CenterResearchAddComponent }
+          {
+            path: 'add',
+            component: CenterResearchAddComponent,
+            canActivate: [AdminGuard]
+          },
+          { path: 'admins', component: CenterAdminsComponent }
         ]
       }
     ]
@@ -36,7 +43,8 @@ const routes: Routes = [
     CenterDashComponent,
     CenterNavComponent,
     CenterResearchesComponent,
-    CenterResearchAddComponent
+    CenterResearchAddComponent,
+    CenterAdminsComponent
   ],
   imports: [
     CommonModule,
