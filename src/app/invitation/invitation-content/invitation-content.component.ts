@@ -114,7 +114,8 @@ export class InvitationContentComponent implements OnInit {
         const newUser: User = {
           email: this.accountEmail.value,
           name: this.name.value,
-          role: 2
+          role: 2,
+          centerID: this.invitation.centerID
         };
         this.authService
           .createAccount(newUser, this.password.value, this.invitation.centerID)

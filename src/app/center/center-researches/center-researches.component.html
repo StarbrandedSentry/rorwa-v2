@@ -1,1 +1,17 @@
-<p>center-researches works!</p>
+<div class="researches-body">
+  <div class="row">
+    <mat-form-field class="full-width search">
+      <input matInput placeholder="Search..." />
+    </mat-form-field>
+    <div *ngIf="authService.user$ | async as user">
+      <button
+        mat-flat-button
+        color="primary"
+        *ngIf="user.role == 2"
+        (click)="onAddResearchClick()"
+      >
+        Add new
+      </button>
+    </div>
+  </div>
+</div>

@@ -25,6 +25,15 @@
             </button>
             <mat-divider></mat-divider>
           </div>
+          <div *ngIf="user.role == 2">
+            <button
+              class="menu-button"
+              [routerLink]="['/center/dash/' + user.centerID]"
+            >
+              Center
+            </button>
+            <mat-divider></mat-divider>
+          </div>
           <button class="menu-button" (click)="onSignOutClick()">
             Sign out
           </button>

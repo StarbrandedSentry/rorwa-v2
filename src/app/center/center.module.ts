@@ -9,6 +9,7 @@ import { MaterialModule } from '../material/material.module';
 import { NavModule } from '../nav/nav.module';
 import { CenterNavComponent } from './center-nav/center-nav.component';
 import { CenterResearchesComponent } from './center-researches/center-researches.component';
+import { CenterResearchAddComponent } from './center-research-add/center-research-add.component';
 
 const routes: Routes = [
   {
@@ -21,7 +22,8 @@ const routes: Routes = [
         component: CenterDashComponent,
         children: [
           { path: '', redirectTo: 'researches', pathMatch: 'full' },
-          { path: 'researches', component: CenterResearchesComponent }
+          { path: 'researches', component: CenterResearchesComponent },
+          { path: 'add', component: CenterResearchAddComponent }
         ]
       }
     ]
@@ -33,7 +35,8 @@ const routes: Routes = [
     CenterComponent,
     CenterDashComponent,
     CenterNavComponent,
-    CenterResearchesComponent
+    CenterResearchesComponent,
+    CenterResearchAddComponent
   ],
   imports: [
     CommonModule,

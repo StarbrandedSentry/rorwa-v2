@@ -9,4 +9,5 @@ export interface Center {
   adminCount?: number;
   researchCount?: number;
   memberCount?: number;
+  centerID?: string;
 }

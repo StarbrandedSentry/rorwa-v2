@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../shared/auth.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-center-researches',
@@ -6,7 +8,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./center-researches.component.scss']
 })
 export class CenterResearchesComponent implements OnInit {
-  constructor() {}
+  constructor(
+    public authService: AuthService,
+    private ar: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit() {}
+
+  onAddResearchClick() {
+    this.router.navigate(['add'], { relativeTo: this.ar.parent });
+  }
 }
