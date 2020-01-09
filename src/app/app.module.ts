@@ -31,6 +31,7 @@ import { CenterService } from './shared/center.service';
 import { UserService } from './shared/user.service';
 import { SuccessComponent } from './message/success/success.component';
 import { MessageModule } from './message/message.module';
+import { CenterModule } from './center/center.module';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { MessageModule } from './message/message.module';
     FirebaseCollectionModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     InvitationModule,
-    MessageModule
+    MessageModule,
+    CenterModule
   ],
   providers: [
     [{ provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher }],

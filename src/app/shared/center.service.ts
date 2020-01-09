@@ -5,13 +5,15 @@ import {
 } from '@angular/fire/firestore';
 import { Center } from '../models/center.model';
 import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CenterService {
   centers$: Observable<Center[]>;
+  private _centers: Center[];
+
   centerCollection: AngularFirestoreCollection<
     Center
   > = this.afFirestore.collection('centers');
@@ -29,13 +31,16 @@ export class CenterService {
           })
         )
       );
+    this.centers$.subscribe(centers => {
+      this._centers = centers;
+    });
   }
 
   createCenter(center: Center) {
     return this.centerCollection.add(center);
   }
 
-  getCenters() {
-    return this.centers$;
+  get centers() {
+    return this._centers;
   }
 }

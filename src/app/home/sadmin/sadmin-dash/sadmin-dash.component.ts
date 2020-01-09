@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {} from 'lodash';
 import { Center } from '../../../models/center.model';
 import { CenterService } from '../../../shared/center.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-sadmin-dash',
@@ -9,12 +10,7 @@ import { CenterService } from '../../../shared/center.service';
   styleUrls: ['./sadmin-dash.component.scss']
 })
 export class SadminDashComponent implements OnInit {
-  centers: Center[];
   constructor(private centerService: CenterService) {}
 
-  ngOnInit() {
-    this.centerService.getCenters().subscribe(centers => {
-      this.centers = centers;
-    });
-  }
+  ngOnInit() {}
 }

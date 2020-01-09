@@ -44,6 +44,7 @@ const routes: Routes = [
     path: 'invitation',
     loadChildren: './invitation/invitation.module#InvitationModule'
   },
+  { path: 'center', loadChildren: './center/center.module#CenterModule' },
   { path: '**', redirectTo: 'home' }
 ];
 
