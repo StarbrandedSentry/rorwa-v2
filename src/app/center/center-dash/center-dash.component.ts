@@ -37,7 +37,6 @@ export class CenterDashComponent implements OnInit {
     );
     this.center$.subscribe(center => {
       this.center = center;
-      console.logt;
     });
   }
 }
