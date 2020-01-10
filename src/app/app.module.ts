@@ -45,7 +45,7 @@ import { NavModule } from './nav/nav.module';
     SadminDashComponent,
     SadminNavComponent,
     SadminSettingsComponent,
-    CreateCenterComponent
+    CreateCenterComponent,
   ],
   imports: [
     BrowserModule,
