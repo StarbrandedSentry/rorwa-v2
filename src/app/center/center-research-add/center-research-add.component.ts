@@ -21,6 +21,7 @@ export class CenterResearchAddComponent implements OnInit {
   downloadURL: Observable<string>;
   isHovering: boolean;
   researchFormGroup: FormGroup;
+  dURL: string;
 
   constructor(
     private storage: AngularFireStorage,
@@ -36,26 +37,22 @@ export class CenterResearchAddComponent implements OnInit {
 
     this.percentage = this.task.percentageChanges();
 
-    this.task
+    const dURL = this.task
       .snapshotChanges()
       .pipe(
         finalize(() => {
           this.downloadURL = ref.getDownloadURL();
           this.downloadURL.subscribe(url => (this.url = url));
         })
-      )
-      .subscribe();
+        ).subscribe();
 
     this.snapshot = this.task.snapshotChanges().pipe(
       tap(snap => {
         if (snap.bytesTransferred === snap.totalBytes) {
-          console.log(snap.bytesTransferred);
-          this.afFirestore
-            .collection('researches')
-            .add({ path, size: snap.totalBytes });
+          this.afFirestore.collection('researches').add({ dURL , size: snap.totalBytes });
         }
       })
-    );
+      );
   }
 
   isActive(snapshot) {
