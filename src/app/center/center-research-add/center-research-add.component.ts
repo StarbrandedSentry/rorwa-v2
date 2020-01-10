@@ -25,7 +25,10 @@ export class CenterResearchAddComponent implements OnInit {
 
   isHovering: boolean;
 
-  constructor(private storage: AngularFireStorage, private afFirestore: AngularFirestore) {}
+  constructor(
+    private storage: AngularFireStorage,
+    private afFirestore: AngularFirestore
+  ) {}
 
   startUpload(event: FileList) {
     const file = event.item(0);
@@ -36,13 +39,15 @@ export class CenterResearchAddComponent implements OnInit {
     this.percentage = this.task.percentageChanges();
 
     this.snapshot = this.task.snapshotChanges().pipe(
-        tap(snap => {
-          if (snap.bytesTransferred === snap.totalBytes) {
-            console.log(snap.bytesTransferred);
-            this.afFirestore.collection('researches').add({ path, size: snap.totalBytes });
-          }
-        })
-      );
+      tap(snap => {
+        if (snap.bytesTransferred === snap.totalBytes) {
+          console.log(snap.bytesTransferred);
+          this.afFirestore
+            .collection('researches')
+            .add({ path, size: snap.totalBytes });
+        }
+      })
+    );
   }
 
   isActive(snapshot) {

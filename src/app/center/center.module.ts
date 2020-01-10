@@ -13,6 +13,7 @@ import { CenterResearchAddComponent } from './center-research-add/center-researc
 import { AdminGuard } from '../guards/admin.guard';
 import { CenterAdminsComponent } from './center-admins/center-admins.component';
 import { SadminGuard } from '../guards/sadmin.guard';
+import { FormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {
@@ -57,7 +58,8 @@ const routes: Routes = [
     FirebaseCollectionModule,
     HttpClientModule,
     MaterialModule,
-    NavModule
+    NavModule,
+    FormsModule
   ]
 })
 export class CenterModule {}
