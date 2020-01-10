@@ -4,9 +4,10 @@ import {
   AngularFireUploadTask
 } from '@angular/fire/storage';
 import { Observable } from 'rxjs';
-import { finalize, tap } from 'rxjs/operators';
+import { finalize, switchMap, tap } from 'rxjs/operators';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-center-research-add',
@@ -23,10 +24,17 @@ export class CenterResearchAddComponent implements OnInit {
   researchFormGroup: FormGroup;
   dURL: string;
 
+  centerID: string;
   constructor(
     private storage: AngularFireStorage,
-    private afFirestore: AngularFirestore
-  ) {}
+    private afFirestore: AngularFirestore,
+    private ar: ActivatedRoute
+  ) {
+    // Get center ID through the params
+    this.ar.parent.params.subscribe(params => {
+      this.centerID = params['id'];
+    });
+  }
 
   startUpload(event: FileList) {
     const file = event.item(0);
