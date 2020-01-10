@@ -8,6 +8,7 @@ import { finalize, switchMap, tap } from 'rxjs/operators';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { Research } from '../../models/research.model';
 
 @Component({
   selector: 'app-center-research-add',
@@ -50,20 +51,26 @@ export class CenterResearchAddComponent implements OnInit {
       .pipe(
         finalize(() => {
           this.downloadURL = ref.getDownloadURL();
-          this.downloadURL.subscribe(url => (this.url = url));
+          this.downloadURL.subscribe(url => {
+            // START SAVING TO FIRESTORE
+            const research: Research = {
+              downloadURL: url,
+              centerID: this.centerID
+            };
+            this.afFirestore.collection('researches').add(research);
+          });
         })
       )
-      .subscribe();
+      .subscribe(res => {});
 
-    this.snapshot = this.task.snapshotChanges().pipe(
+    /*this.snapshot = this.task.snapshotChanges().pipe(
       tap(snap => {
         if (snap.bytesTransferred === snap.totalBytes) {
           this.afFirestore
             .collection('researches')
             .add({ this.url, size: snap.totalBytes });
         }
-      })
-    );
+      })*/
   }
 
   isActive(snapshot) {
