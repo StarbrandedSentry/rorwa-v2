@@ -36,7 +36,7 @@ export class CenterResearchAddComponent implements OnInit {
     });
   }
 
-  startUpload(event: FileList) {
+  async startUpload(event: FileList) {
     const file = event.item(0);
     const path = 'test/' + new Date().getTime() + '_' + file.name;
     const ref = this.storage.ref(path);
@@ -45,22 +45,25 @@ export class CenterResearchAddComponent implements OnInit {
 
     this.percentage = this.task.percentageChanges();
 
-    const dURL = this.task
+    this.task
       .snapshotChanges()
       .pipe(
         finalize(() => {
           this.downloadURL = ref.getDownloadURL();
           this.downloadURL.subscribe(url => (this.url = url));
         })
-        ).subscribe();
+      )
+      .subscribe();
 
     this.snapshot = this.task.snapshotChanges().pipe(
       tap(snap => {
         if (snap.bytesTransferred === snap.totalBytes) {
-          this.afFirestore.collection('researches').add({ dURL , size: snap.totalBytes });
+          this.afFirestore
+            .collection('researches')
+            .add({ this.url, size: snap.totalBytes });
         }
       })
-      );
+    );
   }
 
   isActive(snapshot) {
