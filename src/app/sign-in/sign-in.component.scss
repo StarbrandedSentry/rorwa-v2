@@ -12,6 +12,10 @@ mat-icon {
   width: 40%;
 }
 
+.small {
+  transform: scale(0.35);
+}
+
 @media screen and (max-width: 767px) {
   .container {
     width: 90%;

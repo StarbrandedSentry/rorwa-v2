@@ -3,6 +3,12 @@
     <mat-expansion-panel-header>
       <mat-panel-title>Invite admin</mat-panel-title>
     </mat-expansion-panel-header>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Email</mat-label>
+      <input matInput placeholder="Email" />
+    </mat-form-field>
+    <button mat-flat-button color="primary">Invite</button>
   </mat-expansion-panel>
 
   <div class="admin" *ngFor="let admin of admins">

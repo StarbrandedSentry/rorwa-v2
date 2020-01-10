@@ -19,6 +19,7 @@ export class SignInComponent implements OnInit {
   signInButtonText = 'Sign in';
   signInButtonDisabled: boolean;
   errorMessage: Subject<string> = new Subject<string>();
+  hide = true;
 
   constructor(
     iconRegistry: MatIconRegistry,
