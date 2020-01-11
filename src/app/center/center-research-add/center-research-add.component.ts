@@ -39,6 +39,12 @@ export class CenterResearchAddComponent implements OnInit {
 
   async startUpload(event: FileList) {
     const file = event.item(0);
+
+    if (file.type !== 'application/pdf') {
+      console.error('Unsupported file type')
+      return;
+    }
+
     const path = 'test/' + new Date().getTime() + '_' + file.name;
     const ref = this.storage.ref(path);
 
