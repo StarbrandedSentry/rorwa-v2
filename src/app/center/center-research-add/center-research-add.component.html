@@ -1,21 +1,22 @@
-<form>
+<div>
+<form [formGroup]="researchFormGroup">
   <table cellspacing="0">
     <tr>
       <td>
         <mat-form-field>
-          <input matInput name="researchTitle" placeholder="Research Title" />
+          <input matInput formControlName="researchTitle" placeholder="Research Title" />
         </mat-form-field>
       </td>
     </tr>
     <tr>
       <td>
         <mat-form-field>
-          <input matInput name="author" placeholder="Author" />
+          <input matInput formControlName="author" placeholder="Author" />
         </mat-form-field>
       </td>
       <td>
         <mat-form-field>
-          <input matInput name="date" placeholder="Date" />
+          <input matInput formControlName="date" placeholder="Date" />
         </mat-form-field>
       </td>
     </tr>
@@ -24,7 +25,7 @@
         <mat-form-field>
           <textarea
             matInput
-            name="researchAbstract"
+            formControlName="researchAbstract"
             id="researchAbstract"
             placeholder="Abstract"
             cols="30"
@@ -52,3 +53,4 @@
     </tr>
   </table>
 </form>
+</div>
