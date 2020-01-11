@@ -21,3 +21,10 @@ mat-expansion-panel {
 mat-panel-title {
   font-weight: 700;
 }
+
+.pending {
+  margin-top: 1rem;
+  .mat-subheading-2 {
+    font-weight: 600;
+  }
+}

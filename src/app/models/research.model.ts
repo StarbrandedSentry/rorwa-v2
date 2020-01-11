@@ -1,6 +1,7 @@
 export interface Research {
   id?: string;
-  name?: string;
+  title?: string;
   centerID?: string;
   downloadURL?: string;
+  centerName?: string;
 }

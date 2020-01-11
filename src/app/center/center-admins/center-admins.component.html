@@ -4,10 +4,12 @@
       <mat-panel-title>Invite admin</mat-panel-title>
     </mat-expansion-panel-header>
 
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Email</mat-label>
-      <input matInput placeholder="Email" />
-    </mat-form-field>
+    <div [formGroup]="inviteForm">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="Email" formControlName="email" />
+      </mat-form-field>
+    </div>
     <message-success [message$]="successMsg.asObservable()"></message-success>
     <message-error [message$]="errorMsg.asObservable()"></message-error>
     <button
@@ -18,6 +20,14 @@
     >
       {{ inviteButtonText }}
     </button>
+
+    <div *ngIf="invitations$ | async as invitations" class="pending">
+      <div class="mat-subheading-2">Pending Invitations</div>
+      <div *ngFor="let invitation of invitations">
+        {{ invitation.email }}
+        fesfes
+      </div>
+    </div>
   </mat-expansion-panel>
 
   <div class="admin" *ngFor="let admin of admins">

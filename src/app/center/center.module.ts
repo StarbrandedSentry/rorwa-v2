@@ -13,7 +13,7 @@ import { CenterResearchAddComponent } from './center-research-add/center-researc
 import { AdminGuard } from '../guards/admin.guard';
 import { CenterAdminsComponent } from './center-admins/center-admins.component';
 import { SadminGuard } from '../guards/sadmin.guard';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MessageModule } from '../message/message.module';
 
 const routes: Routes = [
@@ -61,7 +61,8 @@ const routes: Routes = [
     MaterialModule,
     NavModule,
     FormsModule,
-    MessageModule
+    MessageModule,
+    ReactiveFormsModule
   ]
 })
 export class CenterModule {}

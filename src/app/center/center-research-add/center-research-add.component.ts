@@ -4,11 +4,12 @@ import {
   AngularFireUploadTask
 } from '@angular/fire/storage';
 import { Observable } from 'rxjs';
-import { finalize, switchMap, tap } from 'rxjs/operators';
+import { finalize, map, switchMap, tap } from 'rxjs/operators';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Research } from '../../models/research.model';
+import { Center } from '../../models/center.model';
 
 @Component({
   selector: 'app-center-research-add',
@@ -25,6 +26,9 @@ export class CenterResearchAddComponent implements OnInit {
   researchFormGroup: FormGroup;
   dURL: string;
 
+  center$: Observable<Center>;
+  center: Center;
+
   centerID: string;
   constructor(
     private storage: AngularFireStorage,
@@ -34,6 +38,19 @@ export class CenterResearchAddComponent implements OnInit {
     // Get center ID through the params
     this.ar.parent.params.subscribe(params => {
       this.centerID = params['id'];
+      this.center$ = this.afFirestore
+        .doc('centers/' + this.centerID)
+        .snapshotChanges()
+        .pipe(
+          map(a => {
+            const data = a.payload.data() as Center;
+            data.id = a.payload.id;
+            return data;
+          })
+        );
+    });
+    this.center$.subscribe(center => {
+      this.center = center;
     });
   }
 
@@ -41,7 +58,7 @@ export class CenterResearchAddComponent implements OnInit {
     const file = event.item(0);
 
     if (file.type !== 'application/pdf') {
-      console.error('Unsupported file type')
+      console.error('Unsupported file type');
       return;
     }
 
@@ -61,7 +78,8 @@ export class CenterResearchAddComponent implements OnInit {
             // START SAVING TO FIRESTORE
             const research: Research = {
               downloadURL: url,
-              centerID: this.centerID
+              centerID: this.centerID,
+              centerName: this.center.name
             };
             this.afFirestore.collection('researches').add(research);
           });

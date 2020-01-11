@@ -14,4 +14,10 @@
       </button>
     </div>
   </div>
+
+  <div *ngFor="let research of researches" class="research">
+    <a class="mat-title" [href]="research.downloadURL" target="_blank">{{
+      research.title
+    }}</a>
+  </div>
 </div>

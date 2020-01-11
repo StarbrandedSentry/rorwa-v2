@@ -9,6 +9,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatNativeDateModule } from '@angular/material';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 const Material = [
   MatButtonModule,
@@ -20,7 +21,8 @@ const Material = [
   MatDatepickerModule,
   MatNativeDateModule,
   MatExpansionModule,
-  MatDialogModule
+  MatDialogModule,
+  MatSidenavModule
 ];
 
 @NgModule({

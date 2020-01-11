@@ -1,3 +1,7 @@
 <div class="body">
-  BODY
+  <div *ngFor="let research of researchService.researches$ | async">
+    <div class="mat-title">{{ research.title }}</div>
+    <div class="row">Description:</div>
+    <div class="row">Tags:</div>
+  </div>
 </div>

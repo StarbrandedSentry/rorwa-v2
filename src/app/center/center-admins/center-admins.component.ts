@@ -1,12 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {map, switchMap} from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Invitation, User } from '../../models/user.model';
 import { Observable, Subject } from 'rxjs';
 import { UserService } from '../../shared/user.service';
-import {Center} from '../../models/center.model';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import { Center } from '../../models/center.model';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators
+} from '@angular/forms';
 
 @Component({
   selector: 'app-center-admins',
@@ -46,32 +51,45 @@ export class CenterAdminsComponent implements OnInit {
     );
     this.invitations$ = this.ar.parent.paramMap.pipe(
       switchMap(params => {
+        const id = params.get('id');
         return this.afFirestore
           .collection('invitations', ref =>
-            ref
-              .where('centerID', '==', params.get('id'))
-              .where('status', '==', 'pending')
+            ref.where('centerID', '==', id).where('status', '==', 'pending')
           )
-          .valueChanges();
+          .snapshotChanges()
+          .pipe(
+            map(actions =>
+              actions.map(a => {
+                const data = a.payload.doc.data() as Invitation;
+                data.id = a.payload.doc.id;
+                return data;
+              })
+            )
+          );
       })
     );
     this.ar.parent.params.subscribe(params => {
-      this.center$ = this.afFirestore.doc('centers/' + params['id']).snapshotChanges().pipe(map(a => {
-        const data = a.payload.data() as Center;
-        data.id = a.payload.id;
-        return data;
-      }))
+      this.center$ = this.afFirestore
+        .doc('centers/' + params['id'])
+        .snapshotChanges()
+        .pipe(
+          map(a => {
+            const data = a.payload.data() as Center;
+            data.id = a.payload.id;
+            return data;
+          })
+        );
     });
     this.admins$.subscribe(admins => {
       this.admins = admins;
     });
     this.center$.subscribe(center => {
       this.center = center;
-    })
-
+    });
+    this.invitations$.subscribe(invitations => console.log(invitations));
     this.inviteForm = this.formBuilder.group({
       email: ['', [Validators.email]]
-    })
+    });
   }
 
   onInviteClick() {
@@ -82,9 +100,21 @@ export class CenterAdminsComponent implements OnInit {
       invitationType: 1,
       status: 'pending '
     };
-    this.userService.createInvitation().{
-
-    }
+    this.inviteAdminStart();
+    this.userService
+      .createInvitation(newInvitation)
+      .then(res => {
+        this.successMsg.next(
+          /*TODO: CHANGE LINK FOR PRODUCTION*/
+          'Successfully invited!\n' + 'localhost/invitation/' + res.id
+        );
+      })
+      .catch(error => {
+        this.errorMsg.next('Something went wrong!');
+      })
+      .finally(() => {
+        this.inviteAdminStop();
+      });
   }
 
   inviteAdminStart() {
@@ -96,7 +126,7 @@ export class CenterAdminsComponent implements OnInit {
     this.isInviting = false;
   }
 
-  get email(){
+  get email() {
     return this.inviteForm.get('email');
   }
 }

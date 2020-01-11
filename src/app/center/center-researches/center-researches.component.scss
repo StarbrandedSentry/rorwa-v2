@@ -7,3 +7,19 @@
   width: 70%;
   margin-right: 1rem;
 }
+
+a {
+  &.mat-title {
+    cursor: pointer;
+    color: #000000;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.research {
+  margin-bottom: 1rem;
+  border-bottom: var(--grey-200) solid 1px;
+  padding: 0.5rem 0;
+}
