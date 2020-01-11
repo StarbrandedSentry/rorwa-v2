@@ -32,7 +32,6 @@ import { UserService } from './shared/user.service';
 import { MessageModule } from './message/message.module';
 import { CenterModule } from './center/center.module';
 import { NavModule } from './nav/nav.module';
-D;
 import { ResearchService } from './shared/research.service';
 
 @NgModule({

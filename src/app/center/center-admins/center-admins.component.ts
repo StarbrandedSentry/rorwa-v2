@@ -106,7 +106,9 @@ export class CenterAdminsComponent implements OnInit {
       .then(res => {
         this.successMsg.next(
           /*TODO: CHANGE LINK FOR PRODUCTION*/
-          'Successfully invited!\n' + 'localhost/invitation/' + res.id
+          'Successfully invited!\n' +
+            'https://rorwa-v2.firebaseapp.com//invitation/' +
+            res.id
         );
       })
       .catch(error => {

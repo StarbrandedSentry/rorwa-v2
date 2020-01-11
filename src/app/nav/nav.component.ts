@@ -16,7 +16,7 @@ export class NavComponent implements OnInit {
   constructor(
     iconRegistry: MatIconRegistry,
     sanitizer: DomSanitizer,
-    private auth: AuthService,
+    public auth: AuthService,
     private afAuth: AngularFireAuth
   ) {
     iconRegistry.addSvgIcon(

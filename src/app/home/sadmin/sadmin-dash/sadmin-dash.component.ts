@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./sadmin-dash.component.scss']
 })
 export class SadminDashComponent implements OnInit {
-  constructor(private centerService: CenterService) {}
+  constructor(public centerService: CenterService) {}
 
   ngOnInit() {}
 }

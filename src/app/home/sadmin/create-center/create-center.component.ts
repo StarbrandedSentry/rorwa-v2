@@ -93,7 +93,7 @@ export class CreateCenterComponent implements OnInit {
             this.createCenterDone();
             /*TODO: CHANGE LINK FOR PRODUCTION*/
             this.successMessage.next(
-              'Center created.\nInvitation link is: http://localhost:4200/invitation/' +
+              'Center created.\nInvitation link is: https://rorwa-v2.firebaseapp.com/invitation/' +
                 invitationResult.id
             );
           })
