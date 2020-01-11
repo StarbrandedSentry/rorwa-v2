@@ -3,4 +3,8 @@ export interface Research {
   name?: string;
   centerID?: string;
   downloadURL?: string;
+  title?: string;
+  author?: string;
+  date?: string;
+  abstract?: string;
 }

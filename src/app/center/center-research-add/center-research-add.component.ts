@@ -29,7 +29,8 @@ export class CenterResearchAddComponent implements OnInit {
   constructor(
     private storage: AngularFireStorage,
     private afFirestore: AngularFirestore,
-    private ar: ActivatedRoute
+    private ar: ActivatedRoute,
+    private formBuilder: FormBuilder
   ) {
     // Get center ID through the params
     this.ar.parent.params.subscribe(params => {
@@ -61,7 +62,7 @@ export class CenterResearchAddComponent implements OnInit {
             // START SAVING TO FIRESTORE
             const research: Research = {
               downloadURL: url,
-              centerID: this.centerID
+              centerID: this.centerID,
             };
             this.afFirestore.collection('researches').add(research);
           });
@@ -86,5 +87,12 @@ export class CenterResearchAddComponent implements OnInit {
     );
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.researchFormGroup = this.formBuilder.group({
+      researchTitle: ['', [Validators.minLength(8), Validators.required]],
+      author: ['', [Validators.minLength(8), Validators.required]],
+      date: ['', [Validators.required]],
+      researchAbstract: ['', [Validators.minLength(8), Validators.required]]
+    })
+  }
 }
