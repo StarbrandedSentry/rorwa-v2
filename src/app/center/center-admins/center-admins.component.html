@@ -8,7 +8,16 @@
       <mat-label>Email</mat-label>
       <input matInput placeholder="Email" />
     </mat-form-field>
-    <button mat-flat-button color="primary">Invite</button>
+    <message-success [message$]="successMsg.asObservable()"></message-success>
+    <message-error [message$]="errorMsg.asObservable()"></message-error>
+    <button
+      mat-flat-button
+      color="primary"
+      [disabled]="isInviting"
+      (click)="onInviteClick()"
+    >
+      {{ inviteButtonText }}
+    </button>
   </mat-expansion-panel>
 
   <div class="admin" *ngFor="let admin of admins">
