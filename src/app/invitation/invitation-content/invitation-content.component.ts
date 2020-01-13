@@ -84,6 +84,8 @@ export class InvitationContentComponent implements OnInit {
       })
     );
     this.invitation$.pipe(take(1)).subscribe(inv => {
+      console.log(inv);
+      console.log('fsafesa');
       if (inv.status !== 'pending') {
         this.router.navigateByUrl('/invitation/whoops/error');
       }
