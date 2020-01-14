@@ -98,7 +98,7 @@ export class CenterAdminsComponent implements OnInit {
       centerName: this.center.name,
       email: this.email.value,
       invitationType: 1,
-      status: 'pending '
+      status: 'pending'
     };
     this.inviteAdminStart();
     this.userService

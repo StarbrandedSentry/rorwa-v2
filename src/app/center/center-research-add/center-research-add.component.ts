@@ -6,10 +6,12 @@ import {
 import { Observable } from 'rxjs';
 import { finalize, map, switchMap, tap } from 'rxjs/operators';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Research } from '../../models/research.model';
 import { Center } from '../../models/center.model';
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import { MatChipInputEvent } from '@angular/material/chips';
 
 @Component({
   selector: 'app-center-research-add',
@@ -28,8 +30,35 @@ export class CenterResearchAddComponent implements OnInit {
 
   center$: Observable<Center>;
   center: Center;
-
   centerID: string;
+
+  //Research tags
+  visible = true;
+  selectable = true;
+  removable = true;
+  addOnBlur = false;
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+  researchTags: any = [];
+
+  add(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+
+    // Add tag
+    if ((value || '').trim()) {
+      this.researchTags.push({name: value.trim()});
+    }
+
+    // Reset the input value
+    if (input) {
+      input.value = '';
+    }
+  }
+
+  remove(index: any): void {
+    this.researchTags.splice(index, 1);
+  }
+
   constructor(
     private storage: AngularFireStorage,
     private afFirestore: AngularFirestore,
@@ -80,7 +109,12 @@ export class CenterResearchAddComponent implements OnInit {
             const research: Research = {
               downloadURL: url,
               centerID: this.centerID,
-              centerName: this.center.name
+              centerName: this.center.name,
+              title: this.researchTitle.value,
+              author: this.author.value,
+              date: this.publishDate.value,
+              abstract: this.researchAbstract.value,
+              tags: this.researchTags
             };
             this.afFirestore.collection('researches').add(research);
           });
@@ -105,12 +139,33 @@ export class CenterResearchAddComponent implements OnInit {
     );
   }
 
+  get researchTitle() {
+    return this.researchFormGroup.get('researchTitle');
+  }
+
+  get author() {
+    return this.researchFormGroup.get('author');
+  }
+
+  get publishDate() {
+    return this.researchFormGroup.get('publishDate');
+  }
+
+  get researchAbstract() {
+    return this.researchFormGroup.get('researchAbstract');
+  }
+
+  get researchTagsList() {
+    return this.researchTagsList.get('researchTagsList');
+  }
+
   ngOnInit() {
     this.researchFormGroup = this.formBuilder.group({
       researchTitle: ['', [Validators.minLength(8), Validators.required]],
       author: ['', [Validators.minLength(8), Validators.required]],
-      date: ['', [Validators.required]],
-      researchAbstract: ['', [Validators.minLength(8), Validators.required]]
+      publishDate: ['', [Validators.required]],
+      researchAbstract: ['', [Validators.minLength(8), Validators.required]],
+      researchTagsList: ['']
     });
   }
 }
