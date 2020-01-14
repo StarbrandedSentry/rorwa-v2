@@ -5,6 +5,7 @@ export interface Research {
   downloadURL?: string;
   centerName?: string;
   author?: string;
-  date?: string;
+  date?: Date;
   abstract?: string;
+  tags?: string[];
 }

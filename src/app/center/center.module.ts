@@ -15,6 +15,8 @@ import { CenterAdminsComponent } from './center-admins/center-admins.component';
 import { SadminGuard } from '../guards/sadmin.guard';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MessageModule } from '../message/message.module';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatCommonModule, MatInputModule } from '@angular/material';
 
 const routes: Routes = [
   {
@@ -62,7 +64,10 @@ const routes: Routes = [
     NavModule,
     FormsModule,
     MessageModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatChipsModule,
+    MatCommonModule,
+    MatInputModule
   ]
 })
 export class CenterModule {}
