@@ -10,6 +10,7 @@ import { MatNativeDateModule } from '@angular/material';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
 
 const Material = [
   MatButtonModule,
@@ -22,7 +23,8 @@ const Material = [
   MatNativeDateModule,
   MatExpansionModule,
   MatDialogModule,
-  MatSidenavModule
+  MatSidenavModule,
+  MatListModule
 ];
 
 @NgModule({

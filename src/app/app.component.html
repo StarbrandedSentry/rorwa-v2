@@ -1,4 +1,84 @@
+<!--
 <div class="desktop">
   <app-nav></app-nav>
+  <router-outlet></router-outlet>
 </div>
-<router-outlet></router-outlet>
+-->
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav
+    #drawer
+    class="sidenav"
+    [ngClass]="{ hidden: !(isHandset | async)!.matches }"
+    fixedInViewport="false"
+    [attr.role]="isHandset ? 'dialog' : 'navigation'"
+    [mode]="(isHandset | async)!.matches ? 'over' : 'side'"
+    [opened]="!(isHandset | async)!.matches"
+  >
+    <mat-toolbar color="primary">Menu</mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item href="#">Link 1</a>
+      <a mat-list-item href="#">Link 2</a>
+      <a mat-list-item href="#">Link 3</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary" (click)="closeAccMenu($event)">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="(isHandset | async)!.matches"
+      >
+        <mat-icon aria-label="Side nav toggle icon">menu </mat-icon>
+      </button>
+      <div class="logo" [routerLink]="['/home']">
+        <mat-icon svgIcon="research"></mat-icon>
+      </div>
+      <div class="account">
+        <div *ngIf="auth.user$ | async; then authenticated; else anon"></div>
+        <ng-template #anon>
+          <div class="sign-in text-button" [routerLink]="['/sign-in']">
+            SIGN IN
+          </div>
+        </ng-template>
+        <ng-template #authenticated>
+          <div class="user" *ngIf="auth.user$ | async as user">
+            <button
+              mat-button
+              (click)="toggleAccMenu(); $event.stopPropagation()"
+            >
+              {{ user.name }}
+              <i class="material-icons">
+                arrow_drop_down
+              </i>
+            </button>
+
+            <div class="acc-menu" *ngIf="isAccMenuVisible">
+              <div *ngIf="user.role == 1">
+                <button class="menu-button" [routerLink]="['/home/sadmin']">
+                  SAdmin
+                </button>
+                <mat-divider></mat-divider>
+              </div>
+              <div *ngIf="user.role == 2">
+                <button
+                  class="menu-button"
+                  [routerLink]="['/center/dash/' + user.centerID]"
+                >
+                  Center
+                </button>
+                <mat-divider></mat-divider>
+              </div>
+              <button class="menu-button" (click)="onSignOutClick()">
+                Sign out
+              </button>
+            </div>
+          </div>
+        </ng-template>
+      </div>
+    </mat-toolbar>
+
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>
