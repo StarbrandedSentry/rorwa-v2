@@ -10,7 +10,7 @@ import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Research } from '../../models/research.model';
 import { Center } from '../../models/center.model';
-import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
 
 @Component({
@@ -46,7 +46,7 @@ export class CenterResearchAddComponent implements OnInit {
 
     // Add tag
     if ((value || '').trim()) {
-      this.researchTags.push({name: value.trim()});
+      this.researchTags.push({ name: value.trim() });
     }
 
     // Reset the input value

@@ -13,13 +13,27 @@
     </div>
     <div class="row">
       <mat-form-field appearance="outline" class="full-width">
-        <input matInput formControlName="author" placeholder="Author" required/>
+        <input
+          matInput
+          formControlName="author"
+          placeholder="Author"
+          required
+        />
       </mat-form-field>
     </div>
     <div class="row">
       <mat-form-field appearance="outline" class="full-width">
-        <input matInput formControlName="publishDate" placeholder="Date" [matDatepicker]="publishDate" required/>
-        <mat-datepicker-toggle matSuffix [for]="publishDate"></mat-datepicker-toggle>
+        <input
+          matInput
+          formControlName="publishDate"
+          placeholder="Date"
+          [matDatepicker]="publishDate"
+          required
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="publishDate"
+        ></mat-datepicker-toggle>
         <mat-datepicker #publishDate></mat-datepicker>
       </mat-form-field>
     </div>
@@ -36,19 +50,24 @@
     <div class="row">
       <mat-form-field class="full-width">
         <mat-chip-list #chipList aria-label="Tags" class="chip-list">
-          <mat-chip *ngFor="let researchTag of researchTags" [selectable]="selectable"
-                   [removable]="removable" (removed)="remove(tag)">
-            {{researchTag.name}}
+          <mat-chip
+            *ngFor="let researchTag of researchTags"
+            [selectable]="selectable"
+            [removable]="removable"
+            (removed)="remove(tag)"
+          >
+            {{ researchTag.name }}
             <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
           </mat-chip>
-          <input 
+          <input
             matInput
             formControlName="researchTagsList"
             placeholder="Tags"
             [matChipInputFor]="chipList"
             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
             [matChipInputAddOnBlur]="addOnBlur"
-            (matChipInputTokenEnd)="add($event)">
+            (matChipInputTokenEnd)="add($event)"
+          />
         </mat-chip-list>
       </mat-form-field>
     </div>
