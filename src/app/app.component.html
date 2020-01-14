@@ -14,12 +14,66 @@
     [mode]="(isHandset | async)!.matches ? 'over' : 'side'"
     [opened]="!(isHandset | async)!.matches"
   >
-    <mat-toolbar color="primary">Menu</mat-toolbar>
-    <mat-nav-list>
+    <mat-toolbar color="primary" class="mobile-toolbar">
+      <div
+        class="account"
+        [ngClass]="{ hidden: !(isHandset | async)!.matches }"
+      >
+        <div *ngIf="auth.user$ | async; then authenticated1; else anon1"></div>
+        <ng-template #anon1>
+          <div
+            class="sign-in text-button"
+            [routerLink]="['/sign-in']"
+            (click)="drawer.close()"
+          >
+            SIGN IN
+          </div>
+        </ng-template>
+        <ng-template #authenticated1>
+          <div class="user" *ngIf="auth.user$ | async as user">
+            {{ user.name }}
+          </div>
+        </ng-template>
+      </div>
+    </mat-toolbar>
+    <div *ngIf="auth.user$ | async; then authenticated2"></div>
+    <ng-template #authenticated2>
+      <div class="user" *ngIf="auth.user$ | async as user">
+        <mat-nav-list>
+          <div *ngIf="user.role == 1">
+            <a
+              mat-list-item
+              class="menu-button"
+              [routerLink]="['/home/sadmin']"
+              (click)="drawer.close()"
+            >
+              SAdmin
+            </a>
+            <mat-divider></mat-divider>
+          </div>
+          <div *ngIf="user.role == 2">
+            <a
+              mat-list-item
+              class="menu-button"
+              [routerLink]="['/center/dash/' + user.centerID]"
+              (click)="drawer.close()"
+            >
+              Center
+            </a>
+            <mat-divider></mat-divider>
+          </div>
+          <a mat-list-item (click)="onSignOutClick(); drawer.close()">
+            Sign out
+          </a>
+        </mat-nav-list>
+      </div>
+    </ng-template>
+
+    <!--<mat-nav-list>
       <a mat-list-item href="#">Link 1</a>
       <a mat-list-item href="#">Link 2</a>
       <a mat-list-item href="#">Link 3</a>
-    </mat-nav-list>
+    </mat-nav-list>-->
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary" (click)="closeAccMenu($event)">

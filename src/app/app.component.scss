@@ -31,6 +31,14 @@ mat-toolbar a {
   text-decoration: none;
 }
 
+mat-list-item {
+  width: 100%;
+}
+
+mat-nav-list {
+  width: 100%;
+}
+
 mat-toolbar {
   font-size: 1rem;
   height: 7vh;
@@ -45,6 +53,10 @@ mat-toolbar {
     font-size: 1.25rem;
     margin-right: auto;
     transform: scale(1.25) translateY(0.25rem);
+  }
+
+  &.mobile-toolbar {
+    justify-content: flex-start;
   }
 }
 
@@ -90,5 +102,9 @@ mat-toolbar {
   .mobile {
     display: flex;
     flex-direction: column;
+  }
+
+  mat-toolbar {
+    padding: 0 5%;
   }
 }

@@ -234,3 +234,17 @@ h4 {
     color: white;
   }
 }
+
+@media screen and (max-width: 720px) {
+  .body {
+    padding: 1% 5%;
+  }
+
+  .nav {
+    width: 90%;
+  }
+
+  .nav-link {
+    padding: 0.5rem 0.25rem;
+  }
+}
