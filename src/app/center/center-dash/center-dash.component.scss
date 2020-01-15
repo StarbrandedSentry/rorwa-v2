@@ -18,3 +18,20 @@
 .center-main {
   width: 100%;
 }
+
+@media screen and (max-width: 768px) {
+  .center-body {
+    padding: 1% 5%;
+    flex-direction: column;
+  }
+
+  .center-info {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 960px) {
+  .center-body {
+    padding: 1% 5%;
+  }
+}

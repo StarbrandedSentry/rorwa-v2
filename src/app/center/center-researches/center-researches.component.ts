@@ -9,7 +9,7 @@ import { map } from 'rxjs/operators';
 @Component({
   selector: 'app-center-researches',
   templateUrl: './center-researches.component.html',
-  styleUrls: ['./center-researches.component.scss'],
+  styleUrls: ['./center-researches.component.scss']
 })
 export class CenterResearchesComponent implements OnInit {
   researches$: Observable<Research[]>;
@@ -19,7 +19,7 @@ export class CenterResearchesComponent implements OnInit {
     public authService: AuthService,
     private ar: ActivatedRoute,
     private router: Router,
-    private afFirestore: AngularFirestore,
+    private afFirestore: AngularFirestore
   ) {}
 
   ngOnInit() {
