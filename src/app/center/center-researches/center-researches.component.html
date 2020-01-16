@@ -14,74 +14,74 @@
       </button>
     </div>
   </div>
-  <div class="research">
-    <mat-accordion *ngFor="let research of researches">
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            {{ research.title }}
-          </mat-panel-title>
-          <mat-panel-description>
-            <a class="pdf-link" [href]="research.downloadURL" target="_blank">
-              Download PDF
-            </a>
-          </mat-panel-description>
-        </mat-expansion-panel-header>
-        <div>
-          <div class="row">
-            <mat-form-field appearance="outline" class="full-width">
-              <mat-label>Author</mat-label>
-              <input
-                matInput
-                placeholder="Author"
-                value="{{ research.author }}"
-              />
-            </mat-form-field>
-          </div>
-          <div class="row">
-            <mat-form-field appearance="outline" class="full-width">
-              <mat-label>Date</mat-label>
-              <input
-                matInput
-                placeholder="Date"
-                value="{{ research.date.toDate() | date: 'MMM-yyyy' }}"
-              />
-            </mat-form-field>
-          </div>
-          <div class="row">
-            <mat-form-field appearance="outline" class="full-width">
-              <mat-label>Abstract</mat-label>
-              <textarea
-                matInput
-                placeholder="Abstract"
-                value="{{ research.abstract }}"
-                matTextareaAutosize
-                matAutosizeMinRows="5"
-                matAutosizeMaxRows="10"
-              ></textarea>
-            </mat-form-field>
-          </div>
-          <div class="row">
-            <mat-form-field class="full-width">
-              <mat-chip-list #chipList aria-label="Tags" class="chip-list">
-                <mat-chip *ngFor="let tag of research.tags">
-                  {{ tag.name }}
-                </mat-chip>
-                <input
-                  matInput
-                  placeholder="Tags"
-                  [matChipInputFor]="chipList"
-                />
-              </mat-chip-list>
-            </mat-form-field>
-          </div>
-        </div>
-      </mat-expansion-panel>
-    </mat-accordion>
+  <div class="research" *ngFor="let research of researches">
+    <div class="mat-title">{{ research.title }}</div>
+    <div class="mat-subheading-1">{{ research.centerName }}</div>
+    <p class="mat-body">{{ research.abstract }}</p>
   </div>
-  <!-- <div *ngFor="let research of researches" class="research">
-    <a class="mat-title" [href]="research.downloadURL" target="_blank">{{
-      research.title
-    }}</a>
-  </div> -->
 </div>
+
+<!--BIN-->
+<!--<mat-accordion *ngFor="let research of researches">
+<mat-expansion-panel>
+<mat-expansion-panel-header>
+<mat-panel-title>
+{{ research.title }}
+</mat-panel-title>
+<mat-panel-description>
+<a class="pdf-link" [href]="research.downloadURL" target="_blank">
+Download PDF
+</a>
+</mat-panel-description>
+</mat-expansion-panel-header>
+<div>
+<div class="row">
+<mat-form-field appearance="outline" class="full-width">
+<mat-label>Author</mat-label>
+<input
+matInput
+placeholder="Author"
+value="{{ research.author }}"
+/>
+</mat-form-field>
+</div>
+<div class="row">
+<mat-form-field appearance="outline" class="full-width">
+<mat-label>Date</mat-label>
+<input
+matInput
+placeholder="Date"
+value="{{ research.date.toDate() | date: 'MMM-yyyy' }}"
+/>
+</mat-form-field>
+</div>
+<div class="row">
+<mat-form-field appearance="outline" class="full-width">
+<mat-label>Abstract</mat-label>
+<textarea
+matInput
+placeholder="Abstract"
+value="{{ research.abstract }}"
+matTextareaAutosize
+matAutosizeMinRows="5"
+matAutosizeMaxRows="10"
+></textarea>
+</mat-form-field>
+</div>
+<div class="row">
+<mat-form-field class="full-width">
+<mat-chip-list #chipList aria-label="Tags" class="chip-list">
+<mat-chip *ngFor="let tag of research.tags">
+{{ tag.name }}
+</mat-chip>
+<input
+matInput
+placeholder="Tags"
+[matChipInputFor]="chipList"
+/>
+</mat-chip-list>
+</mat-form-field>
+</div>
+</div>
+</mat-expansion-panel>
+</mat-accordion>-->

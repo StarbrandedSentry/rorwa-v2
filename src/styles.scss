@@ -235,6 +235,29 @@ h4 {
   }
 }
 
+.research {
+  margin-bottom: 0.5rem;
+  border-bottom: var(--grey-200) solid 1px;
+  padding-top: 0.5rem;
+  padding-bottom: 1rem;
+
+  .mat-title {
+    font-weight: 700;
+    cursor: pointer;
+    margin-bottom: 0;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .mat-subheading-1 {
+    cursor: pointer;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
 @media screen and (max-width: 768px) {
   .body {
     padding: 1% 5%;
