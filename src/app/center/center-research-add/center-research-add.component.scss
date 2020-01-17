@@ -1,3 +1,9 @@
-.spacer {
-  flex: 1 1 auto;
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.center-research-body {
+  width: 100%;
 }

@@ -17,6 +17,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MessageModule } from '../message/message.module';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatCommonModule, MatInputModule } from '@angular/material';
+import { CenterAddComponent } from './center-add/center-add.component';
+import { CenterJournalAddComponent } from './center-journal-add/center-journal-add.component';
+import { CenterEbookAddComponent } from './center-ebook-add/center-ebook-add.component';
 
 const routes: Routes = [
   {
@@ -32,8 +35,14 @@ const routes: Routes = [
           { path: 'researches', component: CenterResearchesComponent },
           {
             path: 'add',
-            component: CenterResearchAddComponent,
-            canActivate: [AdminGuard]
+            component: CenterAddComponent,
+            canActivate: [AdminGuard],
+            children: [
+              { path: '', redirectTo: 'research', pathMatch: 'full' },
+              { path: 'research', component: CenterResearchAddComponent },
+              { path: 'ebook', component: CenterEbookAddComponent },
+              { path: 'journal', component: CenterJournalAddComponent }
+            ]
           },
           {
             path: 'admins',
@@ -53,7 +62,10 @@ const routes: Routes = [
     CenterNavComponent,
     CenterResearchesComponent,
     CenterResearchAddComponent,
-    CenterAdminsComponent
+    CenterAdminsComponent,
+    CenterJournalAddComponent,
+    CenterAddComponent,
+    CenterEbookAddComponent
   ],
   imports: [
     CommonModule,
