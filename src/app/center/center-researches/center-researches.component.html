@@ -15,7 +15,9 @@
     </div>
   </div>
   <div class="research" *ngFor="let research of researches">
-    <div class="mat-title">{{ research.title }}</div>
+    <div class="mat-title" [routerLink]="['/research', research.id]">
+      {{ research.title }}
+    </div>
     <div class="mat-subheading-1">{{ research.centerName }}</div>
     <p class="mat-body">{{ research.abstract }}</p>
   </div>

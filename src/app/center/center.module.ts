@@ -25,7 +25,7 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'dash/:id', pathMatch: 'full' },
       {
-        path: 'dash/:id',
+        path: 'researches/:id',
         component: CenterDashComponent,
         children: [
           { path: '', redirectTo: 'researches', pathMatch: 'full' },
