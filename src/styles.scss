@@ -256,6 +256,16 @@ h4 {
       text-decoration: underline;
     }
   }
+
+  .mat-subheading-2 {
+    b {
+      margin-right: 0.4rem;
+    }
+
+    .tag {
+      margin-right: 0.25rem;
+    }
+  }
 }
 
 @media screen and (max-width: 768px) {
