@@ -1,7 +1,14 @@
 <div class="body">
   <div *ngFor="let research of researchService.researches" class="research">
-    <div class="mat-title">{{ research.title }}</div>
-    <div class="mat-subheading-1">Description:</div>
+    <div class="mat-title" [routerLink]="['/research', research.id]">
+      {{ research.title }}
+    </div>
+    <div
+      class="mat-subheading-1"
+      [routerLink]="['/center/dash', research.centerID]"
+    >
+      {{ research.centerName }}
+    </div>
     <p class="mat-body">{{ research.abstract }}</p>
     <!--div class="mat-subheading-2"></div>-->
     <div class="mat-subheading-2 row">
