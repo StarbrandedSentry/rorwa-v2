@@ -1,1 +1,73 @@
-<p>center-journal-add works!</p>
+<div class="center-journal-body">
+  <h2 class="mat-title">Add new journal</h2>
+  <form [formGroup]="journalFormGroup">
+    <div class="row">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Journal Title</mat-label>
+        <input
+          matInput
+          formControlName="journalTitle"
+          placeholder="Journal Title"
+          required
+        />
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Publisher</mat-label>
+        <input
+          matInput
+          formControlName="publisher"
+          placeholder="Publisher"
+          required
+        />
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Publish Date</mat-label>
+        <input
+          matInput
+          formControlName="publishDate"
+          placeholder="Publish Date"
+          [matDatepicker]="publishDate"
+          required
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="publishDate"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #publishDate></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Category</mat-label>
+        <input
+          matInput
+          formControlName="category"
+          placeholder="Category"
+          [matAutocomplete]="auto"
+          required
+        />
+        <mat-autocomplete #auto="matAutocomplete"></mat-autocomplete>
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Description</mat-label>
+        <textarea
+          matInput
+          formControlName="description"
+          placeholder="Description"
+          required
+        ></textarea>
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <div class="actions">
+        <button mat-flat-button color="primary">Add Journal</button>
+      </div>
+    </div>
+  </form>
+</div>

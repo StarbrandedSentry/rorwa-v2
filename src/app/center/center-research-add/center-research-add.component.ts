@@ -32,7 +32,7 @@ export class CenterResearchAddComponent implements OnInit {
   center: Center;
   centerID: string;
 
-  //Research tags
+  // Research tags
   visible = true;
   selectable = true;
   removable = true;
