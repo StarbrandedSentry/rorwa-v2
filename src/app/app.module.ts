@@ -33,6 +33,7 @@ import { MessageModule } from './message/message.module';
 import { CenterModule } from './center/center.module';
 import { NavModule } from './nav/nav.module';
 import { ResearchService } from './shared/research.service';
+import { CategoryService } from './shared/category.service';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { ResearchService } from './shared/research.service';
     SadminGuard,
     CenterService,
     UserService,
-    ResearchService
+    ResearchService,
+    CategoryService
   ],
   bootstrap: [AppComponent]
 })
