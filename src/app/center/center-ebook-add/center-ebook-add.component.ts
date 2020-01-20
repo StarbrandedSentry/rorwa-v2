@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-center-ebook-add',
@@ -6,7 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./center-ebook-add.component.scss']
 })
 export class CenterEbookAddComponent implements OnInit {
-  constructor() {}
+  centerID: string;
+  constructor(private ar: ActivatedRoute) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.ar.parent.parent.paramMap.subscribe(params => {
+      this.centerID = params.get('id');
+    });
+  }
 }

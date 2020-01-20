@@ -25,7 +25,6 @@ export class CenterResearchesComponent implements OnInit {
   ngOnInit() {
     this.ar.parent.paramMap.subscribe(params => {
       const id = params.get('id');
-      console.log(params);
       this.researches$ = this.afFirestore
         .collection('researches', ref => ref.where('centerID', '==', id))
         .snapshotChanges()
