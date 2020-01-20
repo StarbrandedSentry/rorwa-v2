@@ -66,8 +66,9 @@ export class CenterResearchAddComponent implements OnInit {
     private formBuilder: FormBuilder
   ) {
     // Get center ID through the params
-    this.ar.parent.params.subscribe(params => {
+    this.ar.paramMap.subscribe(params => {
       this.centerID = params['id'];
+      console.log(params['id']);
       this.center$ = this.afFirestore
         .doc('centers/' + this.centerID)
         .snapshotChanges()
