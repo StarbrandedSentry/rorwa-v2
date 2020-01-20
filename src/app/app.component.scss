@@ -94,6 +94,19 @@ mat-toolbar {
   }
 }
 
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+  background-color: white;
+  border-radius: 5px;
+}
+
+.search-row {
+  width: 50%;
+  min-width: 250px;
+  display: flex;
+  align-items: center;
+  margin-right: 1rem;
+}
+
 @media screen and (max-width: 767px) {
   .desktop {
     display: none;

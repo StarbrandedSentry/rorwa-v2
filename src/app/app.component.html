@@ -87,7 +87,15 @@
         <mat-icon aria-label="Side nav toggle icon">menu </mat-icon>
       </button>
       <div class="logo" [routerLink]="['/home']">
-        <mat-icon svgIcon="research"></mat-icon>
+        <mat-icon svgIcon="research"> </mat-icon>
+      </div>
+      <div class="search-row">
+        <input class="search-bar" type="text" />
+        <button class="search-button">
+          <i class="material-icons">
+            search
+          </i>
+        </button>
       </div>
       <div class="account" [ngClass]="{ hidden: (isHandset | async)!.matches }">
         <div *ngIf="auth.user$ | async; then authenticated; else anon"></div>
