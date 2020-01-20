@@ -1,13 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import {
-  AngularFirestore,
-  AngularFirestoreCollection
-} from '@angular/fire/firestore';
-import { Observable, pipe } from 'rxjs';
+
 import { ActivatedRoute } from '@angular/router';
-import { map } from 'rxjs/operators';
-import { Category } from '../../models/misc.model';
+import { CategoryService } from 'src/app/shared/category.service';
 
 @Component({
   selector: 'app-center-journal-add',
@@ -19,7 +14,7 @@ export class CenterJournalAddComponent implements OnInit {
   centerID: string;
 
   constructor(
-    private afFirestore: AngularFirestore,
+    public categoryService: CategoryService,
     private formBuilder: FormBuilder,
     private ar: ActivatedRoute
   ) {}
