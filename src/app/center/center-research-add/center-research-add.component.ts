@@ -64,26 +64,7 @@ export class CenterResearchAddComponent implements OnInit {
     private afFirestore: AngularFirestore,
     private ar: ActivatedRoute,
     private formBuilder: FormBuilder
-  ) {
-    // Get center ID through the params
-    this.ar.paramMap.subscribe(params => {
-      this.centerID = params['id'];
-      console.log(params['id']);
-      this.center$ = this.afFirestore
-        .doc('centers/' + this.centerID)
-        .snapshotChanges()
-        .pipe(
-          map(a => {
-            const data = a.payload.data() as Center;
-            data.id = a.payload.id;
-            return data;
-          })
-        );
-    });
-    this.center$.subscribe(center => {
-      this.center = center;
-    });
-  }
+  ) {}
 
   async startUpload(event: FileList) {
     const file = event.item(0);
@@ -161,6 +142,24 @@ export class CenterResearchAddComponent implements OnInit {
   }
 
   ngOnInit() {
+    // Get center ID through the params
+    this.ar.parent.parent.paramMap.subscribe(params => {
+      this.centerID = params.get('id');
+      this.center$ = this.afFirestore
+        .doc('centers/' + this.centerID)
+        .snapshotChanges()
+        .pipe(
+          map(a => {
+            const data = a.payload.data() as Center;
+            data.id = a.payload.id;
+            return data;
+          })
+        );
+    });
+    this.center$.subscribe(center => {
+      this.center = center;
+    });
+
     this.researchFormGroup = this.formBuilder.group({
       researchTitle: ['', [Validators.minLength(8), Validators.required]],
       author: ['', [Validators.minLength(8), Validators.required]],
