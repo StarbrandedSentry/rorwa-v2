@@ -16,7 +16,7 @@ import { SadminGuard } from '../guards/sadmin.guard';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MessageModule } from '../message/message.module';
 import { MatChipsModule } from '@angular/material/chips';
-import { MatCommonModule, MatInputModule } from '@angular/material';
+import { MatCommonModule, MatInputModule, MatAutocompleteModule } from '@angular/material';
 import { CenterAddComponent } from './center-add/center-add.component';
 import { CenterJournalAddComponent } from './center-journal-add/center-journal-add.component';
 import { CenterEbookAddComponent } from './center-ebook-add/center-ebook-add.component';
@@ -79,7 +79,8 @@ const routes: Routes = [
     ReactiveFormsModule,
     MatChipsModule,
     MatCommonModule,
-    MatInputModule
+    MatInputModule,
+    MatAutocompleteModule
   ]
 })
 export class CenterModule {}

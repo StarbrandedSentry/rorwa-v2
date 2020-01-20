@@ -54,7 +54,7 @@
             *ngFor="let researchTag of researchTags"
             [selectable]="selectable"
             [removable]="removable"
-            (removed)="remove(tag)"
+            (removed)="remove(researchTag)"
           >
             {{ researchTag.name }}
             <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
