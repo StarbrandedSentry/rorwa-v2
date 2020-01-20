@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ResearchService } from '../../shared/research.service';
+import { TabLink } from '../../models/misc.model';
 
 @Component({
   selector: 'app-dash',
@@ -7,7 +8,11 @@ import { ResearchService } from '../../shared/research.service';
   styleUrls: ['./dash.component.scss']
 })
 export class DashComponent implements OnInit {
-  constructor(public researchService: ResearchService) {}
+  tabLinks: TabLink[] = [
+    { path: 'researches', label: 'Researches' },
+    { path: 'journals', label: 'Journals' }
+  ];
+  constructor() {}
 
   ngOnInit() {}
 }

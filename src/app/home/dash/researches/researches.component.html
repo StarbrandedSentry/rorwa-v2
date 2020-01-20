@@ -1,0 +1,19 @@
+<div *ngFor="let research of researchService.researches" class="research">
+  <div class="mat-title" [routerLink]="['/research', research.id]">
+    {{ research.title }}
+  </div>
+  <div
+    class="mat-subheading-1"
+    [routerLink]="['/center/dash', research.centerID]"
+  >
+    {{ research.centerName }}
+  </div>
+  <p class="mat-body">{{ research.abstract }}</p>
+  <!--div class="mat-subheading-2"></div>-->
+  <div class="mat-subheading-2 row">
+    <b>Keywords:</b>
+    <div *ngFor="let tag of research.tags; let isLast = last" class="tag">
+      {{ tag.name }}{{ isLast ? '' : ', ' }}
+    </div>
+  </div>
+</div>

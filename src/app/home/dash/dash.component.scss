@@ -1,0 +1,41 @@
+nav {
+  padding-right: 15%;
+  padding-left: 15%;
+  background-color: #ffffff;
+}
+
+.dash-body {
+  padding: 1% 15%;
+  display: flex;
+}
+
+.filter {
+  width: 300px;
+  min-width: 200px;
+  margin-right: 1rem;
+}
+
+mat-expansion-panel {
+  height: fit-content;
+}
+
+.dash-content {
+  width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  nav {
+    padding-right: 5%;
+    padding-left: 5%;
+  }
+
+  .dash-body {
+    padding: 1% 5%;
+    flex-direction: column;
+  }
+
+  .filter {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+}

@@ -34,6 +34,8 @@ import { CenterModule } from './center/center.module';
 import { NavModule } from './nav/nav.module';
 import { ResearchService } from './shared/research.service';
 import { CategoryService } from './shared/category.service';
+import { ResearchesComponent } from './home/dash/researches/researches.component';
+import { JournalsComponent } from './home/dash/journals/journals.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +49,9 @@ import { CategoryService } from './shared/category.service';
     SadminDashComponent,
     SadminNavComponent,
     SadminSettingsComponent,
-    CreateCenterComponent
+    CreateCenterComponent,
+    ResearchesComponent,
+    JournalsComponent
   ],
   imports: [
     BrowserModule,

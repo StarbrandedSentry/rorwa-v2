@@ -10,6 +10,8 @@ import { SadminDashComponent } from './home/sadmin/sadmin-dash/sadmin-dash.compo
 import { SadminSettingsComponent } from './home/sadmin/sadmin-settings/sadmin-settings.component';
 import { SadminGuard } from './guards/sadmin.guard';
 import { CreateCenterComponent } from './home/sadmin/create-center/create-center.component';
+import { ResearchesComponent } from './home/dash/researches/researches.component';
+import { JournalsComponent } from './home/dash/journals/journals.component';
 
 const redirectSignedInToDash = redirectLoggedInTo(['home']);
 
@@ -20,7 +22,14 @@ const routes: Routes = [
     component: HomeComponent,
     children: [
       { path: '', redirectTo: 'dash', pathMatch: 'full' },
-      { path: 'dash', component: DashComponent },
+      {
+        path: 'dash',
+        component: DashComponent,
+        children: [
+          { path: 'researches', component: ResearchesComponent },
+          { path: 'journals', component: JournalsComponent }
+        ]
+      },
       { path: 'search', component: SearchComponent },
       {
         path: 'sadmin',
@@ -49,6 +58,7 @@ const routes: Routes = [
     path: 'research',
     loadChildren: './research/research.module#ResearchModule'
   },
+  { path: 'search', loadChildren: './search/search.module#SearchModule' },
   { path: '**', redirectTo: 'home' }
 ];
 

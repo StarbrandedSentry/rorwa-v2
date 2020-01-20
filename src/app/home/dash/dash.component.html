@@ -1,21 +1,26 @@
-<div class="body">
-  <div *ngFor="let research of researchService.researches" class="research">
-    <div class="mat-title" [routerLink]="['/research', research.id]">
-      {{ research.title }}
-    </div>
-    <div
-      class="mat-subheading-1"
-      [routerLink]="['/center/dash', research.centerID]"
-    >
-      {{ research.centerName }}
-    </div>
-    <p class="mat-body">{{ research.abstract }}</p>
-    <!--div class="mat-subheading-2"></div>-->
-    <div class="mat-subheading-2 row">
-      <b>Keywords:</b>
-      <div *ngFor="let tag of research.tags; let isLast = last" class="tag">
-        {{ tag.name }}{{ isLast ? '' : ', ' }}
-      </div>
-    </div>
+<nav mat-tab-nav-bar>
+  <a
+    mat-tab-link
+    *ngFor="let link of tabLinks"
+    [routerLink]="link.path"
+    routerLinkActive
+    #rla="routerLinkActive"
+  >
+    {{ link.label }}
+  </a>
+</nav>
+
+<div class="dash-body">
+  <mat-expansion-panel class="filter" hideToggle>
+    <mat-expansion-panel-header>
+      <mat-icon>filter_list</mat-icon>
+      <mat-panel-title>
+        Filter
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    Daddy
+  </mat-expansion-panel>
+  <div class="dash-content">
+    <router-outlet></router-outlet>
   </div>
 </div>
