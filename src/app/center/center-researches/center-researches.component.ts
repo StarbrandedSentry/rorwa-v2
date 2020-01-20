@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../shared/auth.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RoutesRecognized } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Research } from '../../models/research.model';
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -23,8 +23,8 @@ export class CenterResearchesComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.ar.parent.params.subscribe(params => {
-      const id = params['id'];
+    this.ar.parent.paramMap.subscribe(params => {
+      const id = params.get('id');
       this.researches$ = this.afFirestore
         .collection('researches', ref => ref.where('centerID', '==', id))
         .snapshotChanges()
