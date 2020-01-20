@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Data } from '@angular/router';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-center-journal-add',
@@ -11,8 +12,10 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class CenterJournalAddComponent implements OnInit {
   journalFormGroup: FormGroup;
-  categories: Observable<string[]>;
+  categories$: Observable<Data[]>;
+  categories: AngularFirestoreCollection;
   centerID: string;
+
   constructor(
     private afFirestore: AngularFirestore,
     private formBuilder: FormBuilder,
@@ -51,5 +54,8 @@ export class CenterJournalAddComponent implements OnInit {
       category: ['', [Validators.minLength(8), Validators.required]],
       description: ['', [Validators.minLength(8), Validators.required]]
     });
+
+    this.categories = this.afFirestore.collection('categories');
+    this.categories$ = this.categories.valueChanges().subscribe(categories => { this.categories$ = categories; });
   }
 }

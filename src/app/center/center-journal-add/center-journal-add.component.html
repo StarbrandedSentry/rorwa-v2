@@ -50,7 +50,11 @@
           [matAutocomplete]="auto"
           required
         />
-        <mat-autocomplete #auto="matAutocomplete"></mat-autocomplete>
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let category of categories" [value]="category">
+            {{ category }}
+          </mat-option>
+        </mat-autocomplete>
       </mat-form-field>
     </div>
     <div class="row">
