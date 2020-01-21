@@ -51,7 +51,10 @@
           required
         />
         <mat-autocomplete #auto="matAutocomplete">
-          <mat-option *ngFor="let category of categoryService.categories" [value]="category.name">
+          <mat-option
+            *ngFor="let category of categoryService.categories"
+            [value]="category.name"
+          >
             {{ category.name }}
           </mat-option>
         </mat-autocomplete>
