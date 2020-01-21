@@ -84,6 +84,7 @@ mat-toolbar {
   box-shadow: 0 0 6px -1px var(--grey-700);
   height: auto;
   padding: 0.1rem 0;
+  z-index: 99;
 
   button {
     position: relative;
