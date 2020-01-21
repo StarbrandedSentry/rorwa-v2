@@ -1,1 +1,118 @@
-<p>center-ebook-add works!</p>
+<div class="center-ebook-body">
+    <h2 class="mat-title">Add new e-book</h2>
+    <form [formGroup]="ebookFormGroup">
+        <div class="row">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>e-Book Title</mat-label>
+              <input
+                matInput
+                formControlName="ebookTitle"
+                placeholder="e-Book Title"
+                required
+              />
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Author</mat-label>
+              <input
+                matInput
+                formControlName="author"
+                placeholder="Author"
+                required
+              />
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Publish Date</mat-label>
+              <input
+                matInput
+                formControlName="publishDate"
+                placeholder="Publish Date"
+                [matDatepicker]="publishDate"
+                required
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="publishDate"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #publishDate></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Description</mat-label>
+              <textarea
+                matInput
+                formControlName="description"
+                placeholder="Description"
+                required
+              ></textarea>
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Category</mat-label>
+              <input
+                matInput
+                formControlName="category"
+                placeholder="Category"
+                [matAutocomplete]="auto"
+                required
+              />
+              <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngFor="let category of categoryService.categories" [value]="category.name">
+                  {{ category.name }}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <mat-form-field class="full-width">
+              <mat-chip-list #chipList aria-label="Tags" class="chip-list">
+                <mat-chip
+                  *ngFor="let ebookTag of ebookTags"
+                  [selectable]="selectable"
+                  [removable]="removable"
+                  (removed)="remove(researchTag)"
+                >
+                  {{ ebookTag.name }}
+                  <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                </mat-chip>
+                <input
+                  matInput
+                  formControlName="ebookTagsList"
+                  placeholder="Tags"
+                  [matChipInputFor]="chipList"
+                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                  [matChipInputAddOnBlur]="addOnBlur"
+                  (matChipInputTokenEnd)="add($event)"
+                />
+              </mat-chip-list>
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <div class="file">
+              <label class="file-label"></label>
+              <input type="file" (change)="startUpload($event.target.files)" />
+            </div>
+            <div *ngIf="percentage | async as pct">
+              <progress [value]="pct" max="100"></progress>
+              {{ pct | number }}
+            </div>
+            <div *ngIf="snapshot | async as snap">
+              {{ snap.bytesTransferred }} of {{ snap.totalBytes }}
+              <div *ngIf="downloadURL | async as url">
+                <h3>e-Books</h3>
+                <a [href]="url">Download</a>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="actions">
+              <button mat-flat-button color="primary">Add e-Book</button>
+            </div>
+          </div>
+    </form>
+</div>
