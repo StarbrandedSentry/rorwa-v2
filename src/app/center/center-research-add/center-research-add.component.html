@@ -78,7 +78,11 @@
     <div class="row">
       <div class="file">
         <label class="file-label"></label>
-        <input type="file" (change)="startUpload($event.target.files)" />
+        <input
+          type="file"
+          #fileInput
+          (change)="startUpload($event.target.files)"
+        />
       </div>
       <div *ngIf="percentage | async as pct">
         <progress [value]="pct" max="100"></progress>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import {
   AngularFireStorage,
   AngularFireUploadTask
@@ -12,7 +12,9 @@ import { Research } from '../../models/research.model';
 import { Center } from '../../models/center.model';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
+import { ViewChild } from '@angular/core';
 
+// @ts-ignore
 @Component({
   selector: 'app-center-research-add',
   templateUrl: './center-research-add.component.html',
@@ -42,6 +44,9 @@ export class CenterResearchAddComponent implements OnInit {
 
   file;
   errorMessage: Subject<string> = new Subject<string>();
+
+  @ViewChild('fileInput', { static: false })
+  inputFile: ElementRef;
 
   add(event: MatChipInputEvent): void {
     const input = event.input;
@@ -73,6 +78,7 @@ export class CenterResearchAddComponent implements OnInit {
     // Placeholder file type error
     if (event.item(0).type !== 'application/pdf') {
       this.errorMessage.next('Unsupported file type');
+      this.inputFile.nativeElement.value = '';
       return;
     }
     this.file = event.item(0);
