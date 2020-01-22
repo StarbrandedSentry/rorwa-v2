@@ -90,7 +90,12 @@
         <mat-icon svgIcon="research"> </mat-icon>
       </div>
       <div class="search-row">
-        <input class="search-bar" type="text" [(ngModel)]="search" />
+        <input
+          class="search-bar"
+          type="text"
+          [(ngModel)]="search"
+          (change)="onSearchChange()"
+        />
         <div class="search-close">
           <i
             class="material-icons"

@@ -36,6 +36,7 @@ import { ResearchService } from './shared/research.service';
 import { CategoryService } from './shared/category.service';
 import { ResearchesComponent } from './home/dash/researches/researches.component';
 import { JournalsComponent } from './home/dash/journals/journals.component';
+import { EbooksComponent } from './home/dash/ebooks/ebooks.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { JournalsComponent } from './home/dash/journals/journals.component';
     SadminSettingsComponent,
     CreateCenterComponent,
     ResearchesComponent,
-    JournalsComponent
+    JournalsComponent,
+    EbooksComponent
   ],
   imports: [
     BrowserModule,

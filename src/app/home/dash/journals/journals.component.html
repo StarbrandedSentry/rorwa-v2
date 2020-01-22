@@ -1,1 +1,23 @@
-<p>journals works!</p>
+<div *ngFor="let journal of researchService.journals" class="research">
+  <div class="mat-title" [routerLink]="['/journal', journal.id]">
+    {{ journal.title }}
+  </div>
+  <div
+    class="mat-subheading-1"
+    [routerLink]="['/center/dash', journal.centerID]"
+  >
+    {{ journal.centerName }}
+  </div>
+  <p class="mat-body">{{ journal.description }}</p>
+  <!--div class="mat-subheading-2"></div>-->
+  <!--<div class="mat-subheading-2 row">
+    <b>Keywords:</b>
+    <div *ngFor="let tag of journal.tags; let isLast = last" class="tag">
+      {{ tag.name }}{{ isLast ? '' : ', ' }}
+    </div>
+  </div>-->
+  <div class="mat-subheading-2">
+    <b>Category:</b>
+    {{ journal.category }}
+  </div>
+</div>

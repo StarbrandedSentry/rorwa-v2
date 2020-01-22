@@ -19,8 +19,29 @@
         Filter
       </mat-panel-title>
     </mat-expansion-panel-header>
-    Daddy
+    <!--MAT PANEL CONTENT START-->
+    <mat-form-field>
+      <mat-label>Category</mat-label>
+      <mat-select
+        [(ngModel)]="selectedCategory"
+        (ngModelChange)="filterByCategory()"
+      >
+        <mat-option>None</mat-option>
+        <mat-option
+          *ngFor="let category of categoryServ.categories"
+          [value]="category.name"
+        >
+          {{ category.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div class="filter-actions">
+      <button mat-button (click)="onResetFilterClick()">Reset</button>
+    </div>
+    <!--MAT PANEL CONTENT END-->
   </mat-expansion-panel>
+
   <div class="dash-content">
     <router-outlet></router-outlet>
   </div>
