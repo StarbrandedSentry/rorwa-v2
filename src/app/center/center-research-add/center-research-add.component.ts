@@ -3,7 +3,7 @@ import {
   AngularFireStorage,
   AngularFireUploadTask
 } from '@angular/fire/storage';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { finalize, map, switchMap, tap } from 'rxjs/operators';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
@@ -41,6 +41,7 @@ export class CenterResearchAddComponent implements OnInit {
   researchTags: any = [];
 
   file;
+  errorMessage: Subject<string> = new Subject<string>();
 
   add(event: MatChipInputEvent): void {
     const input = event.input;
@@ -70,8 +71,8 @@ export class CenterResearchAddComponent implements OnInit {
 
   async startUpload(event: FileList) {
     // Placeholder file type error
-    if (this.file.type !== 'application/pdf') {
-      console.error('Unsupported file type');
+    if (event.item(0).type !== 'application/pdf') {
+      this.errorMessage.next('Unsupported file type');
       return;
     }
     this.file = event.item(0);
@@ -93,7 +94,7 @@ export class CenterResearchAddComponent implements OnInit {
     );
   }
 
-  onAddClick() {
+  async onAddClick() {
     const path = 'test/' + new Date().getTime() + '_' + this.file.name;
     const ref = this.storage.ref(path);
 

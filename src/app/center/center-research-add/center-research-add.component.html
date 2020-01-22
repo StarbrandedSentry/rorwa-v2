@@ -92,6 +92,11 @@
         </div>
       </div>
     </div>
+
+    <div>
+      <message-error [message$]="errorMessage.asObservable()"></message-error>
+    </div>
+
     <div class="row">
       <div class="actions">
         <button mat-flat-button color="primary" (click)="onAddClick()">
