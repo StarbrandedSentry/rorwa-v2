@@ -1,7 +1,66 @@
-<div>
+<div class="center-writers-body">
   <div *ngIf="authService.user$ | async as user" class="writer-add">
     <div *ngIf="user.role === 2 && user.centerID === centerID">
-      ADD HERE
+      <h2 class="mat-title">Add Writers</h2>
+      <form [formGroup]="writerFormGroup">
+        <div class="row">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Writer Name</mat-label>
+            <input
+              matInput
+              formControlName="writerName"
+              placeholder="Writer Name"
+              required
+            />
+          </mat-form-field>
+        </div>
+        <div class="row">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>School/University</mat-label>
+            <input
+              matInput
+              formControlName="education"
+              placeholder="School/University"
+              required
+            />
+          </mat-form-field>
+        </div>
+        <div class="row">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Program</mat-label>
+            <input
+              matInput
+              formControlName="program"
+              placeholder="Program"
+              required
+            />
+          </mat-form-field>
+        </div>
+        <div class="row">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Year Graduated</mat-label>
+            <input
+              matInput
+              formControlName="yearGraduated"
+              placeholder="Year Graduated"
+              [matDatepicker]="yearGraduated"
+              required
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="yearGraduated"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #yearGraduated></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div class="row">
+          <div class="actions">
+            <button mat-flat-button color="primary" (click)="onAddWriter()">
+              Add Writer
+            </button>
+          </div>
+        </div>
+      </form>
     </div>
   </div>
 
