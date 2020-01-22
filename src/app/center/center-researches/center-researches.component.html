@@ -3,7 +3,7 @@
     <mat-form-field class="full-width search">
       <input matInput placeholder="Search..." />
     </mat-form-field>
-    <div *ngIf="authService.user$ | async as user">
+    <!--<div *ngIf="authService.user$ | async as user">
       <button
         mat-flat-button
         color="primary"
@@ -12,7 +12,7 @@
       >
         Add new
       </button>
-    </div>
+    </div>-->
   </div>
   <div class="research" *ngFor="let research of researches">
     <div class="mat-title" [routerLink]="['/research', research.id]">

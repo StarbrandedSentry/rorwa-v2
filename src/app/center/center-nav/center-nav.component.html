@@ -16,6 +16,14 @@
       >
         Admins
       </div>
+      <div
+        class="nav-link"
+        [routerLink]="['add']"
+        routerLinkActive="link-active"
+        *ngIf="user.role == 2"
+      >
+        Add
+      </div>
     </div>
   </div>
 </div>
