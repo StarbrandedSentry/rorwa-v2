@@ -12,3 +12,8 @@
   width: 100%;
 }
 
+.mat-subheading-1 {
+  &:hover {
+    text-decoration: none;
+  }
+}

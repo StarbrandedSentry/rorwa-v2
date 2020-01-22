@@ -1,6 +1,6 @@
 <div class="center-writers-body">
-  <div *ngIf="authService.user$ | async as user" class="writer-add">
-    <div *ngIf="user.role === 2 && user.centerID === centerID">
+  <div *ngIf="authService.user$ | async as user">
+    <div *ngIf="user.role === 2 && user.centerID === centerID" class="writer-add container">
       <h2 class="mat-title">Add Writers</h2>
       <form [formGroup]="writerFormGroup">
         <div class="row">

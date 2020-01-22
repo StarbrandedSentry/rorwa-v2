@@ -38,6 +38,7 @@ import { ResearchesComponent } from './home/dash/researches/researches.component
 import { JournalsComponent } from './home/dash/journals/journals.component';
 import { EbooksComponent } from './home/dash/ebooks/ebooks.component';
 import { JournalModule } from './journal/journal.module';
+import { CentersComponent } from './home/dash/centers/centers.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { JournalModule } from './journal/journal.module';
     CreateCenterComponent,
     ResearchesComponent,
     JournalsComponent,
-    EbooksComponent
+    EbooksComponent,
+    CentersComponent
   ],
   imports: [
     BrowserModule,

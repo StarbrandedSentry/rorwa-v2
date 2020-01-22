@@ -13,7 +13,8 @@ export class DashComponent implements OnInit {
   tabLinks: TabLink[] = [
     { path: 'researches', label: 'Researches' },
     { path: 'books', label: 'Books' },
-    { path: 'journals', label: 'Journals' }
+    { path: 'journals', label: 'Journals' },
+    { path: 'centers', label: 'Centers' }
   ];
   constructor(
     public categoryServ: CategoryService,

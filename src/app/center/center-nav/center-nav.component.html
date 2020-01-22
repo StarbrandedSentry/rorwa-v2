@@ -27,7 +27,7 @@
         class="nav-link"
         [routerLink]="['add']"
         routerLinkActive="link-active"
-        *ngIf="user.role == 2"
+        *ngIf="user.role == 2 && user.centerID === centerID"
       >
         Add
       </div>
