@@ -13,6 +13,7 @@ import { CreateCenterComponent } from './home/sadmin/create-center/create-center
 import { ResearchesComponent } from './home/dash/researches/researches.component';
 import { JournalsComponent } from './home/dash/journals/journals.component';
 import { EbooksComponent } from './home/dash/ebooks/ebooks.component';
+import { CentersComponent } from './home/dash/centers/centers.component';
 
 const redirectSignedInToDash = redirectLoggedInTo(['home']);
 
@@ -30,7 +31,8 @@ const routes: Routes = [
           { path: '', redirectTo: 'researches', pathMatch: 'full' },
           { path: 'researches', component: ResearchesComponent },
           { path: 'books', component: EbooksComponent },
-          { path: 'journals', component: JournalsComponent }
+          { path: 'journals', component: JournalsComponent },
+          { path: 'centers', component: CentersComponent }
         ]
       },
       { path: 'search', component: SearchComponent },

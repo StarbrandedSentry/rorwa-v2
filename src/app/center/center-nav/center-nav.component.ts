@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../shared/auth.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-center-nav',
@@ -7,7 +8,12 @@ import { AuthService } from '../../shared/auth.service';
   styleUrls: ['./center-nav.component.scss']
 })
 export class CenterNavComponent implements OnInit {
-  constructor(public authService: AuthService) {}
+  centerID: string;
+  constructor(public authService: AuthService, private ar: ActivatedRoute) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.ar.paramMap.subscribe(params => {
+      this.centerID = params.get('id');
+    });
+  }
 }

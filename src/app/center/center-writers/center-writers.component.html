@@ -1,6 +1,9 @@
 <div>
-  <div *ngIf="authService.user$ | async as user" class="writer-add">
-    <div *ngIf="user.role === 2 && user.centerID === centerID">
+  <div *ngIf="authService.user$ | async as user">
+    <div
+      *ngIf="user.role === 2 && user.centerID === centerID"
+      class="writer-add container"
+    >
       ADD HERE
     </div>
   </div>

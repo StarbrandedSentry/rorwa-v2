@@ -1,3 +1,9 @@
 .writer-add {
   margin-bottom: 1rem;
 }
+
+.mat-subheading-1 {
+  &:hover {
+    text-decoration: none;
+  }
+}

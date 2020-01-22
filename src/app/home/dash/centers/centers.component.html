@@ -1,0 +1,8 @@
+<div *ngFor="let center of centerService.centers" class="research">
+  <div class="mat-title" [routerLink]="['/center/dash', center.id]">
+    {{ center.name }}
+  </div>
+  <div class="mat-subheading-1">{{ center.address }}</div>
+
+  <p class="mat-body">{{ center.description }}</p>
+</div>
