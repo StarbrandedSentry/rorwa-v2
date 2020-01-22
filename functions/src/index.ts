@@ -42,3 +42,24 @@ export const incrementUsers = functions.firestore
       }
     }
   });
+
+export const incrementResearchCount = functions.firestore
+  .document('researches/{research}')
+  .onWrite((change, context) => {
+    //YEAH I WRITE FUNCTIONS HOW CAN YOU TELL
+    const afterData = change.after.data();
+    if (!afterData) {
+      return;
+    }
+
+    admin
+      .firestore()
+      .doc('centers/' + afterData.centerID)
+      .update({ researchCount: FieldValue.increment(1) })
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  });
