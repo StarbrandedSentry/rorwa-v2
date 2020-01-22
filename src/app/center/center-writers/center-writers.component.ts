@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Center } from 'src/app/models/center.model';
 import { Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { map } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Writer } from 'src/app/models/writer.model';
 import { WriterService } from 'src/app/shared/writer.service';
@@ -26,39 +26,41 @@ export class CenterWritersComponent implements OnInit {
     private afFirestore: AngularFirestore,
     private formBuilder: FormBuilder,
     public writerService: WriterService
-    ) {}
+  ) {}
 
-    get writerName() {
-      return this.writerFormGroup.get('writerName');
-    }
+  get writerName() {
+    return this.writerFormGroup.get('writerName');
+  }
 
-    get education() {
-      return this.writerFormGroup.get('education');
-    }
+  get education() {
+    return this.writerFormGroup.get('education');
+  }
 
-    get program() {
-      return this.writerFormGroup.get('program');
-    }
+  get program() {
+    return this.writerFormGroup.get('program');
+  }
 
-    get yearGraduated() {
-      return this.writerFormGroup.get('yearGraduated');
-    }
+  get yearGraduated() {
+    return this.writerFormGroup.get('yearGraduated');
+  }
 
   ngOnInit() {
     // Get center ID through the params
-    this.ar.parent.parent.paramMap.subscribe(params => {
-      this.centerID = params.get('id');
-      this.center$ = this.afFirestore
-        .doc('centers/' + this.centerID)
-        .snapshotChanges()
-        .pipe(
-          map(a => {
-            const data = a.payload.data() as Center;
-            data.id = a.payload.id;
-            return data;
-          })
-        );
-    });
+    this.center$ = this.ar.parent.paramMap.pipe(
+      switchMap(params => {
+        this.centerID = params.get('id');
+        return this.afFirestore
+          .doc('centers/' + this.centerID)
+          .snapshotChanges()
+          .pipe(
+            map(a => {
+              const data = a.payload.data() as Center;
+              data.id = a.payload.id;
+              return data;
+            })
+          );
+      })
+    );
     this.center$.subscribe(center => {
       this.center = center;
     });

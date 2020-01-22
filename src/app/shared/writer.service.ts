@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Writer } from '../models/writer.model';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import {
+  AngularFirestore,
+  AngularFirestoreCollection
+} from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -21,7 +24,7 @@ export class WriterService {
       .snapshotChanges()
       .pipe(
         map(actions =>
-          actions.map( a => {
+          actions.map(a => {
             const data = a.payload.doc.data() as Writer;
             data.id = a.payload.doc.id;
             return data;
