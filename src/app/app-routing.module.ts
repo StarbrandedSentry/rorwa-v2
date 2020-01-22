@@ -12,6 +12,7 @@ import { SadminGuard } from './guards/sadmin.guard';
 import { CreateCenterComponent } from './home/sadmin/create-center/create-center.component';
 import { ResearchesComponent } from './home/dash/researches/researches.component';
 import { JournalsComponent } from './home/dash/journals/journals.component';
+import { EbooksComponent } from './home/dash/ebooks/ebooks.component';
 
 const redirectSignedInToDash = redirectLoggedInTo(['home']);
 
@@ -27,6 +28,7 @@ const routes: Routes = [
         component: DashComponent,
         children: [
           { path: 'researches', component: ResearchesComponent },
+          { path: 'books', component: EbooksComponent },
           { path: 'journals', component: JournalsComponent }
         ]
       },

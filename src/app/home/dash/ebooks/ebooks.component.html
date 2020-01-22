@@ -1,1 +1,20 @@
-<p>ebooks works!</p>
+<div *ngFor="let ebook of researchService.ebooks" class="research">
+  <div class="mat-title" [routerLink]="['/ebook', ebook.id]">
+    {{ ebook.title }}
+  </div>
+  <div class="mat-subheading-1" [routerLink]="['/center/dash', ebook.centerID]">
+    {{ ebook.centerName }}
+  </div>
+  <p class="mat-body">{{ ebook.abstract }}</p>
+  <!--div class="mat-subheading-2"></div>-->
+  <div class="mat-subheading-2 row">
+    <b>Keywords:</b>
+    <div *ngFor="let tag of ebook.tags; let isLast = last" class="tag">
+      {{ tag.name }}{{ isLast ? '' : ', ' }}
+    </div>
+  </div>
+  <div class="mat-subheading-2">
+    <b>Category:</b>
+    {{ ebook.category }}
+  </div>
+</div>

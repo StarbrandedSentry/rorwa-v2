@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ResearchService } from '../../../shared/research.service';
 
 @Component({
   selector: 'app-ebooks',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./ebooks.component.scss']
 })
 export class EbooksComponent implements OnInit {
-  constructor() {}
+  constructor(public researchService: ResearchService) {}
 
   ngOnInit() {}
 }

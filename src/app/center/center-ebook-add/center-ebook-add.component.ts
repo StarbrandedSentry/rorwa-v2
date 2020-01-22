@@ -63,9 +63,9 @@ export class CenterEbookAddComponent implements OnInit {
     public categoryService: CategoryService,
     private ebookService: EbookService,
     private formBuilder: FormBuilder
-    ) {}
+  ) {}
 
-      get ebookTitle() {
+  get ebookTitle() {
     return this.ebookFormGroup.get('ebookTitle');
   }
 

@@ -10,7 +10,7 @@ import { DashComponent } from './home/dash/dash.component';
 import { SearchComponent } from './home/search/search.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SignInComponent } from './sign-in/sign-in.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   ErrorStateMatcher,
   ShowOnDirtyErrorStateMatcher
@@ -36,6 +36,7 @@ import { ResearchService } from './shared/research.service';
 import { CategoryService } from './shared/category.service';
 import { ResearchesComponent } from './home/dash/researches/researches.component';
 import { JournalsComponent } from './home/dash/journals/journals.component';
+import { EbooksComponent } from './home/dash/ebooks/ebooks.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { JournalsComponent } from './home/dash/journals/journals.component';
     SadminSettingsComponent,
     CreateCenterComponent,
     ResearchesComponent,
-    JournalsComponent
+    JournalsComponent,
+    EbooksComponent
   ],
   imports: [
     BrowserModule,
@@ -65,7 +67,8 @@ import { JournalsComponent } from './home/dash/journals/journals.component';
     InvitationModule,
     MessageModule,
     NavModule,
-    CenterModule
+    CenterModule,
+    FormsModule
   ],
   providers: [
     [{ provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher }],

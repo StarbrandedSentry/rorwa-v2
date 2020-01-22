@@ -86,7 +86,7 @@
                   *ngFor="let ebookTag of ebookTags"
                   [selectable]="selectable"
                   [removable]="removable"
-                  (removed)="remove(researchTag)"
+                  (removed)="remove(ebookTag)"
                 >
                   {{ ebookTag.name }}
                   <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
