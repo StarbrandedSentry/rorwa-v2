@@ -27,6 +27,7 @@ const routes: Routes = [
         path: 'dash',
         component: DashComponent,
         children: [
+          { path: '', redirectTo: 'researches', pathMatch: 'full'},
           { path: 'researches', component: ResearchesComponent },
           { path: 'books', component: EbooksComponent },
           { path: 'journals', component: JournalsComponent }

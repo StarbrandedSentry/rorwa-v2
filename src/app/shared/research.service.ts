@@ -101,7 +101,7 @@ export class ResearchService {
   }
 
   filterProperty(property: string, rule: any) {
-    this.filters[property] = val => val == rule;
+    this.filters[property] = val => val === rule;
     this.applyFilters();
   }
 
