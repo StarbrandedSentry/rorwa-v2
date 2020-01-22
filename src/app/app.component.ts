@@ -10,6 +10,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { AuthService } from './shared/auth.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { User } from './models/user.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -17,6 +18,8 @@ import { User } from './models/user.model';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  search: string;
+
   isHandset: Observable<BreakpointState> = this.breakpointObserver.observe(
     Breakpoints.Handset
   );
@@ -28,7 +31,8 @@ export class AppComponent {
     iconRegistry: MatIconRegistry,
     sanitizer: DomSanitizer,
     public auth: AuthService,
-    private afAuth: AngularFireAuth
+    private afAuth: AngularFireAuth,
+    private router: Router
   ) {
     iconRegistry.addSvgIcon(
       'research',
@@ -46,5 +50,19 @@ export class AppComponent {
 
   onSignOutClick() {
     this.auth.signOut();
+  }
+
+  onResetSearchClick() {
+    this.search = '';
+    this.router.navigate([], {
+      queryParamsHandling: 'merge',
+      queryParams: { search: null }
+    });
+  }
+
+  onSearchClick() {
+    this.router.navigate([], {
+      queryParams: { search: this.search }
+    });
   }
 }

@@ -49,8 +49,8 @@ export class CenterEbookAddComponent implements OnInit {
     private afFirestore: AngularFirestore,
     public categoryService: CategoryService,
     private formBuilder: FormBuilder
-    ) {}
-    
+  ) {}
+
   ngOnInit() {
     this.ar.parent.parent.paramMap.subscribe(params => {
       this.centerID = params.get('id');

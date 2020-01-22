@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ResearchService } from '../../shared/research.service';
 import { TabLink } from '../../models/misc.model';
 
 @Component({

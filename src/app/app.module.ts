@@ -10,7 +10,7 @@ import { DashComponent } from './home/dash/dash.component';
 import { SearchComponent } from './home/search/search.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SignInComponent } from './sign-in/sign-in.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   ErrorStateMatcher,
   ShowOnDirtyErrorStateMatcher
@@ -65,7 +65,8 @@ import { JournalsComponent } from './home/dash/journals/journals.component';
     InvitationModule,
     MessageModule,
     NavModule,
-    CenterModule
+    CenterModule,
+    FormsModule
   ],
   providers: [
     [{ provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher }],

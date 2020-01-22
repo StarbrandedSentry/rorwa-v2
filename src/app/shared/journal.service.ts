@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import {
+  AngularFirestore,
+  AngularFirestoreCollection
+} from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Journal } from '../models/journal.model';
@@ -11,7 +14,9 @@ export class JournalService {
   journals$: Observable<Journal[]>;
   private _journals: Journal[];
 
-  journalCollection: AngularFirestoreCollection<Journal> = this.afFirestore.collection('journals');
+  journalCollection: AngularFirestoreCollection<
+    Journal
+  > = this.afFirestore.collection('journals');
 
   constructor(private afFirestore: AngularFirestore) {
     this.journals$ = this.afFirestore

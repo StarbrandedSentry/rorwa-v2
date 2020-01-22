@@ -3,6 +3,7 @@
     mat-tab-link
     *ngFor="let link of tabLinks"
     [routerLink]="link.path"
+    queryParamsHandling="merge"
     routerLinkActive
     #rla="routerLinkActive"
   >
