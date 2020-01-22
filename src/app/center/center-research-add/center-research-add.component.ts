@@ -40,6 +40,8 @@ export class CenterResearchAddComponent implements OnInit {
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   researchTags: any = [];
 
+  file;
+
   add(event: MatChipInputEvent): void {
     const input = event.input;
     const value = event.value;
@@ -67,18 +69,35 @@ export class CenterResearchAddComponent implements OnInit {
   ) {}
 
   async startUpload(event: FileList) {
-    const file = event.item(0);
-
     // Placeholder file type error
-    if (file.type !== 'application/pdf') {
+    if (this.file.type !== 'application/pdf') {
       console.error('Unsupported file type');
       return;
     }
+    this.file = event.item(0);
 
-    const path = 'test/' + new Date().getTime() + '_' + file.name;
+    /*this.snapshot = this.task.snapshotChanges().pipe(
+      tap(snap => {
+        if (snap.bytesTransferred === snap.totalBytes) {
+          this.afFirestore
+            .collection('researches')
+            .add({ this.url, size: snap.totalBytes });
+        }
+      })*/
+  }
+
+  isActive(snapshot) {
+    return (
+      snapshot.state === 'running' &&
+      snapshot.bytesTransferred < snapshot.totalBytes
+    );
+  }
+
+  onAddClick() {
+    const path = 'test/' + new Date().getTime() + '_' + this.file.name;
     const ref = this.storage.ref(path);
 
-    this.task = this.storage.upload(path, file);
+    this.task = this.storage.upload(path, this.file);
 
     this.percentage = this.task.percentageChanges();
 
@@ -104,22 +123,6 @@ export class CenterResearchAddComponent implements OnInit {
         })
       )
       .subscribe(res => {});
-
-    /*this.snapshot = this.task.snapshotChanges().pipe(
-      tap(snap => {
-        if (snap.bytesTransferred === snap.totalBytes) {
-          this.afFirestore
-            .collection('researches')
-            .add({ this.url, size: snap.totalBytes });
-        }
-      })*/
-  }
-
-  isActive(snapshot) {
-    return (
-      snapshot.state === 'running' &&
-      snapshot.bytesTransferred < snapshot.totalBytes
-    );
   }
 
   get researchTitle() {
