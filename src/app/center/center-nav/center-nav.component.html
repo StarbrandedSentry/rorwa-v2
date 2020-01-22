@@ -7,6 +7,13 @@
     >
       Researches
     </div>
+    <div
+      class="nav-link"
+      [routerLink]="['writers']"
+      routerLinkActive="link-active"
+    >
+      Writers
+    </div>
     <div *ngIf="authService.user$ | async as user">
       <div
         class="nav-link"

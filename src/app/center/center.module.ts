@@ -24,6 +24,7 @@ import {
 import { CenterAddComponent } from './center-add/center-add.component';
 import { CenterJournalAddComponent } from './center-journal-add/center-journal-add.component';
 import { CenterEbookAddComponent } from './center-ebook-add/center-ebook-add.component';
+import { CenterWritersComponent } from './center-writers/center-writers.component';
 
 const routes: Routes = [
   {
@@ -52,7 +53,8 @@ const routes: Routes = [
             path: 'admins',
             component: CenterAdminsComponent,
             canActivate: [SadminGuard]
-          }
+          },
+          { path: 'writers', component: CenterWritersComponent }
         ]
       }
     ]
@@ -69,7 +71,8 @@ const routes: Routes = [
     CenterAdminsComponent,
     CenterJournalAddComponent,
     CenterAddComponent,
-    CenterEbookAddComponent
+    CenterEbookAddComponent,
+    CenterWritersComponent
   ],
   imports: [
     CommonModule,
