@@ -3,6 +3,7 @@
   <form [formGroup]="researchFormGroup">
     <div class="row">
       <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Research Title</mat-label>
         <input
           matInput
           formControlName="researchTitle"
@@ -13,6 +14,7 @@
     </div>
     <div class="row">
       <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Author</mat-label>
         <input
           matInput
           formControlName="author"
@@ -23,10 +25,11 @@
     </div>
     <div class="row">
       <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Publish Date</mat-label>
         <input
           matInput
           formControlName="publishDate"
-          placeholder="Date"
+          placeholder="Publish Date"
           [matDatepicker]="publishDate"
           required
         />
@@ -39,6 +42,7 @@
     </div>
     <div class="row">
       <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Abstract</mat-label>
         <textarea
           matInput
           formControlName="researchAbstract"

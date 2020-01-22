@@ -69,6 +69,7 @@ export class CenterResearchAddComponent implements OnInit {
   async startUpload(event: FileList) {
     const file = event.item(0);
 
+    // Placeholder file type error
     if (file.type !== 'application/pdf') {
       console.error('Unsupported file type');
       return;
