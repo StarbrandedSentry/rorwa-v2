@@ -27,7 +27,7 @@ const routes: Routes = [
         path: 'dash',
         component: DashComponent,
         children: [
-          { path: '', redirectTo: 'researches', pathMatch: 'full'},
+          { path: '', redirectTo: 'researches', pathMatch: 'full' },
           { path: 'researches', component: ResearchesComponent },
           { path: 'books', component: EbooksComponent },
           { path: 'journals', component: JournalsComponent }
@@ -61,6 +61,7 @@ const routes: Routes = [
     path: 'research',
     loadChildren: './research/research.module#ResearchModule'
   },
+  { path: 'journal', loadChildren: './journal/journal.module#JournalModule' },
   { path: 'search', loadChildren: './search/search.module#SearchModule' },
   { path: '**', redirectTo: 'home' }
 ];

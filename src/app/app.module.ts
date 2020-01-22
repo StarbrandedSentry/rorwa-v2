@@ -37,6 +37,7 @@ import { CategoryService } from './shared/category.service';
 import { ResearchesComponent } from './home/dash/researches/researches.component';
 import { JournalsComponent } from './home/dash/journals/journals.component';
 import { EbooksComponent } from './home/dash/ebooks/ebooks.component';
+import { JournalModule } from './journal/journal.module';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { EbooksComponent } from './home/dash/ebooks/ebooks.component';
     MessageModule,
     NavModule,
     CenterModule,
-    FormsModule
+    FormsModule,
+    JournalModule
   ],
   providers: [
     [{ provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher }],

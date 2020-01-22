@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
+import {
+  AngularFireStorage,
+  AngularFireUploadTask
+} from '@angular/fire/storage';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
@@ -160,6 +163,7 @@ export class CenterEbookAddComponent implements OnInit {
             this.afFirestore.collection('ebooks').add(newEbook);
           });
         })
-      ).subscribe(res => {});
+      )
+      .subscribe(res => {});
   }
 }
