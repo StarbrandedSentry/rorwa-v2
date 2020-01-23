@@ -32,6 +32,13 @@ export class CategoryService {
     });
   }
 
+  addCategory(categoryName: string) {
+    const newCategory: Category = {
+      name: categoryName
+    };
+    return this.categoriesCollection.add(newCategory);
+  }
+
   get categories() {
     return this._categories;
   }

@@ -4,9 +4,22 @@
     <div class="row">
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>New category</mat-label>
-        <input matInput placeholder="New category" />
+        <input matInput placeholder="New category" [(ngModel)]="newCategory" />
       </mat-form-field>
-      <button mat-flat-button color="primary" class="category-btn">Add</button>
+      <button
+        mat-flat-button
+        color="primary"
+        class="category-btn"
+        [disabled]="isAddingCategory"
+        (click)="onAddCategoryClick()"
+      >
+        {{ catAddBtnText }}
+      </button>
     </div>
+    <mat-list>
+      <mat-list-item *ngFor="let category of categoryService.categories">
+        {{ category.name }}
+      </mat-list-item>
+    </mat-list>
   </div>
 </div>
