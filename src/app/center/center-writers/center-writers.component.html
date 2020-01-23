@@ -44,7 +44,7 @@
             <mat-label>Year Graduated</mat-label>
             <input
               matInput
-              formControlName="yeadGraduated"
+              formControlName="yearGraduated"
               placeholder="Year Graduated"
               required
             />
@@ -60,8 +60,12 @@
       </form>
     </div>
   </div>
-
-  <div>
-    THE WRITERS COME HERE
+  <div *ngFor="let writer of writerService.writers" class="research">
+    <div class="mat-title">
+      {{ writer.name }}
+    </div>
+    <div class="mat-subheading-1"><b>Center: </b> {{ writer.centerName }}</div>
+    <p class="mat-body"><b>Education: </b> {{ writer.education }}</p>
+    <p class="mat-body"><b>Program: </b> {{ writer.program }}</p>
   </div>
 </div>
