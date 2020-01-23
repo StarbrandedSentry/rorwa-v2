@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {
   AngularFireStorage,
@@ -34,6 +34,11 @@ export class CenterEbookAddComponent implements OnInit {
 
   errorMessage: Subject<string> = new Subject<string>();
   successMessage: Subject<string> = new Subject<string>();
+
+  @ViewChild('fileInput', { static: false })
+  inputFile: ElementRef;
+
+  file;
 
   // e-Book tags
   visible = true;
@@ -130,18 +135,26 @@ export class CenterEbookAddComponent implements OnInit {
   }
 
   async startUpload(event: FileList) {
-    const file = event.item(0);
-
-    // Placeholder file type error
-    if (file.type !== 'application/pdf') {
-      console.error('Unsupported file type');
+    if (event.item(0).type !== 'application/pdf') {
+      this.errorMessage.next('Unsupported file type');
+      this.inputFile.nativeElement.value = '';
       return;
     }
+    this.file = event.item(0);
+  }
 
-    const path = 'test/' + new Date().getTime() + '_' + file.name;
+  isActive(snapshot) {
+    return (
+      snapshot.state === 'running' &&
+      snapshot.bytesTransferred < snapshot.totalBytes
+    );
+  }
+
+  onAddClick() {
+    const path = 'test/' + new Date().getTime() + '_' + this.file.name;
     const ref = this.storage.ref(path);
 
-    this.task = this.storage.upload(path, file);
+    this.task = this.storage.upload(path, this.file);
 
     this.percentage = this.task.percentageChanges();
 
@@ -172,6 +185,11 @@ export class CenterEbookAddComponent implements OnInit {
               .catch(err => {
                 this.errorMessage.next(err);
               });
+            this.ebookFormGroup.reset();
+            this.ebookTags = [];
+            Object.keys(this.ebookFormGroup.controls).forEach(key => {
+              this.ebookFormGroup.get(key).setErrors(null);
+            });
           });
         })
       )
