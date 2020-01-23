@@ -6,6 +6,16 @@ import { RouterModule, Routes } from '@angular/router';
 import { MaterialModule } from '../material/material.module';
 import { FirebaseCollectionModule } from '../firebase-collection/firebase-collection.module';
 import { MessageModule } from '../message/message.module';
+import {
+  FormsModule,
+  ReactiveFormsModule
+} from '@angular/forms';
+import {
+  MatCommonModule,
+  MatInputModule,
+  MatAutocompleteModule
+} from '@angular/material';
+import { MatChipsModule } from '@angular/material/chips';
 
 const routes: Routes = [
   {
@@ -23,7 +33,13 @@ const routes: Routes = [
     MaterialModule,
     FirebaseCollectionModule,
     MessageModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    FormsModule,
+    ReactiveFormsModule,
+    MatCommonModule,
+    MatInputModule,
+    MatAutocompleteModule,
+    MatChipsModule
   ]
 })
 export class JournalModule {}

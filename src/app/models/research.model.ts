@@ -4,6 +4,8 @@ export interface Research {
   downloadURL?: string;
   centerID?: string;
   centerName?: string;
+  journalID?: string;
+  journalTitle?: string;
   author?: string[];
   date?: Date;
   abstract?: string;
