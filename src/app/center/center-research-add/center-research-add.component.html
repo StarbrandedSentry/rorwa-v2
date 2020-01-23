@@ -39,12 +39,20 @@
           <input
             matInput
             formControlName="authorsList"
+            [matAutocomplete]="auto"
             [matChipInputFor]="authorsChipList"
             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
             [matChipInputAddOnBlur]="addOnBlur"
             (matChipInputTokenEnd)="addAuthor($event)"
           />
         </mat-chip-list>
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+          <mat-option
+          *ngFor="let writer of writerService.writers"
+          [value]="writer.name">
+            {{ writer.name }}
+          </mat-option>
+        </mat-autocomplete>
       </mat-form-field>
     </div>
     <div class="row">

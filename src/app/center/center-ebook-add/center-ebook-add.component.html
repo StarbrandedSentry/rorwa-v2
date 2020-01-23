@@ -1,13 +1,13 @@
 <div class="center-ebook-body">
-  <h2 class="mat-title">Add new e-book</h2>
+  <h2 class="mat-title">Add new book</h2>
   <form [formGroup]="ebookFormGroup">
     <div class="row">
       <mat-form-field appearance="outline" class="full-width">
-        <mat-label>e-Book Title</mat-label>
+        <mat-label>Title</mat-label>
         <input
           matInput
           formControlName="ebookTitle"
-          placeholder="e-Book Title"
+          placeholder="Title"
           required
         />
       </mat-form-field>
@@ -65,25 +65,19 @@
     <div class="row">
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Category</mat-label>
-        <input
-          matInput
-          formControlName="category"
-          placeholder="Category"
-          [matAutocomplete]="auto"
-          required
-        />
-        <mat-autocomplete #auto="matAutocomplete">
+        <mat-select formControlName="category">
           <mat-option
             *ngFor="let category of categoryService.categories"
             [value]="category.name"
           >
             {{ category.name }}
           </mat-option>
-        </mat-autocomplete>
+        </mat-select>
       </mat-form-field>
     </div>
     <div class="row">
-      <mat-form-field class="full-width">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Tags</mat-label>
         <mat-chip-list #chipList aria-label="Tags" class="chip-list">
           <mat-chip
             *ngFor="let ebookTag of ebookTags"
@@ -122,6 +116,12 @@
           <a [href]="url">Download</a>
         </div>
       </div>
+    </div>
+    <div>
+      <message-error [message$]="errorMessage.asObservable()"></message-error>
+    </div>
+    <div>
+      <message-success [message$]="successMessage.asObservable()"></message-success>
     </div>
     <div class="row">
       <div class="actions">

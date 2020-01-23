@@ -43,21 +43,14 @@
     <div class="row">
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Category</mat-label>
-        <input
-          matInput
-          formControlName="category"
-          placeholder="Category"
-          [matAutocomplete]="auto"
-          required
-        />
-        <mat-autocomplete #auto="matAutocomplete">
+        <mat-select formControlName="category">
           <mat-option
             *ngFor="let category of categoryService.categories"
             [value]="category.name"
           >
             {{ category.name }}
           </mat-option>
-        </mat-autocomplete>
+        </mat-select>
       </mat-form-field>
     </div>
     <div class="row">
@@ -70,6 +63,12 @@
           required
         ></textarea>
       </mat-form-field>
+    </div>
+    <div>
+      <message-error [message$]="errorMessage.asObservable()"></message-error>
+    </div>
+    <div>
+      <message-success [message$]="successMessage.asObservable()"></message-success>
     </div>
     <div class="row">
       <div class="actions">

@@ -9,7 +9,7 @@ import { TabLink } from '../../models/misc.model';
 export class CenterAddComponent implements OnInit {
   tabLinks: TabLink[] = [
     { label: 'Research', path: 'research' },
-    { label: 'E-book', path: 'ebook' },
+    { label: 'Book', path: 'ebook' },
     { label: 'Journal', path: 'journal' }
   ];
 

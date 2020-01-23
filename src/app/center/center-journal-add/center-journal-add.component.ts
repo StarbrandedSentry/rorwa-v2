@@ -6,7 +6,7 @@ import { CategoryService } from 'src/app/shared/category.service';
 import { Journal } from 'src/app/models/journal.model';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Center } from 'src/app/models/center.model';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { JournalService } from 'src/app/shared/journal.service';
 
@@ -20,6 +20,9 @@ export class CenterJournalAddComponent implements OnInit {
   center$: Observable<Center>;
   center: Center;
   centerID: string;
+
+  errorMessage: Subject<string> = new Subject<string>();
+  successMessage: Subject<string> = new Subject<string>();
 
   constructor(
     public categoryService: CategoryService,
@@ -87,6 +90,13 @@ export class CenterJournalAddComponent implements OnInit {
       category: this.category.value,
       description: this.description.value
     };
-    this.journalService.addNewJournal(newJournal);
+    this.journalService
+      .addNewJournal(newJournal)
+      .then(res => {
+        this.successMessage.next('Journal successfully added!');
+      })
+      .catch(err => {
+        this.errorMessage.next(err);
+      });
   }
 }
