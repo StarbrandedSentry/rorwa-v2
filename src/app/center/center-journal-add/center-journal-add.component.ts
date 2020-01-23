@@ -94,6 +94,10 @@ export class CenterJournalAddComponent implements OnInit {
       .addNewJournal(newJournal)
       .then(res => {
         this.successMessage.next('Journal successfully added!');
+        this.journalFormGroup.reset();
+        Object.keys(this.journalFormGroup.controls).forEach(key => {
+          this.journalFormGroup.get(key).setErrors(null);
+        });
       })
       .catch(err => {
         this.errorMessage.next(err);

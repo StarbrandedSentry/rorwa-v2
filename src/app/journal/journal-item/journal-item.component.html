@@ -1,5 +1,14 @@
 <div class="body">
   <div *ngIf="journal">
     <div class="mat-headline">{{ journal.title }}</div>
+    <div class="information-column">
+      <div
+        class="mat-subheading-2 center-name"
+        [routerLink]="['/center/dash', journal.centerID]"
+      >
+        <b>Center: </b>
+        <span>{{ journal.centerName }}</span>
+      </div>
+    </div>
   </div>
 </div>

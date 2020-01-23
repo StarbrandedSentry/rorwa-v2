@@ -182,6 +182,10 @@ export class CenterResearchAddComponent implements OnInit {
               .catch(err => {
                 this.errorMessage.next(err);
               });
+            this.researchFormGroup.reset();
+            Object.keys(this.researchFormGroup.controls).forEach(key => {
+              this.researchFormGroup.get(key).setErrors(null);
+            });
           });
         })
       )
