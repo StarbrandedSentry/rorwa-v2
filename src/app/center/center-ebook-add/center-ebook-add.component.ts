@@ -9,7 +9,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { CategoryService } from 'src/app/shared/category.service';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Center } from 'src/app/models/center.model';
 import { map, finalize } from 'rxjs/operators';
 import { Ebook } from 'src/app/models/ebook.model';
@@ -31,6 +31,9 @@ export class CenterEbookAddComponent implements OnInit {
   percentage: Observable<number>;
   snapshot: Observable<any>;
   downloadURL: Observable<string>;
+
+  errorMessage: Subject<string> = new Subject<string>();
+  successMessage: Subject<string> = new Subject<string>();
 
   // e-Book tags
   visible = true;
@@ -160,7 +163,14 @@ export class CenterEbookAddComponent implements OnInit {
               category: this.category.value,
               tags: this.ebookTags
             };
-            this.afFirestore.collection('ebooks').add(newEbook);
+            this.afFirestore.collection('ebooks')
+              .add(newEbook)
+              .then( res => {
+                this.successMessage.next('Book successfully added!');
+              })
+              .catch(err => {
+                this.errorMessage.next(err);
+              });
           });
         })
       )

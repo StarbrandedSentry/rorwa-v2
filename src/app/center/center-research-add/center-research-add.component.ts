@@ -14,6 +14,9 @@ import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { ViewChild } from '@angular/core';
 import { CategoryService } from 'src/app/shared/category.service';
+import { WriterService } from 'src/app/shared/writer.service';
+import { MatAutocompleteSelectedEvent, MatAutocomplete } from '@angular/material';
+import { Writer } from 'src/app/models/writer.model';
 
 // @ts-ignore
 @Component({
@@ -50,6 +53,11 @@ export class CenterResearchAddComponent implements OnInit {
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   authorInput: any = [];
   researchTags: any = [];
+  writerCollection: string[];
+  filteredAuthors: Observable<string[]>;
+
+  @ViewChild('_authorInput', {static: false}) _authorInput: ElementRef<HTMLInputElement>;
+  @ViewChild('auto', {static: false}) matAutocomplete: MatAutocomplete;
 
   addAuthor(event: MatChipInputEvent): void {
     const input = event.input;
@@ -97,12 +105,19 @@ export class CenterResearchAddComponent implements OnInit {
     }
   }
 
+  selected(event: MatAutocompleteSelectedEvent) : void {
+    this.authorInput.push(event.option.viewValue);
+    this._authorInput.nativeElement.value = '';
+    this.authorsList.setValue(null);
+  }
+
   constructor(
     private storage: AngularFireStorage,
     private afFirestore: AngularFirestore,
     private ar: ActivatedRoute,
     private formBuilder: FormBuilder,
-    public categoryService: CategoryService
+    public categoryService: CategoryService,
+    public writerService: WriterService
   ) {}
 
   async startUpload(event: FileList) {
