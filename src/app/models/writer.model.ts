@@ -5,5 +5,5 @@ export interface Writer {
   centerName?: string;
   education?: string;
   program?: string;
-  yearGraduated?: Date;
+  yearGraduated?: string;
 }
