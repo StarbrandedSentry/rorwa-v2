@@ -1,12 +1,14 @@
 export interface Research {
   id?: string;
   title?: string;
-  centerID?: string;
   downloadURL?: string;
+  centerID?: string;
   centerName?: string;
-  author?: string;
-  category?: string;
+  author?: string[];
   date?: Date;
   abstract?: string;
+  university?: string;
+  program?: string;
+  category?: string;
   tags?: string[];
 }

@@ -13,6 +13,7 @@ import { Center } from '../../models/center.model';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { ViewChild } from '@angular/core';
+import { CategoryService } from 'src/app/shared/category.service';
 
 // @ts-ignore
 @Component({
@@ -34,21 +35,37 @@ export class CenterResearchAddComponent implements OnInit {
   center: Center;
   centerID: string;
 
-  // Research tags
-  visible = true;
-  selectable = true;
-  removable = true;
-  addOnBlur = false;
-  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
-  researchTags: any = [];
-
   file;
   errorMessage: Subject<string> = new Subject<string>();
 
   @ViewChild('fileInput', { static: false })
   inputFile: ElementRef;
 
-  add(event: MatChipInputEvent): void {
+  // Authors and Keywords
+  visible = true;
+  selectable = true;
+  removable = true;
+  addOnBlur = false;
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+  authorInput: any = [];
+  researchTags: any = [];
+
+  addAuthor(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+
+    // Add tag
+    if ((value || '').trim()) {
+      this.authorInput.push({ name: value.trim() });
+    }
+
+    // Reset the input value
+    if (input) {
+      input.value = '';
+    }
+  }
+
+  addTag(event: MatChipInputEvent): void {
     const input = event.input;
     const value = event.value;
 
@@ -63,15 +80,28 @@ export class CenterResearchAddComponent implements OnInit {
     }
   }
 
-  remove(index: any): void {
-    this.researchTags.splice(index, 1);
+  removeAuthor(author): void {
+    const index = this.authorInput.indexOf(author);
+
+    if (index >= 0) {
+      this.authorInput.splice(index, 1);
+    }
+  }
+
+  removeTag(tag): void {
+    const index = this.researchTags.indexOf(tag);
+
+    if (index >= 0) {
+      this.researchTags.splice(index, 1);
+    }
   }
 
   constructor(
     private storage: AngularFireStorage,
     private afFirestore: AngularFirestore,
     private ar: ActivatedRoute,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    public categoryService: CategoryService
   ) {}
 
   async startUpload(event: FileList) {
@@ -120,9 +150,12 @@ export class CenterResearchAddComponent implements OnInit {
               centerID: this.centerID,
               centerName: this.center.name,
               title: this.researchTitle.value,
-              author: this.author.value,
+              author: this.authorInput,
               date: this.publishDate.value,
               abstract: this.researchAbstract.value,
+              university: this.university.value,
+              program: this.program.value,
+              category: this.category.value,
               tags: this.researchTags
             };
             this.afFirestore.collection('researches').add(research);
@@ -136,8 +169,8 @@ export class CenterResearchAddComponent implements OnInit {
     return this.researchFormGroup.get('researchTitle');
   }
 
-  get author() {
-    return this.researchFormGroup.get('author');
+  get authorsList() {
+    return this.researchFormGroup.get('authorsList');
   }
 
   get publishDate() {
@@ -146,6 +179,18 @@ export class CenterResearchAddComponent implements OnInit {
 
   get researchAbstract() {
     return this.researchFormGroup.get('researchAbstract');
+  }
+
+  get university() {
+    return this.researchFormGroup.get('university');
+  }
+
+  get program() {
+    return this.researchFormGroup.get('program');
+  }
+
+  get category() {
+    return this.researchFormGroup.get('category');
   }
 
   get researchTagsList() {
@@ -173,9 +218,12 @@ export class CenterResearchAddComponent implements OnInit {
 
     this.researchFormGroup = this.formBuilder.group({
       researchTitle: ['', [Validators.minLength(8), Validators.required]],
-      author: ['', [Validators.minLength(8), Validators.required]],
+      authorsList: [''],
       publishDate: ['', [Validators.required]],
       researchAbstract: ['', [Validators.minLength(8), Validators.required]],
+      university: ['', [Validators.minLength(8), Validators.required]],
+      program: ['', [Validators.minLength(8), Validators.required]],
+      category: ['', [Validators.required]],
       researchTagsList: ['']
     });
   }
