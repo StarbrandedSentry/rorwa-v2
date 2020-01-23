@@ -3,7 +3,7 @@ import {
   AngularFireStorage,
   AngularFireUploadTask
 } from '@angular/fire/storage';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, Subscription } from 'rxjs';
 import { finalize, map, switchMap, tap } from 'rxjs/operators';
 import { AngularFirestore } from '@angular/fire/firestore';
 import {
@@ -36,7 +36,7 @@ import { AuthService } from '../../shared/auth.service';
 export class JournalItemComponent implements OnInit {
   journal$;
   journal: Journal;
-  researches$: Observable<Research[]>;
+  researches$: Subscription;
   researches: Research[];
 
   url: string;
@@ -138,7 +138,7 @@ export class JournalItemComponent implements OnInit {
     public authService: AuthService
   ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
     this.journal$ = this.ar.paramMap.pipe(
       switchMap(params => {
         return this.afFirestore
@@ -155,6 +155,24 @@ export class JournalItemComponent implements OnInit {
     );
     this.journal$.subscribe(journal => {
       this.journal = journal;
+
+      this.researches$ = this.afFirestore
+        .collection('researches', ref =>
+          ref.where('journalID', '==', this.journal.id)
+        )
+        .snapshotChanges()
+        .pipe(
+          map(actions =>
+            actions.map(a => {
+              const data = a.payload.doc.data() as Research;
+              data.id = a.payload.doc.id;
+              return data;
+            })
+          )
+        )
+        .subscribe(res => {
+          this.researches = res;
+        });
     });
 
     this.researchFormGroup = this.formBuilder.group({
