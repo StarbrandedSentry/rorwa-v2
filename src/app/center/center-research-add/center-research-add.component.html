@@ -87,7 +87,7 @@
         />
       </mat-form-field>
     </div>
-        <div class="row">
+    <div class="row">
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Program</mat-label>
         <input
@@ -104,7 +104,8 @@
         <mat-select formControlName="category">
           <mat-option
             *ngFor="let category of categoryService.categories"
-            [value]="category.name">
+            [value]="category.name"
+          >
             {{ category.name }}
           </mat-option>
         </mat-select>

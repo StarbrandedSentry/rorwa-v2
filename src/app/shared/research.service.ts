@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Research } from '../models/research.model';
 import { filter, map } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import * as _ from 'lodash';
 import { Journal } from '../models/journal.model';
+import { stringify } from 'querystring';
 
 @Injectable({
   providedIn: 'root'
@@ -90,6 +91,31 @@ export class ResearchService {
       }
     });
   }
+
+  /*  search(key: string) {
+    const startAt = new Subject();
+    const endAt = new Subject();
+    startAt.next(key);
+    endAt.next(key + '\uf8ff');
+
+    this.researches$ = this.afFirestore
+      .collection('researches', ref =>
+        ref
+          .orderBy('title')
+          .startAt(startAt)
+          .endAt(endAt)
+      )
+      .snapshotChanges()
+      .pipe(
+        map(actions =>
+          actions.map(a => {
+            const data = a.payload.doc.data() as Research;
+            data.id = a.payload.doc.id;
+            return data;
+          })
+        )
+      );
+  }*/
 
   applyFilters() {
     this._filteredResearches = _.filter(
