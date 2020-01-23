@@ -12,7 +12,7 @@
         />
       </mat-form-field>
     </div>
-    <div class="row">
+    <!-- <div class="row">
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Author</mat-label>
         <input
@@ -21,6 +21,42 @@
           placeholder="Author"
           required
         />
+      </mat-form-field>
+    </div> -->
+    <div class="row">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Author/s</mat-label>
+        <mat-chip-list #authorsChipList class="chip-list">
+          <mat-chip
+            *ngFor="let author of authorInput"
+            [selectable]="selectable"
+            [removable]="removable"
+            (removed)="removeAuthor(author)"
+          >
+            {{ author.name }}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip>
+          <input
+            matInput
+            formControlName="authorsList"
+            [matAutocomplete]="auto"
+            [matChipInputFor]="authorsChipList"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            [matChipInputAddOnBlur]="addOnBlur"
+            (matChipInputTokenEnd)="addAuthor($event)"
+          />
+        </mat-chip-list>
+        <mat-autocomplete
+          #auto="matAutocomplete"
+          (optionSelected)="selected($event)"
+        >
+          <mat-option
+            *ngFor="let writer of writerService.writers"
+            [value]="writer"
+          >
+            {{ writer.name }}
+          </mat-option>
+        </mat-autocomplete>
       </mat-form-field>
     </div>
     <div class="row">

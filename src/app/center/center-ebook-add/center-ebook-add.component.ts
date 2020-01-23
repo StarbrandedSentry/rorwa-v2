@@ -14,6 +14,9 @@ import { Center } from 'src/app/models/center.model';
 import { map, finalize } from 'rxjs/operators';
 import { Ebook } from 'src/app/models/ebook.model';
 import { EbookService } from 'src/app/shared/ebook.service';
+import { MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material';
+import { Writer } from 'src/app/models/writer.model';
+import { WriterService } from 'src/app/shared/writer.service';
 
 @Component({
   selector: 'app-center-ebook-add',
@@ -47,6 +50,15 @@ export class CenterEbookAddComponent implements OnInit {
   addOnBlur = false;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   ebookTags: any = [];
+  writerCollection: string[];
+  filteredAuthors: Observable<string[]>;
+  authors: Writer[];
+  authorInput: any = [];
+
+  @ViewChild('_authorInput', { static: false }) _authorInput: ElementRef<
+  HTMLInputElement
+  >;
+  @ViewChild('auto', { static: false }) matAutocomplete: MatAutocomplete;
 
   add(event: MatChipInputEvent): void {
     const input = event.input;
@@ -63,8 +75,37 @@ export class CenterEbookAddComponent implements OnInit {
     }
   }
 
+  addAuthor(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+
+    // Add tag
+    if ((value || '').trim()) {
+      this.authorInput.push({ name: value.trim() });
+    }
+
+    // Reset the input value
+    if (input) {
+      input.value = '';
+    }
+  }
+
   remove(index: any): void {
     this.ebookTags.splice(index, 1);
+  }
+
+  removeAuthor(author): void {
+    const index = this.authorInput.indexOf(author);
+
+    if (index >= 0) {
+      this.authorInput.splice(index, 1);
+    }
+  }
+
+  selected(event: MatAutocompleteSelectedEvent): void {
+    this.authorInput.push(event.option.value);
+    this._authorInput.nativeElement.value = '';
+    this.authorsList.setValue(null);
   }
 
   constructor(
@@ -72,7 +113,7 @@ export class CenterEbookAddComponent implements OnInit {
     private storage: AngularFireStorage,
     private afFirestore: AngularFirestore,
     public categoryService: CategoryService,
-    private ebookService: EbookService,
+    public writerService: WriterService,
     private formBuilder: FormBuilder
   ) {}
 
@@ -80,8 +121,8 @@ export class CenterEbookAddComponent implements OnInit {
     return this.ebookFormGroup.get('ebookTitle');
   }
 
-  get author() {
-    return this.ebookFormGroup.get('author');
+  get authorsList() {
+    return this.ebookFormGroup.get('authorsList');
   }
 
   get publisher() {
@@ -169,7 +210,7 @@ export class CenterEbookAddComponent implements OnInit {
               downloadURL: url,
               centerID: this.centerID,
               centerName: this.center.name,
-              author: this.author.value,
+              author: this.authorInput,
               publisher: this.publisher.value,
               date: this.publishDate.value,
               description: this.description.value,
