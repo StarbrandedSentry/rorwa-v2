@@ -26,7 +26,7 @@
         [(ngModel)]="selectedCategory"
         (ngModelChange)="filterByCategory()"
       >
-        <mat-option>None</mat-option>
+        <mat-option (click)="resetCategoryFilter()">None</mat-option>
         <mat-option
           *ngFor="let category of categoryServ.categories"
           [value]="category.name"

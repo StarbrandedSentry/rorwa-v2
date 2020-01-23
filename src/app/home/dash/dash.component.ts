@@ -31,4 +31,9 @@ export class DashComponent implements OnInit {
   filterByCategory() {
     this.researchServ.filterProperty('category', this.selectedCategory);
   }
+
+  resetCategoryFilter(): void {
+    this.selectedCategory = '';
+    this.researchServ.removeFilter('category');
+  }
 }
