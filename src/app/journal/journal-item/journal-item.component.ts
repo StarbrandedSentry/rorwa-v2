@@ -6,7 +6,12 @@ import {
 import { Observable, Subject } from 'rxjs';
 import { finalize, map, switchMap, tap } from 'rxjs/operators';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  ReactiveFormsModule
+} from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Research } from '../../models/research.model';
 import { Center } from '../../models/center.model';
@@ -21,6 +26,7 @@ import {
 } from '@angular/material';
 import { Writer } from 'src/app/models/writer.model';
 import { Journal } from '../../models/journal.model';
+import { AuthService } from '../../shared/auth.service';
 
 @Component({
   selector: 'app-journal-item',
@@ -128,7 +134,8 @@ export class JournalItemComponent implements OnInit {
     private ar: ActivatedRoute,
     private formBuilder: FormBuilder,
     public categoryService: CategoryService,
-    public writerService: WriterService
+    public writerService: WriterService,
+    public authService: AuthService
   ) {}
 
   ngOnInit() {

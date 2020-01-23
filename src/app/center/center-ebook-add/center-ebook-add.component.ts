@@ -14,7 +14,10 @@ import { Center } from 'src/app/models/center.model';
 import { map, finalize } from 'rxjs/operators';
 import { Ebook } from 'src/app/models/ebook.model';
 import { EbookService } from 'src/app/shared/ebook.service';
-import { MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material';
+import {
+  MatAutocomplete,
+  MatAutocompleteSelectedEvent
+} from '@angular/material';
 import { Writer } from 'src/app/models/writer.model';
 import { WriterService } from 'src/app/shared/writer.service';
 
@@ -56,7 +59,7 @@ export class CenterEbookAddComponent implements OnInit {
   authorInput: any = [];
 
   @ViewChild('_authorInput', { static: false }) _authorInput: ElementRef<
-  HTMLInputElement
+    HTMLInputElement
   >;
   @ViewChild('auto', { static: false }) matAutocomplete: MatAutocomplete;
 

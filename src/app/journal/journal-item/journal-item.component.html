@@ -23,195 +23,213 @@
       <p>{{ journal.description }}</p>
     </div>
   </div>
-  <div class="research-add-body">
-    <div
-      class="research-add container"
-    >
-      <h2 class="mat-title">Add a research under this journal</h2>
-      <form [formGroup]="researchFormGroup">
-        <div class="row">
-          <mat-form-field appearance="outline" class="full-width">
-            <mat-label>Research Title</mat-label>
-            <input
-              matInput
-              formControlName="researchTitle"
-              placeholder="Research Title"
-              required
-            />
-            <mat-error>Entry must be longer!</mat-error>
-          </mat-form-field>
-        </div>
-        <div class="row">
-          <mat-form-field appearance="outline" class="full-width">
-            <mat-label>Author/s</mat-label>
-            <mat-chip-list #authorsChipList class="chip-list">
-              <mat-chip
-                *ngFor="let author of authorInput"
-                [selectable]="selectable"
-                [removable]="removable"
-                (removed)="removeAuthor(author)"
-              >
-                {{ author.name }}
-                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-              </mat-chip>
-              <input
-                matInput
-                formControlName="authorsList"
-                [matAutocomplete]="auto"
-                [matChipInputFor]="authorsChipList"
-                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                [matChipInputAddOnBlur]="addOnBlur"
-                (matChipInputTokenEnd)="addAuthor($event)"
-              />
-            </mat-chip-list>
-            <mat-autocomplete
-              #auto="matAutocomplete"
-              (optionSelected)="selected($event)"
-            >
-              <mat-option
-                *ngFor="let writer of writerService.writers"
-                [value]="writer"
-              >
-                {{ writer.name }}
-              </mat-option>
-            </mat-autocomplete>
-          </mat-form-field>
-        </div>
-        <div class="row">
-          <mat-form-field appearance="outline" class="full-width">
-            <mat-label>Publish Date</mat-label>
-            <input
-              matInput
-              formControlName="publishDate"
-              placeholder="Publish Date"
-              [matDatepicker]="publishDate"
-              required
-            />
-            <mat-datepicker-toggle
-              matSuffix
-              [for]="publishDate"
-            ></mat-datepicker-toggle>
-            <mat-datepicker #publishDate></mat-datepicker>
-          </mat-form-field>
-        </div>
-        <div class="row">
-          <mat-form-field appearance="outline" class="full-width">
-            <mat-label>Abstract</mat-label>
-            <textarea
-              matInput
-              formControlName="researchAbstract"
-              placeholder="Abstract"
-              rows="8"
-              required
-            ></textarea>
-            <mat-error>Entry must be longer!</mat-error>
-          </mat-form-field>
-        </div>
-        <div class="row">
-          <mat-form-field appearance="outline" class="full-width">
-            <mat-label>College/University</mat-label>
-            <input
-              matInput
-              formControlName="university"
-              placeholder="College/University"
-              required
-            />
-            <mat-error>Entry must be longer!</mat-error>
-          </mat-form-field>
-        </div>
-        <div class="row">
-          <mat-form-field appearance="outline" class="full-width">
-            <mat-label>Program</mat-label>
-            <input
-              matInput
-              formControlName="program"
-              placeholder="Program"
-              required
-            />
-            <mat-error>Entry must be longer!</mat-error>
-          </mat-form-field>
-        </div>
-        <div class="row">
-          <mat-form-field appearance="outline" class="full-width">
-            <mat-label>Category</mat-label>
-            <mat-select formControlName="category">
-              <mat-option
-                *ngFor="let category of categoryService.categories"
-                [value]="category.name"
-              >
-                {{ category.name }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-        <div class="row">
-          <mat-form-field appearance="outline" class="full-width">
-            <mat-label>Keywords</mat-label>
-            <mat-chip-list #chipList class="chip-list">
-              <mat-chip
-                *ngFor="let researchTag of researchTags"
-                [selectable]="selectable"
-                [removable]="removable"
-                (removed)="removeTag(researchTag)"
-              >
-                {{ researchTag.name }}
-                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-              </mat-chip>
-              <input
-                matInput
-                formControlName="researchTagsList"
-                [matChipInputFor]="chipList"
-                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                [matChipInputAddOnBlur]="addOnBlur"
-                (matChipInputTokenEnd)="addTag($event)"
-              />
-            </mat-chip-list>
-          </mat-form-field>
-        </div>
-        <div class="row">
-          <div class="file">
-            <label class="file-label"></label>
-            <input
-              type="file"
-              #fileInput
-              (change)="startUpload($event.target.files)"
-            />
+
+  <mat-tab-group>
+    <mat-tab label="Researches">
+      FOR THE THIRD QUESTIONS
+    </mat-tab>
+    <div *ngIf="authService.user$ | async as user">
+      <mat-tab label="Add" *ngIf="user.role === 2">
+        <div class="research-add-body">
+          <div class="research-add container">
+            <h2 class="mat-title">Add a research under this journal</h2>
+            <form [formGroup]="researchFormGroup">
+              <div class="row">
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>Research Title</mat-label>
+                  <input
+                    matInput
+                    formControlName="researchTitle"
+                    placeholder="Research Title"
+                    required
+                  />
+                  <mat-error>Entry must be longer!</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="row">
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>Author/s</mat-label>
+                  <mat-chip-list #authorsChipList class="chip-list">
+                    <mat-chip
+                      *ngFor="let author of authorInput"
+                      [selectable]="selectable"
+                      [removable]="removable"
+                      (removed)="removeAuthor(author)"
+                    >
+                      {{ author.name }}
+                      <mat-icon matChipRemove *ngIf="removable"
+                        >cancel</mat-icon
+                      >
+                    </mat-chip>
+                    <input
+                      matInput
+                      formControlName="authorsList"
+                      [matAutocomplete]="auto"
+                      [matChipInputFor]="authorsChipList"
+                      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                      [matChipInputAddOnBlur]="addOnBlur"
+                      (matChipInputTokenEnd)="addAuthor($event)"
+                    />
+                  </mat-chip-list>
+                  <mat-autocomplete
+                    #auto="matAutocomplete"
+                    (optionSelected)="selected($event)"
+                  >
+                    <mat-option
+                      *ngFor="let writer of writerService.writers"
+                      [value]="writer"
+                    >
+                      {{ writer.name }}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+              </div>
+              <div class="row">
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>Publish Date</mat-label>
+                  <input
+                    matInput
+                    formControlName="publishDate"
+                    placeholder="Publish Date"
+                    [matDatepicker]="publishDate"
+                    required
+                  />
+                  <mat-datepicker-toggle
+                    matSuffix
+                    [for]="publishDate"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker #publishDate></mat-datepicker>
+                </mat-form-field>
+              </div>
+              <div class="row">
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>Abstract</mat-label>
+                  <textarea
+                    matInput
+                    formControlName="researchAbstract"
+                    placeholder="Abstract"
+                    rows="8"
+                    required
+                  ></textarea>
+                  <mat-error>Entry must be longer!</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="row">
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>College/University</mat-label>
+                  <input
+                    matInput
+                    formControlName="university"
+                    placeholder="College/University"
+                    required
+                  />
+                  <mat-error>Entry must be longer!</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="row">
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>Program</mat-label>
+                  <input
+                    matInput
+                    formControlName="program"
+                    placeholder="Program"
+                    required
+                  />
+                  <mat-error>Entry must be longer!</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="row">
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>Category</mat-label>
+                  <mat-select formControlName="category">
+                    <mat-option
+                      *ngFor="let category of categoryService.categories"
+                      [value]="category.name"
+                    >
+                      {{ category.name }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="row">
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>Keywords</mat-label>
+                  <mat-chip-list #chipList class="chip-list">
+                    <mat-chip
+                      *ngFor="let researchTag of researchTags"
+                      [selectable]="selectable"
+                      [removable]="removable"
+                      (removed)="removeTag(researchTag)"
+                    >
+                      {{ researchTag.name }}
+                      <mat-icon matChipRemove *ngIf="removable"
+                        >cancel</mat-icon
+                      >
+                    </mat-chip>
+                    <input
+                      matInput
+                      formControlName="researchTagsList"
+                      [matChipInputFor]="chipList"
+                      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                      [matChipInputAddOnBlur]="addOnBlur"
+                      (matChipInputTokenEnd)="addTag($event)"
+                    />
+                  </mat-chip-list>
+                </mat-form-field>
+              </div>
+              <div class="row">
+                <div class="file">
+                  <label class="file-label"></label>
+                  <input
+                    type="file"
+                    #fileInput
+                    (change)="startUpload($event.target.files)"
+                  />
+                </div>
+                <div *ngIf="percentage | async as pct">
+                  <progress [value]="pct" max="100"></progress>
+                  {{ pct | number }}
+                </div>
+                <div *ngIf="snapshot | async as snap">
+                  {{ snap.bytesTransferred }} of {{ snap.totalBytes }}
+                  <div *ngIf="downloadURL | async as url">
+                    <h3>Researches</h3>
+                    <a [href]="url">Download</a>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <message-error
+                  [message$]="errorMessage.asObservable()"
+                ></message-error>
+              </div>
+              <div>
+                <message-success
+                  [message$]="successMessage.asObservable()"
+                ></message-success>
+              </div>
+              <div class="row">
+                <div class="actions">
+                  <button
+                    mat-flat-button
+                    color="primary"
+                    (click)="onAddClick()"
+                  >
+                    Add Research
+                  </button>
+                </div>
+              </div>
+            </form>
           </div>
-          <div *ngIf="percentage | async as pct">
-            <progress [value]="pct" max="100"></progress>
-            {{ pct | number }}
+        </div>
+        <div class="research" *ngFor="let research of researches">
+          <div class="mat-title" [routerLink]="['/research', research.id]">
+            {{ research.title }}
           </div>
-          <div *ngIf="snapshot | async as snap">
-            {{ snap.bytesTransferred }} of {{ snap.totalBytes }}
-            <div *ngIf="downloadURL | async as url">
-              <h3>Researches</h3>
-              <a [href]="url">Download</a>
-            </div>
-          </div>
+          <div class="mat-subheading-1">{{ research.centerName }}</div>
+          <p class="mat-body">{{ research.abstract }}</p>
         </div>
-        <div>
-          <message-error [message$]="errorMessage.asObservable()"></message-error>
-        </div>
-        <div>
-          <message-success
-            [message$]="successMessage.asObservable()"
-          ></message-success>
-        </div>
-        <div class="row">
-          <div class="actions">
-            <button mat-flat-button color="primary" (click)="onAddClick()">
-              Add Research
-            </button>
-          </div>
-        </div>
-      </form>
+      </mat-tab>
     </div>
-  </div>
-  <div class="research" *ngFor="let research of researches">
-    <div class="mat-title" [routerLink]="['/research', research.id]">
-      {{ research.title }}
-    </div>
-    <div class="mat-subheading-1">{{ research.centerName }}</div>
-    <p class="mat-body">{{ research.abstract }}</p>
-  </div>
+  </mat-tab-group>
 </div>

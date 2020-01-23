@@ -6,10 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { MaterialModule } from '../material/material.module';
 import { FirebaseCollectionModule } from '../firebase-collection/firebase-collection.module';
 import { MessageModule } from '../message/message.module';
-import {
-  FormsModule,
-  ReactiveFormsModule
-} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   MatCommonModule,
   MatInputModule,
