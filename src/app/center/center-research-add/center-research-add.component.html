@@ -46,10 +46,14 @@
             (matChipInputTokenEnd)="addAuthor($event)"
           />
         </mat-chip-list>
-        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+        <mat-autocomplete
+          #auto="matAutocomplete"
+          (optionSelected)="selected($event)"
+        >
           <mat-option
-          *ngFor="let writer of writerService.writers"
-          [value]="writer.name">
+            *ngFor="let writer of writerService.writers"
+            [value]="writer"
+          >
             {{ writer.name }}
           </mat-option>
         </mat-autocomplete>

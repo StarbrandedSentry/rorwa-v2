@@ -15,7 +15,10 @@ import { MatChipInputEvent } from '@angular/material/chips';
 import { ViewChild } from '@angular/core';
 import { CategoryService } from 'src/app/shared/category.service';
 import { WriterService } from 'src/app/shared/writer.service';
-import { MatAutocompleteSelectedEvent, MatAutocomplete } from '@angular/material';
+import {
+  MatAutocompleteSelectedEvent,
+  MatAutocomplete
+} from '@angular/material';
 import { Writer } from 'src/app/models/writer.model';
 
 // @ts-ignore
@@ -55,9 +58,12 @@ export class CenterResearchAddComponent implements OnInit {
   researchTags: any = [];
   writerCollection: string[];
   filteredAuthors: Observable<string[]>;
+  authors: Writer[];
 
-  @ViewChild('_authorInput', {static: false}) _authorInput: ElementRef<HTMLInputElement>;
-  @ViewChild('auto', {static: false}) matAutocomplete: MatAutocomplete;
+  @ViewChild('_authorInput', { static: false }) _authorInput: ElementRef<
+    HTMLInputElement
+  >;
+  @ViewChild('auto', { static: false }) matAutocomplete: MatAutocomplete;
 
   addAuthor(event: MatChipInputEvent): void {
     const input = event.input;
@@ -105,8 +111,8 @@ export class CenterResearchAddComponent implements OnInit {
     }
   }
 
-  selected(event: MatAutocompleteSelectedEvent) : void {
-    this.authorInput.push(event.option.viewValue);
+  selected(event: MatAutocompleteSelectedEvent): void {
+    this.authorInput.push(event.option.value);
     this._authorInput.nativeElement.value = '';
     this.authorsList.setValue(null);
   }

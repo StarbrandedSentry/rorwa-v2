@@ -163,9 +163,10 @@ export class CenterEbookAddComponent implements OnInit {
               category: this.category.value,
               tags: this.ebookTags
             };
-            this.afFirestore.collection('ebooks')
+            this.afFirestore
+              .collection('ebooks')
               .add(newEbook)
-              .then( res => {
+              .then(res => {
                 this.successMessage.next('Book successfully added!');
               })
               .catch(err => {
