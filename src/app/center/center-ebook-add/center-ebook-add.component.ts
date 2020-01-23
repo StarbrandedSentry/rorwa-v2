@@ -186,6 +186,7 @@ export class CenterEbookAddComponent implements OnInit {
                 this.errorMessage.next(err);
               });
             this.ebookFormGroup.reset();
+            this.ebookTags = [];
             Object.keys(this.ebookFormGroup.controls).forEach(key => {
               this.ebookFormGroup.get(key).setErrors(null);
             });

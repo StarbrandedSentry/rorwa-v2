@@ -190,6 +190,8 @@ export class CenterResearchAddComponent implements OnInit {
                 this.errorMessage.next(err);
               });
             this.researchFormGroup.reset();
+            this.authorInput = [];
+            this.researchTags = [];
             Object.keys(this.researchFormGroup.controls).forEach(key => {
               this.researchFormGroup.get(key).setErrors(null);
             });
