@@ -159,7 +159,8 @@ export class CenterResearchAddComponent implements OnInit {
               category: this.category.value,
               tags: this.researchTags
             };
-            this.afFirestore.collection('researches')
+            this.afFirestore
+              .collection('researches')
               .add(research)
               .then(res => {
                 this.successMessage.next('Research successfully added!');

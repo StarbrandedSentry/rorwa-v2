@@ -39,6 +39,7 @@ import { JournalsComponent } from './home/dash/journals/journals.component';
 import { EbooksComponent } from './home/dash/ebooks/ebooks.component';
 import { JournalModule } from './journal/journal.module';
 import { CentersComponent } from './home/dash/centers/centers.component';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import { CentersComponent } from './home/dash/centers/centers.component';
     NavModule,
     CenterModule,
     FormsModule,
+    PdfViewerModule,
     JournalModule
   ],
   providers: [

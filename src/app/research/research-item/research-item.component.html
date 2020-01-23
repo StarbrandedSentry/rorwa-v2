@@ -9,6 +9,35 @@
         <b>Center:</b>
         <span>{{ research.centerName }}</span>
       </div>
+      <div class="mat-subheading-2 row">
+        <b>Author/s:</b>
+        <div
+          *ngFor="let author of research.author; let isLast = last"
+          class="tag"
+        >
+          {{ author.name }}{{ isLast ? '' : ', ' }}
+        </div>
+      </div>
+      <div class="mat-subheading-2 row">
+        <b>Keywords:</b>
+        <div *ngFor="let tag of research.tags; let isLast = last" class="tag">
+          {{ tag.name }}{{ isLast ? '' : ', ' }}
+        </div>
+      </div>
+    </div>
+    <!--ABSTRACT-->
+    <div>
+      <div class="mat-title">Abstract</div>
+      <p>{{ research.abstract }}</p>
+    </div>
+    <!--PDF-->
+    <div>
+      <pdf-viewer
+        [page]="page"
+        [src]="pdfUrl"
+        [show-all]="false"
+        [render-text]="true"
+      ></pdf-viewer>
     </div>
   </div>
 </div>

@@ -6,6 +6,7 @@ import { MaterialModule } from '../material/material.module';
 import { FirebaseCollectionModule } from '../firebase-collection/firebase-collection.module';
 import { MessageModule } from '../message/message.module';
 import { RouterModule, Routes } from '@angular/router';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 const routes: Routes = [
   {
@@ -23,7 +24,8 @@ const routes: Routes = [
     MaterialModule,
     FirebaseCollectionModule,
     MessageModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    PdfViewerModule
   ]
 })
 export class ResearchModule {}
