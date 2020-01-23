@@ -26,13 +26,35 @@
       </div>
     </div>
     <!--ABSTRACT-->
-    <div>
+    <div class="abstract-body">
       <div class="mat-title">Abstract</div>
       <p>{{ research.abstract }}</p>
     </div>
     <!--PDF-->
-    <div>
+    <div class="pdf-body">
+      <div class="pdf-controls">
+        <div
+          *ngIf="authService.user$ | async as user; then downloadButton"
+        ></div>
+        <ng-template #downloadButton>
+          <button mat-button (click)="onDownloadClick()">Download PDF</button>
+        </ng-template>
+        <div class="pdf-buttons">
+          <i class="material-icons" (click)="changePage('left')">
+            arrow_left
+          </i>
+          <div class="page">
+            {{ page }}
+          </div>
+          <i class="material-icons" (click)="changePage('right')">
+            arrow_right
+          </i>
+        </div>
+      </div>
       <pdf-viewer
+        class="pdf-content"
+        autoresize="true"
+        fit-to-page="true"
         [page]="page"
         [src]="pdfUrl"
         [show-all]="false"

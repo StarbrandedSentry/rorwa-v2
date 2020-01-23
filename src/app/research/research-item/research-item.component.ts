@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { map, switchMap } from 'rxjs/operators';
 import { Research } from '../../models/research.model';
+import { AuthService } from '../../shared/auth.service';
 
 @Component({
   selector: 'app-research-item',
@@ -18,7 +19,8 @@ export class ResearchItemComponent implements OnInit {
 
   constructor(
     private afFirestore: AngularFirestore,
-    private ar: ActivatedRoute
+    private ar: ActivatedRoute,
+    public authService: AuthService
   ) {}
 
   ngOnInit() {
@@ -40,5 +42,20 @@ export class ResearchItemComponent implements OnInit {
       this.research = research;
       this.pdfUrl = this.research.downloadURL;
     });
+  }
+
+  changePage(direction: string) {
+    if (direction === 'right') {
+      this.page++;
+    } else if (direction === 'left') {
+      if (this.page === 0) {
+        return;
+      }
+      this.page--;
+    }
+  }
+
+  onDownloadClick() {
+    window.open(this.pdfUrl, '_blank');
   }
 }

@@ -164,10 +164,11 @@ h4 {
 }
 
 .no-select {
-  text-transform: uppercase;
   -webkit-touch-callout: none;
   -moz-user-select: none;
   -ms-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .text-button {
@@ -299,6 +300,41 @@ h4 {
     align-items: center;
     justify-content: center;
   }
+}
+
+/*
+.pdf-content {
+  outline: var(--grey-500) 1px solid;
+}
+*/
+
+.pdf-controls {
+  height: 5vh;
+  border: var(--grey-500) 1px solid;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0 5%;
+  button {
+    margin-right: auto;
+  }
+  .pdf-buttons {
+    display: flex;
+    align-items: center;
+  }
+  i {
+    cursor: pointer;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+}
+
+.pdf-body {
+  background-color: var(--grey-500);
 }
 
 .filter {
