@@ -37,6 +37,7 @@ export class CenterResearchAddComponent implements OnInit {
 
   file;
   errorMessage: Subject<string> = new Subject<string>();
+  successMessage: Subject<string> = new Subject<string>();
 
   @ViewChild('fileInput', { static: false })
   inputFile: ElementRef;
@@ -158,7 +159,14 @@ export class CenterResearchAddComponent implements OnInit {
               category: this.category.value,
               tags: this.researchTags
             };
-            this.afFirestore.collection('researches').add(research);
+            this.afFirestore.collection('researches')
+              .add(research)
+              .then(res => {
+                this.successMessage.next('Research successfully added!');
+              })
+              .catch(err => {
+                this.errorMessage.next(err);
+              });
           });
         })
       )
