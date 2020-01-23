@@ -69,7 +69,7 @@ export class CenterWritersComponent implements OnInit {
       writerName: ['', [Validators.minLength(8), Validators.required]],
       education: ['', [Validators.minLength(8), Validators.required]],
       program: ['', [Validators.minLength(8), Validators.required]],
-      yearGraduated: ['', [Validators.minLength(4), Validators.required]],
+      yearGraduated: ['', [Validators.minLength(4), Validators.required]]
     });
   }
 
