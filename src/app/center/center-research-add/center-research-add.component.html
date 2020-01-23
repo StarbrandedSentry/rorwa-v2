@@ -12,15 +12,39 @@
         />
       </mat-form-field>
     </div>
-    <div class="row">
+    <!-- <div class="row">
       <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Author</mat-label>
+        <mat-label>Author/s</mat-label>
         <input
           matInput
           formControlName="author"
           placeholder="Author"
           required
         />
+      </mat-form-field>
+    </div> -->
+    <div class="row">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Author/s</mat-label>
+        <mat-chip-list #authorsChipList class="chip-list">
+          <mat-chip
+            *ngFor="let author of authorInput"
+            [selectable]="selectable"
+            [removable]="removable"
+            (removed)="removeAuthor(author)"
+          >
+            {{ author.name }}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip>
+          <input
+            matInput
+            formControlName="authorsList"
+            [matChipInputFor]="authorsChipList"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            [matChipInputAddOnBlur]="addOnBlur"
+            (matChipInputTokenEnd)="addAuthor($event)"
+          />
+        </mat-chip-list>
       </mat-form-field>
     </div>
     <div class="row">
@@ -47,18 +71,52 @@
           matInput
           formControlName="researchAbstract"
           placeholder="Abstract"
+          rows="8"
           required
         ></textarea>
       </mat-form-field>
     </div>
     <div class="row">
-      <mat-form-field class="full-width">
-        <mat-chip-list #chipList aria-label="Tags" class="chip-list">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>College/University</mat-label>
+        <input
+          matInput
+          formControlName="university"
+          placeholder="College/University"
+          required
+        />
+      </mat-form-field>
+    </div>
+        <div class="row">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Program</mat-label>
+        <input
+          matInput
+          formControlName="program"
+          placeholder="Program"
+          required
+        />
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Category</mat-label>
+        <mat-select name="category">
+          <mat-option *ngFor="let category of categoryService.categories" [value]="category.name">
+            {{ category.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Keywords</mat-label>
+        <mat-chip-list #chipList class="chip-list">
           <mat-chip
             *ngFor="let researchTag of researchTags"
             [selectable]="selectable"
             [removable]="removable"
-            (removed)="remove(researchTag)"
+            (removed)="removeTag(researchTag)"
           >
             {{ researchTag.name }}
             <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
@@ -66,11 +124,10 @@
           <input
             matInput
             formControlName="researchTagsList"
-            placeholder="Tags"
             [matChipInputFor]="chipList"
             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
             [matChipInputAddOnBlur]="addOnBlur"
-            (matChipInputTokenEnd)="add($event)"
+            (matChipInputTokenEnd)="addTag($event)"
           />
         </mat-chip-list>
       </mat-form-field>
