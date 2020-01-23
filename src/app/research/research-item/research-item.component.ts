@@ -12,6 +12,9 @@ import { Research } from '../../models/research.model';
 export class ResearchItemComponent implements OnInit {
   research$;
   research: Research;
+  pdfUrl: string;
+
+  page = 1;
 
   constructor(
     private afFirestore: AngularFirestore,
@@ -35,6 +38,7 @@ export class ResearchItemComponent implements OnInit {
     );
     this.research$.subscribe(research => {
       this.research = research;
+      this.pdfUrl = this.research.downloadURL;
     });
   }
 }
