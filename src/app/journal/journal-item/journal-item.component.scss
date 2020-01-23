@@ -1,0 +1,43 @@
+.mat-subheading-2 {
+  b {
+    margin-right: 1rem;
+  }
+  span {
+    cursor: pointer;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.information-column {
+  .mat-subheading-2 {
+    margin-bottom: 0;
+  }
+  margin-bottom: 4rem;
+}
+
+.tag {
+  margin-right: 0.5rem;
+}
+
+.research-add {
+  margin-bottom: 1rem;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.research-add-body {
+  width: 100%;
+}
+
+.mat-subheading-1 {
+  &:hover {
+    text-decoration: none;
+  }
+}
+
