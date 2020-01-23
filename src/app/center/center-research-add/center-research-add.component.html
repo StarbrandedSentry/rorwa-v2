@@ -101,8 +101,10 @@
     <div class="row">
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Category</mat-label>
-        <mat-select name="category">
-          <mat-option *ngFor="let category of categoryService.categories" [value]="category.name">
+        <mat-select formControlName="category">
+          <mat-option
+            *ngFor="let category of categoryService.categories"
+            [value]="category.name">
             {{ category.name }}
           </mat-option>
         </mat-select>
