@@ -20,7 +20,7 @@ export class SadminSettingsComponent implements OnInit {
       return;
     }
     this.addCategoryStart();
-    this.categoryService.addCategory(this.newCategory).finally(res => {
+    this.categoryService.addCategory(this.newCategory).then(res => {
       this.addCategoryStop();
       this.newCategory = '';
     });

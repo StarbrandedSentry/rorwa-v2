@@ -1,0 +1,20 @@
+.center-name {
+}
+
+.mat-subheading-2 {
+  b {
+    margin-right: 1rem;
+  }
+  span {
+    cursor: pointer;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.information-column {
+  .mat-subheading-2 {
+    margin-bottom: 0;
+  }
+}
